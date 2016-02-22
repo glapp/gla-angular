@@ -1,17 +1,19 @@
-<form layout="column" class="md-inline-form">
-  <md-content layout-gt-sm="row" layout-padding>
-    <md-input-container>
-      <label>Email</label>
-      <input ng-model="vm.loginData.email" type="email" required>
-    </md-input-container>
-    <md-input-container>
-      <label>Password</label>
-      <input ng-model="vm.loginData.password" type="password" required>
-    </md-input-container>
-  </md-content>
-  <md-content layout-gt-sm="row" layout-padding>
-    <md-button ng-click="vm.login()">
+<md-dialog>
+  <md-subheader class="md-primary" layout="center">Log in</md-subheader>
+  <form layout="column" class="md-inline-form">
+    <md-content layout-gt-sm="row" layout-padding>
+      <md-input-container flex>
+        <label>Email</label>
+        <input ng-model="vm.loginData.email" type="email" required>
+      </md-input-container>
+      <md-input-container flex>
+        <label>Password</label>
+        <input ng-model="vm.loginData.password" type="password" required>
+      </md-input-container>
+    </md-content>
+    <md-button aria-label="Submit" ng-click="vm.login()">
       Submit
     </md-button>
-  </md-content>
-</form>
+  </form>
+</md-dialog>
+

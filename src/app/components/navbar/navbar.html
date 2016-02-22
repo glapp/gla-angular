@@ -9,11 +9,14 @@
     </md-button>
   </section>
   <md-menu md-position-mode="target-right target">
-    <md-button class="md-fab md-mini" aria-label="Login / Sign up" ng-click="vm.openMenu($mdOpenMenu, $event)">
+    <md-button class="md-raised md-accent" aria-label="Login / Sign up" ng-click="vm.openMenu($mdOpenMenu, $event)">
       <md-icon ng-hide="vm.isAuth()">person_outline</md-icon>
-      <md-icon ng-show="vm.isAuth()">person</md-icon>
+      <div ng-show="vm.isAuth()">
+        <md-icon>person</md-icon>
+        {{ vm.isAuth().name }}
+      </div>
     </md-button>
-    <md-menu-content>
+    <md-menu-content width="3">
       <md-menu-item ng-hide="vm.isAuth()">
         <md-button ng-click="vm.openLogin()">
           <md-icon>exit_to_app</md-icon>
@@ -21,14 +24,14 @@
         </md-button>
       </md-menu-item>
       <md-menu-item ng-hide="vm.isAuth()">
-        <md-button ng-click="vm.signup()">
+        <md-button ng-click="vm.openSignup()">
           <md-icon>add</md-icon>
           Sign up
         </md-button>
       </md-menu-item>
       <md-menu-item ng-show="vm.isAuth()">
         <md-button ng-click="vm.logout()">
-          <md-icon>adll_out</md-icon>
+          <md-icon>power_settings_new</md-icon>
           Log out
         </md-button>
       </md-menu-item>

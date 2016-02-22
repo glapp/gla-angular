@@ -11,7 +11,7 @@
     $logProvider.debugEnabled(true);
 
     $mdThemingProvider.theme('default')
-      .primaryPalette('blue', {
+      .primaryPalette('blue-grey', {
         'hue-1': '50'
       })
       .accentPalette('green');

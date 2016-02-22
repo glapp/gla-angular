@@ -1,0 +1,24 @@
+<md-dialog>
+  <md-subheader class="md-primary">Sign up</md-subheader>
+  <form layout="column" class="md-inline-form">
+    <md-content layout-gt-sm="row" layout-padding>
+      <md-input-container>
+        <label>Name</label>
+        <input ng-model="vm.signupData.name" required>
+      </md-input-container>
+    </md-content>
+    <md-content layout-gt-sm="row" layout-padding>
+      <md-input-container>
+        <label>Email</label>
+        <input ng-model="vm.signupData.email" type="email" required>
+      </md-input-container>
+      <md-input-container>
+        <label>Password</label>
+        <input ng-model="vm.signupData.password" type="password" required>
+      </md-input-container>
+    </md-content>
+    <md-button aria-label="Submit" ng-click="vm.signup()">
+      Submit
+    </md-button>
+  </form>
+</md-dialog>

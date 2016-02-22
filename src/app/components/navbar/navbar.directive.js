@@ -18,11 +18,11 @@
     return directive;
 
     /** @ngInject */
-    function NavbarController($window, $rootScope, $mdDialog, $document, User, toastr) {
+    function NavbarController($rootScope, $mdDialog, $document, User, toastr) {
       var vm = this;
 
       vm.openLogin = openLogin;
-      vm.signup = signup;
+      vm.openSignup = openSignup;
       vm.openMenu = openMenu;
       vm.isAuth = isAuth;
       vm.logout = logout;
@@ -37,7 +37,9 @@
       function openLogin() {
         $mdDialog.show({
           controller: 'LoginController',
+          controllerAs: 'vm',
           templateUrl: 'app/components/navbar/dialogs/login.html',
+          clickOutsideToClose: true,
           parent: angular.element($document.body),
           targetEvent: originatorEv
         });
@@ -48,24 +50,21 @@
         return $rootScope.user;
       }
 
-      function signup() {
-        var email = 'islerfab@gmail.com';
-        User.signup({email: 'islerfab@gmail.com', password: '111111'}, function onSuccess(response) {
-          $rootScope.user = {
-            id: response.id
-            // TODO: Add more attributes
-          };
-        }, function onError(err) {
-          if (err.status == 400) {
-            toastr.error('That email address has already been taken, please try again.', 'Error');
-          }
+      function openSignup() {
+        $mdDialog.show({
+          controller: 'SignupController',
+          controllerAs: 'vm',
+          templateUrl: 'app/components/navbar/dialogs/signup.html',
+          clickOutsideToClose: true,
+          parent: angular.element($document.body),
+          targetEvent: originatorEv
         });
+        originatorEv = null;
       }
 
       function logout() {
-        User.logout(function onSuccess(response) {
+        User.logout(function onSuccess() {
           $rootScope.user = null;
-          $window.location.reload();
         }, function onError(err) {
           toastr.error('Error: ', err);
         })
