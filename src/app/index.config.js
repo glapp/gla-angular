@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -19,6 +19,7 @@
     // Don't strip trailing slashes from calculated URLs
     $resourceProvider.defaults.stripTrailingSlashes = false;
 
+    // Always include credentials
     $httpProvider.defaults.withCredentials = true;
 
     // Set options third-party lib

@@ -1,6 +1,16 @@
-<md-toolbar layout="row" layout-align="center center">
+<md-toolbar layout="row" layout="start center">
 
-  <section flex layout="row" layout-align="end">
+  <section layout="row">
+    <md-button aria-label="Home" ng-click="vm.changeState('home')">
+      Home
+    </md-button>
+    <md-button aria-label="Apps" ng-click="vm.changeState('apps')">
+      Apps
+    </md-button>
+  </section>
+
+  <span flex></span>
+  <section layout="row" layout-align="end center">
     <md-button class="md-fab md-mini" aria-label="Notifications">
       <md-icon>notifications</md-icon>
     </md-button>
@@ -8,34 +18,37 @@
       <md-icon>settings</md-icon>
     </md-button>
   </section>
-  <md-menu md-position-mode="target-right target">
-    <md-button class="md-raised md-accent" aria-label="Login / Sign up" ng-click="vm.openMenu($mdOpenMenu, $event)">
-      <md-icon ng-hide="vm.isAuth()">person_outline</md-icon>
-      <div ng-show="vm.isAuth()">
-        <md-icon>person</md-icon>
-        {{ vm.isAuth().name }}
-      </div>
-    </md-button>
-    <md-menu-content width="3">
-      <md-menu-item ng-hide="vm.isAuth()">
-        <md-button ng-click="vm.openLogin()">
-          <md-icon>exit_to_app</md-icon>
-          Log in
-        </md-button>
-      </md-menu-item>
-      <md-menu-item ng-hide="vm.isAuth()">
-        <md-button ng-click="vm.openSignup()">
-          <md-icon>add</md-icon>
-          Sign up
-        </md-button>
-      </md-menu-item>
-      <md-menu-item ng-show="vm.isAuth()">
-        <md-button ng-click="vm.logout()">
-          <md-icon>power_settings_new</md-icon>
-          Log out
-        </md-button>
-      </md-menu-item>
-    </md-menu-content>
-  </md-menu>
+
+  <section layout="row" layout-align="end center">
+    <md-menu md-position-mode="target-right target">
+      <md-button class="md-raised md-accent" aria-label="Login / Sign up" ng-click="vm.openMenu($mdOpenMenu, $event)">
+        <md-icon ng-hide="vm.isAuth()">person_outline</md-icon>
+        <div ng-show="vm.isAuth()">
+          <md-icon>person</md-icon>
+          {{ vm.isAuth().name }}
+        </div>
+      </md-button>
+      <md-menu-content width="3">
+        <md-menu-item ng-hide="vm.isAuth()">
+          <md-button ng-click="vm.openLogin()">
+            <md-icon>exit_to_app</md-icon>
+            Log in
+          </md-button>
+        </md-menu-item>
+        <md-menu-item ng-hide="vm.isAuth()">
+          <md-button ng-click="vm.openSignup()">
+            <md-icon>add</md-icon>
+            Sign up
+          </md-button>
+        </md-menu-item>
+        <md-menu-item ng-show="vm.isAuth()">
+          <md-button ng-click="vm.logout()">
+            <md-icon>power_settings_new</md-icon>
+            Log out
+          </md-button>
+        </md-menu-item>
+      </md-menu-content>
+    </md-menu>
+  </section>
 
 </md-toolbar>

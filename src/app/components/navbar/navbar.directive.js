@@ -18,7 +18,7 @@
     return directive;
 
     /** @ngInject */
-    function NavbarController($rootScope, $mdDialog, $document, User, toastr) {
+    function NavbarController($rootScope, $state, $mdDialog, $document, User, toastr) {
       var vm = this;
 
       vm.openLogin = openLogin;
@@ -26,8 +26,13 @@
       vm.openMenu = openMenu;
       vm.isAuth = isAuth;
       vm.logout = logout;
+      vm.changeState = changeState;
 
       var originatorEv;
+
+      function changeState(name) {
+        $state.go(name);
+      }
 
       function openMenu($mdOpenMenu, ev) {
         originatorEv = ev;

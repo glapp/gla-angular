@@ -1,0 +1,19 @@
+<md-dialog>
+  <md-subheader class="md-primary" layout="center">Add application</md-subheader>
+  <form layout="column" class="md-inline-form">
+    <md-content layout-gt-sm="row" layout-padding>
+      <md-input-container flex>
+        <label>Name</label>
+        <input ng-model="vm.appData.name" type="text" required>
+      </md-input-container>
+      <md-input-container flex>
+        <label>Git URL</label>
+        <input ng-model="vm.appData.gitUrl" type="text" required>
+      </md-input-container>
+    </md-content>
+    <md-button aria-label="Submit" ng-click="vm.addApp()">
+      Submit
+    </md-button>
+  </form>
+</md-dialog>
+

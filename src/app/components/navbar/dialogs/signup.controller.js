@@ -6,7 +6,7 @@
     .controller('SignupController', SignupController);
 
   /** @ngInject */
-  function SignupController($rootScope, $state, $mdDialog, User, toastr) {
+  function SignupController($rootScope, $mdDialog, User, toastr) {
     var vm = this;
 
     vm.signupData = {};

@@ -1,0 +1,23 @@
+<div layout="column" layout-fill>
+
+  <header>
+    <acme-navbar></acme-navbar>
+  </header>
+
+  <md-content>
+    <div layout="row" layout-align="end center">
+      <md-button class="md-fab add-button" aria-label="Add application" ng-click="ac.openAddDialog($event)">
+        <md-icon>add</md-icon>
+      </md-button>
+    </div>
+
+
+
+    <md-list layout="column">
+      <md-list-item ng-repeat="app in ac.apps">
+        {{app.name}}
+      </md-list-item>
+    </md-list>
+  </md-content>
+
+</div>

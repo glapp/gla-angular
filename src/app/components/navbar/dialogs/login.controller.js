@@ -6,7 +6,7 @@
     .controller('LoginController', LoginController);
 
   /** @ngInject */
-  function LoginController($rootScope, $state, $mdDialog, User, toastr) {
+  function LoginController($rootScope, $mdDialog, User, toastr) {
     var vm = this;
 
     vm.loginData = {};
@@ -15,8 +15,8 @@
     function login() {
       User.login({email: vm.loginData.email, password: vm.loginData.password}, function onSuccess(response) {
         $rootScope.user = {
-          id: response.id
-          // TODO: Add more attributes
+          id: response.id,
+          name: response.name
         };
         vm.loginData = {};
         $mdDialog.hide();
