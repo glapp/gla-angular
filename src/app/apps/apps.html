@@ -12,12 +12,18 @@
     </div>
 
 
-
-    <md-list layout="column">
-      <md-list-item ng-repeat="app in ac.apps">
-        {{app.name}}
-      </md-list-item>
-    </md-list>
+    <div layout="row">
+      <md-card ng-repeat="app in ac.apps" layout-padding>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">{{app.name}}</span>
+          </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+          {{app.status}}
+        </md-card-content>
+      </md-card>
+    </div>
   </md-content>
 
 </div>

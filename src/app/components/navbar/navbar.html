@@ -4,7 +4,7 @@
     <md-button aria-label="Home" ng-click="vm.changeState('home')">
       Home
     </md-button>
-    <md-button aria-label="Apps" ng-click="vm.changeState('apps')">
+    <md-button aria-label="Apps" ng-show="vm.isAuth()" ng-click="vm.changeState('apps')">
       Apps
     </md-button>
   </section>
