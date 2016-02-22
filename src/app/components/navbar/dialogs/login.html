@@ -1,0 +1,17 @@
+<form layout="column" class="md-inline-form">
+  <md-content layout-gt-sm="row" layout-padding>
+    <md-input-container>
+      <label>Email</label>
+      <input ng-model="vm.loginData.email" type="email" required>
+    </md-input-container>
+    <md-input-container>
+      <label>Password</label>
+      <input ng-model="vm.loginData.password" type="password" required>
+    </md-input-container>
+  </md-content>
+  <md-content layout-gt-sm="row" layout-padding>
+    <md-button ng-click="vm.login()">
+      Submit
+    </md-button>
+  </md-content>
+</form>
