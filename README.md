@@ -6,8 +6,10 @@
 ## Prepare
 * `npm install`
 * `npm install -g gulp` 
-* `bower install`
+* `npm install -g bower`
+* add `sudo` before the above install commands in Linux
 
 ## Run
+* `bower install`
 * `gulp build`
 * `gulp serve`
