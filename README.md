@@ -6,7 +6,8 @@
 ## Prepare
 * `npm install`
 * `npm install -g gulp` 
+* `bower install`
 
 ## Run
-* `gulp buid`
+* `gulp build`
 * `gulp serve`
