@@ -70,8 +70,10 @@
       function logout() {
         User.logout(function onSuccess() {
           $rootScope.user = null;
+          $state.go('landing');
         }, function onError(err) {
           toastr.error('Error: ', err);
+          $state.go('landing');
         })
       }
 

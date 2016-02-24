@@ -10,7 +10,7 @@
       spyOn(_webDevTec_, 'getTec').and.returnValue([{}, {}, {}, {}, {}]);
       spyOn(_toastr_, 'info').and.callThrough();
 
-      vm = _$controller_('MainController');
+      vm = _$controller_('HomeController');
       toastr = _toastr_;
     }));
 

@@ -15,8 +15,8 @@
       <md-whiteframe ng-repeat="app in ac.apps" class="{{app.status}}-status md-whiteframe-2dp" flex-sm="50" flex-gt-sm="25" layout
                      layout-align="center center">
         <md-whiteframe-content>
-          <h4>{{app.name}}</h4>
-          <p>{{app.status}}</p>
+          <span class="md-title">{{app.name}}</span>
+          <p class="md-body-1">{{app.status}}</p>
         </md-whiteframe-content>
       </md-whiteframe>
     </div>

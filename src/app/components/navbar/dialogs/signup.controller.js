@@ -6,7 +6,7 @@
     .controller('SignupController', SignupController);
 
   /** @ngInject */
-  function SignupController($rootScope, $mdDialog, User, toastr) {
+  function SignupController($rootScope, $state, $mdDialog, User, toastr) {
     var vm = this;
 
     vm.signupData = {};
@@ -14,12 +14,13 @@
 
     function signup() {
       User.signup({name: vm.signupData.name, email: vm.signupData.email, password: vm.signupData.password}, function onSuccess(response) {
+        $mdDialog.hide();
         $rootScope.user = {
           id: response.id,
           name: response.name
         };
         vm.signupData = {};
-        $mdDialog.hide();
+        $state.go('home');
       }, function onError(err) {
         toastr.error('Error when signing up: ', err);
         vm.signupData = {};

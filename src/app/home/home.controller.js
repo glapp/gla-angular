@@ -3,10 +3,10 @@
 
   angular
     .module('glaAngular')
-    .controller('MainController', MainController);
+    .controller('HomeController', HomeController);
 
   /** @ngInject */
-  function MainController(toastr) {
+  function HomeController($rootScope, $state, toastr) {
     var vm = this;
 
     vm.showToastr = showToastr;
