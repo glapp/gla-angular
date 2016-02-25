@@ -1,0 +1,18 @@
+<md-content>
+  <div layout="row" layout-align="end center">
+    <md-button class="md-fab add-button" aria-label="Add application" ng-click="alc.openAddDialog($event)">
+      <md-icon>add</md-icon>
+    </md-button>
+  </div>
+
+  <div layout="row" layout-padding layout-wrap layout-fill ng-cloak>
+    <md-whiteframe ng-repeat="app in alc.apps" class="{{app.status}}-status md-whiteframe-2dp" flex-sm="50"
+                   flex-gt-sm="25" layout
+                   layout-align="center center">
+      <md-whiteframe-content>
+        <a ui-sref="apps.details({ app_id: app.id })" class="md-title">{{app.name}}</a>
+        <p class="md-body-1">{{app.status}}</p>
+      </md-whiteframe-content>
+    </md-whiteframe>
+  </div>
+</md-content>

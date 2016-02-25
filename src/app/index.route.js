@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -24,7 +24,20 @@
         url: '/apps',
         templateUrl: 'app/apps/apps.html',
         controller: 'AppsController',
-        controllerAs: 'ac'
+        controllerAs: 'ac',
+        abstract: true
+      })
+      .state('apps.list', {
+        url: '',
+        templateUrl: 'app/apps/list/list.html',
+        controller: 'AppListController',
+        controllerAs: 'alc'
+      })
+      .state('apps.details', {
+        url: '/{app_id}', // TODO: Should include only database IDs
+        templateUrl: 'app/apps/details/details.html',
+        controller: 'AppDetailsController',
+        controllerAs: 'adc'
       });
 
     $urlRouterProvider.otherwise('/');
