@@ -6,10 +6,21 @@
     .controller('AppDetailsController', AppDetailsController);
 
   /** @ngInject */
-  function AppDetailsController($stateParams) {
+  function AppDetailsController($stateParams, Application, toastr) {
     var vm = this;
 
-    vm.app_id = $stateParams.app_id;
+    vm.app = {};
+
+    getDetails();
+
+    function getDetails() {
+      Application.getAppDetails({app_id: $stateParams.app_id},
+        function onSuccess(response) {
+          vm.app = response.app;
+        }, function onError(err) {
+          toastr.error(err.data, 'Error');
+        });
+    }
 
   }
 })();

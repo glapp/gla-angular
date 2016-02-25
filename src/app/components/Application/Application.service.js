@@ -11,7 +11,8 @@
         },
         {
           getUserApps: {method: 'GET', url: 'http://localhost:1337/application/getUserApps'},
-          addApp: {method: 'POST', url: 'http://localhost:1337/application/add'}
+          getAppDetails: {method: 'GET', url: 'http://localhost:1337/application/getAppDetails', isArray: false},
+          addApp: {method: 'POST', url: 'http://localhost:1337/application/add', isArray: false}
         }
       );
     }
