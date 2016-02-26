@@ -12,7 +12,7 @@
     vm.navItems = [];
     vm.tabItems = [];
     vm.app = {};
-    vm.selectedIndex = 3;
+    vm.selectedIndex = 0;
 
     getDetails();
 
@@ -43,10 +43,27 @@
           angular.forEach(vm.app.components, function (component) {
             vm.tabItems.push({
               title: component.originalName,
-              list: [{
-                description: 'Image',
-                content: [component.image]
-              }]
+              list: [
+                {
+                  description: 'Image',
+                  content: [component.image]
+                },
+                {
+                  description: 'Ready',
+                  content: [component.ready]
+                },
+                {
+                  description: 'Environment',
+                  content: component.environment
+                },
+                {
+                  description: 'Published ports',
+                  content: component.ports
+                },
+                {
+                  description: 'Exposed ports',
+                  content: component.expose
+                }]
             })
           })
 

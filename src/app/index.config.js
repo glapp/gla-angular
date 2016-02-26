@@ -14,7 +14,9 @@
       .primaryPalette('blue-grey', {
         'hue-1': '50'
       })
-      .accentPalette('orange');
+      .accentPalette('orange', {
+        'hue-1': 'A200'
+      });
 
     // Don't strip trailing slashes from calculated URLs
     $resourceProvider.defaults.stripTrailingSlashes = false;

@@ -1,15 +1,13 @@
 <sub-navbar items="adc.navItems"></sub-navbar>
 
-<md-content>
-  <div layout="row">
-    <div flex="75">
+<div layout="row" layout-fill>
+  <div flex="70" class="md-whiteframe-1dp" layout="column" layout-fill>
 
-      <md-list-item class="md-title">Details of {{adc.app.name}}</md-list-item>
+    <span class="md-title md-padding">Details of {{adc.app.name}}</span>
 
-      <md-tabs md-selected="adc.selectedIndex" md-border-bottom md-autoselect>
-        <md-tab ng-repeat="tab in adc.tabItems"
-                ng-disabled="tab.disabled"
-                label="{{tab.title}}">
+    <md-tabs layout-fill class="md-accent md-hue-1 tabs-section" md-selected="adc.selectedIndex">
+      <md-tab ng-repeat="tab in adc.tabItems" ng-disabled="tab.disabled" label="{{tab.title}}">
+        <md-content>
           <md-list>
             <md-list-item class="md-2-line" ng-repeat="item in tab.list">
               <div class="md-list-item-text" layout="column">
@@ -18,12 +16,10 @@
               </div>
             </md-list-item>
           </md-list>
-        </md-tab>
-      </md-tabs>
-
-    </div>
-    <div flex="25">
-      {{adc.app}}
-    </div>
+        </md-content>
+      </md-tab>
+    </md-tabs>
   </div>
-</md-content>
+  <div flex="30" class="md-whiteframe-1dp" layout="column" layout-align="center center">
+    <span class="md-title md-padding">Charts</span>  </div>
+</div>
