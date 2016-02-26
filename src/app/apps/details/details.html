@@ -1,6 +1,29 @@
 <sub-navbar items="adc.navItems"></sub-navbar>
 
 <md-content>
-  App Details of {{adc.app.id}}!
-  {{adc.app}}
+  <div layout="row">
+    <div flex="75">
+
+      <md-list-item class="md-title">Details of {{adc.app.name}}</md-list-item>
+
+      <md-tabs md-selected="adc.selectedIndex" md-border-bottom md-autoselect>
+        <md-tab ng-repeat="tab in adc.tabItems"
+                ng-disabled="tab.disabled"
+                label="{{tab.title}}">
+          <md-list>
+            <md-list-item class="md-2-line" ng-repeat="item in tab.list">
+              <div class="md-list-item-text" layout="column">
+                <h4>{{item.description}}</h4>
+                <p ng-repeat="listitem in item.content">{{listitem}}</p>
+              </div>
+            </md-list-item>
+          </md-list>
+        </md-tab>
+      </md-tabs>
+
+    </div>
+    <div flex="25">
+      {{adc.app}}
+    </div>
+  </div>
 </md-content>
