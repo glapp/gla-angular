@@ -9,7 +9,7 @@
   function AppsController() {
     var vm = this;
 
-    vm.apps = [];
+    vm.navItems = 'test'
 
   }
 })();

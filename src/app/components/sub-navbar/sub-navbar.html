@@ -1,0 +1,15 @@
+<md-toolbar layout="row" class="md-hue-1">
+  <span layout="row" class="md-toolbar-tools" layout-align="start center">
+    <md-button ui-sref="apps.list" class="md-accent nav-button">
+      Your Apps
+    </md-button>
+    <md-button ng-repeat="item in snb.items" ui-sref="{{item.state}}" class="md-accent nav-button">
+      <md-icon>keyboard_arrow_right</md-icon>
+      {{item.name}}
+    </md-button>
+  </span>
+  <span flex></span>
+  <span layout="row" class="md-toolbar-tools" layout-align="end center">
+    <ng-transclude></ng-transclude>
+  </span>
+</md-toolbar>
