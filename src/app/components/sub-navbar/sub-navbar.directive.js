@@ -22,7 +22,7 @@
     return directive;
 
     /** @ngInject */
-    function SubNavbarController($log) {
+    function SubNavbarController() {
       var vm = this;
 
       vm.test = 'test'

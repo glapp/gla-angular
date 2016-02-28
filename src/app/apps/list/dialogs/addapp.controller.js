@@ -15,7 +15,6 @@
     function addApp() {
       Application.addApp({name: vm.appData.name, gitUrl: vm.appData.gitUrl},
         function onSuccess(response) {
-          $log.info(response.app);
           $mdDialog.hide(response.app);
         },
         function onError(err) {

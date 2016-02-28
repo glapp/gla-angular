@@ -8,11 +8,12 @@
 
 
   <div layout="row" layout-padding layout-wrap layout-fill ng-cloak>
-    <md-whiteframe ng-repeat="app in alc.apps" class="{{app.status}}-status md-whiteframe-2dp" flex-sm="50"
+    <md-whiteframe ui-sref="apps.details({ app_id: app.id })" ng-repeat="app in alc.apps"
+                   class="{{app.status}}-status md-whiteframe-2dp app-box" flex-sm="50"
                    flex-gt-sm="25" layout
                    layout-align="center center">
       <md-whiteframe-content>
-        <a ui-sref="apps.details({ app_id: app.id })" class="md-title">{{app.name}}</a>
+        <span class="md-title">{{app.name}}</span>
         <p class="md-body-1">{{app.status}}</p>
       </md-whiteframe-content>
     </md-whiteframe>

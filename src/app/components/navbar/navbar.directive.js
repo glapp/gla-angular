@@ -72,7 +72,7 @@
           $rootScope.user = null;
           $state.go('landing');
         }, function onError(err) {
-          toastr.error('Error: ', err);
+          toastr.error('Error: ', err.data);
           $state.go('landing');
         })
       }

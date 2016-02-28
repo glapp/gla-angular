@@ -22,7 +22,7 @@
         vm.signupData = {};
         $state.go('home');
       }, function onError(err) {
-        toastr.error('Error when signing up: ', err);
+        toastr.error(err.data.error, 'Error: ' + err.statusText);
         vm.signupData = {};
         $mdDialog.hide();
       });

@@ -1,18 +1,22 @@
 <sub-navbar items="adc.navItems"></sub-navbar>
 
-<div layout="row" layout-fill>
+<div layout="column" layout-gt-md="row" layout-fill>
   <div flex="70" class="md-whiteframe-1dp" layout="column" layout-fill>
 
-    <span class="md-title md-padding">Details of {{adc.app.name}}</span>
+    <div layout="start center">
+      <span class="md-title md-padding">Details of {{adc.app.name}}</span>
+      <span flex></span>
+      <md-button class="md-raised" ng-click="adc.deploy()" ng-disabled="adc.disableDeploy()">Deploy</md-button>
+    </div>
 
     <md-tabs layout-fill class="md-accent md-hue-1 tabs-section" md-selected="adc.selectedIndex">
       <md-tab ng-repeat="tab in adc.tabItems" ng-disabled="tab.disabled" label="{{tab.title}}">
         <md-content>
           <md-list>
-            <md-list-item class="md-2-line" ng-repeat="item in tab.list">
+            <md-list-item ng-repeat="item in tab.list" ng-hide="adc.isEmpty(item.content)" class="md-2-line">
               <div class="md-list-item-text" layout="column">
                 <h4>{{item.description}}</h4>
-                <p ng-repeat="listitem in item.content">{{listitem}}</p>
+                <p ng-repeat="listitem in item.content track by $index">{{listitem}}</p>
               </div>
             </md-list-item>
           </md-list>
