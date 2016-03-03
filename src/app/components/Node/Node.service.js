@@ -10,7 +10,7 @@
           id: '@_id'
         },
         {
-          getInfo: {method: 'GET', url: 'http://localhost:1337/nodes/info'}
+          getInfo: {method: 'GET', url: 'http://localhost:1337/nodes/info', isArray: true}
         }
       );
     }

@@ -9,7 +9,7 @@
       <md-button class="md-raised" ng-click="adc.deploy()" ng-disabled="adc.disableDeploy()">Deploy</md-button>
     </div>
 
-    <md-tabs layout-fill class="md-accent md-hue-1 tabs-section" md-selected="adc.selectedIndex">
+    <md-tabs md-dynamic-height class="md-accent md-hue-1 tabs-section" md-selected="adc.selectedIndex">
       <md-tab ng-repeat="tab in adc.tabItems" ng-disabled="tab.disabled" label="{{tab.title}}">
         <md-content>
           <md-list>
@@ -25,5 +25,6 @@
     </md-tabs>
   </div>
   <div flex="30" class="md-whiteframe-1dp" layout="column" layout-align="center center">
-    <span class="md-title md-padding">Charts</span>  </div>
+    <span class="md-title md-padding">Charts</span>
+  </div>
 </div>
