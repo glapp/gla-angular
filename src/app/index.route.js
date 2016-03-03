@@ -38,6 +38,12 @@
         templateUrl: 'app/apps/details/details.html',
         controller: 'AppDetailsController',
         controllerAs: 'adc'
+      })
+      .state('infrastructure', {
+        url: '/infrastructure',
+        templateUrl: 'app/infrastructure/infrastructure.html',
+        controller: 'InfrastructureController',
+        controllerAs: 'ic'
       });
 
     $urlRouterProvider.otherwise('/');

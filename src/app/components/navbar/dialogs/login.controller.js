@@ -20,7 +20,7 @@
           name: response.name
         };
         vm.loginData = {};
-        $state.go('home');
+        $state.go('apps.list');
       }, function onError(err) {
         toastr.error('Error when signing in: ', err);
         vm.loginData = {};

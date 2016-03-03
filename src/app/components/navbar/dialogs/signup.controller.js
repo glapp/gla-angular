@@ -20,7 +20,7 @@
           name: response.name
         };
         vm.signupData = {};
-        $state.go('home');
+        $state.go('apps.list');
       }, function onError(err) {
         toastr.error(err.data.error, 'Error: ' + err.statusText);
         vm.signupData = {};
