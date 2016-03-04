@@ -1,13 +1,13 @@
 <md-toolbar layout="row">
 
   <section layout="row" layout-align="center center">
-    <md-button aria-label="Home" ng-show="vm.isAuth()" ui-sref="home">
+    <md-button aria-label="Home" ui-sref-active="md-raised" ng-show="vm.isAuth()" ui-sref="home">
       Home
     </md-button>
-    <md-button aria-label="Apps" ng-show="vm.isAuth()" ui-sref="apps.list">
+    <md-button aria-label="Apps" ui-sref-active="md-raised" ng-show="vm.isAuth()" ui-sref="apps.list">
       Apps
     </md-button>
-    <md-button aria-label="Infrastructure" ng-show="vm.isAuth()" ui-sref="infrastructure">
+    <md-button aria-label="Infrastructure" ui-sref-active="md-raised" ng-show="vm.isAuth()" ui-sref="infrastructure">
       Infrastructure
     </md-button>
   </section>

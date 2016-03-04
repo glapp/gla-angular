@@ -28,6 +28,7 @@
 
     function fillList() {
       vm.tabItems = [];
+
       angular.forEach(vm.nodes, function (node) {
         var labels = [];
         for (var key in node.labels) {
@@ -36,8 +37,12 @@
         var title = node.name;
         var length = node.name.length;
         if (length > 8) {
-          title = node.name.substring(0,2) + '...' + node.name.substring(length - 5);
+          title = node.name.substring(0, 2) + '...' + node.name.substring(length - 5);
         }
+        var components = node.components.map(function (component) {
+          return component.name;
+        });
+
         vm.tabItems.push({
           title: title,
           list: [
@@ -64,6 +69,10 @@
             {
               description: 'Reserved Memory',
               content: [node.reservedMemory]
+            },
+            {
+              description: 'Components',
+              content: components
             }
           ]
         });

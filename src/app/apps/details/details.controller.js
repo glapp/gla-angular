@@ -36,7 +36,8 @@
     function getDetails() {
       Application.getAppDetails({app_id: $stateParams.app_id},
         function onSuccess(response) {
-          vm.app = response.app;
+          $log.info(response);
+          vm.app = response;
           vm.navItems.push({
             name: vm.app.name,
             state: "apps.details({ app_id: '" + vm.app.id + "'})"
@@ -77,6 +78,8 @@
           }]
       });
       angular.forEach(vm.app.components, function (component) {
+        var hostname = component.node ? component.node.name : undefined;
+        var hostip = component.node ? component.node.ip : undefined;
         vm.tabItems.push({
           title: component.originalName,
           list: [
@@ -86,7 +89,7 @@
             },
             {
               description: 'Host',
-              content: [component.node_name, component.node_ip]
+              content: [hostname, hostip]
             },
             {
               description: 'Ready',
