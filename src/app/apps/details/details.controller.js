@@ -6,16 +6,19 @@
     .controller('AppDetailsController', AppDetailsController);
 
   /** @ngInject */
-  function AppDetailsController($stateParams, $log, Application, toastr) {
+  function AppDetailsController($stateParams, $log, Application, Node, toastr) {
     var vm = this;
 
     vm.navItems = [];
     vm.tabItems = [];
     vm.app = {};
+    vm.nodes = [];
     vm.selectedIndex = 0;
     vm.deploy = deploy;
     vm.disableDeploy = disableDeploy;
     vm.isEmpty = isEmpty;
+    vm.disableMove = disableMove;
+    vm.move = move;
 
     getDetails();
 
@@ -37,24 +40,49 @@
         function onSuccess(response) {
           $log.info(response);
           vm.app = response;
-          vm.navItems.push({
-            name: vm.app.name,
-            state: "apps.details({ app_id: '" + vm.app.id + "'})"
-          });
+          if (vm.navItems.length == 0) {
+            vm.navItems.push({
+              name: vm.app.name,
+              state: "apps.details({ app_id: '" + vm.app.id + "'})"
+            });
+          }
         }, function onError(err) {
           toastr.error(err.data, 'Error');
         });
+      Node.getInfo(
+        function onSuccess(response) {
+          vm.nodes = response;
+        }, function onError(err) {
+          toastr.error(err.data, 'Error');
+        })
     }
 
 
     function isEmpty(content) {
       var empty = true;
-      angular.forEach(content, function(element) {
+      angular.forEach(content, function (element) {
         if (element && element != undefined && element != '') {
           empty = false;
         }
       });
       return empty;
+    }
+
+    function move(component, goal_node) {
+      Application.move({
+        component_id: component.id,
+        goal_node: goal_node.name
+      }, function onSuccess(response) {
+        $log.info(response);
+        getDetails();
+      }, function onError(err) {
+        $log.error(err);
+        toastr.error(err.data, 'Error');
+      });
+    }
+
+    function disableMove() {
+      return false
     }
   }
 })();

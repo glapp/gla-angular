@@ -6,7 +6,7 @@
     <div layout="start center">
       <span class="md-title md-padding">Details of {{adc.app.name}}</span>
       <span flex></span>
-      <md-button class="md-raised" ng-click="adc.deploy()" ng-disabled="adc.disableDeploy()">Deploy</md-button>
+      <md-button class="md-raised" ng-click="adc.deploy()" ng-show="adc.app.status=='ready'" ng-disabled="adc.app.status=='deployed'">Deploy</md-button>
     </div>
 
     <md-tabs md-dynamic-height class="md-accent md-hue-1 tabs-section" md-selected="adc.selectedIndex">
@@ -49,7 +49,7 @@
                   <h4>Host</h4>
                   <p>{{component.node.name}}</p>
                   <p ng-hide="component.published_port">{{component.node.ip}}</p>
-                  <a ng-show="component.published_port"
+                  <a ng-show="component.published_port" target="_blank"
                      href="{{'http://' + component.node.ip + ':' + component.published_port}}">{{component.node.ip + ':'
                     + component.published_port}}</a>
                 </div>
@@ -69,7 +69,18 @@
             </md-list>
           </div>
           <div flex="20" layout="column">
-            <md-button>Test</md-button>
+            <md-menu md-position-mode="target-right target" ng-show="adc.app.status=='deployed'">
+              <md-button class="md-raised" aria-label="Move" ng-click="$mdOpenMenu($event)">
+                Move
+              </md-button>
+              <md-menu-content width="5">
+                <md-menu-item ng-repeat="node in adc.nodes" ng-hide="node.name==component.node.name">
+                  <md-button ng-click="adc.move(component, node)">
+                    {{node.name}}
+                  </md-button>
+                </md-menu-item>
+              </md-menu-content>
+            </md-menu>
           </div>
         </md-content>
       </md-tab>
