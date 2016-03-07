@@ -1,92 +1,112 @@
 <sub-navbar items="adc.navItems"></sub-navbar>
 
-<div layout="column" layout-gt-md="row" layout-fill>
-  <div flex="70" class="md-whiteframe-1dp" layout="column" layout-fill>
+<!--This is where the child view will be injected. If no child view (policy), it will show the embedded content!-->
+<ui-view>
+  <div layout="column" layout-gt-md="row" layout-fill>
+    <div flex="70" class="md-whiteframe-1dp" layout="column" layout-fill>
 
-    <div layout="start center">
-      <span class="md-title md-padding">Details of {{adc.app.name}}</span>
-      <span flex></span>
-      <md-button class="md-raised" ng-click="adc.deploy()" ng-show="adc.app.status=='ready'" ng-disabled="adc.app.status=='deployed'">Deploy</md-button>
-    </div>
+      <div layout="start center">
+        <span class="md-title md-padding">Details of {{adc.app.name}}</span>
+        <div>
+          <md-menu md-position-mode="target target">
+            <md-button class="md-icon-button" aria-label="More" ng-click="$mdOpenMenu($event)">
+              <md-icon>more_vert</md-icon>
+            </md-button>
+            <md-menu-content width="3">
+              <md-menu-item>
+                <md-button ui-sref="apps.details.policy({app_id: adc.app.id})">
+                  Edit policy
+                </md-button>
+              </md-menu-item>
+            </md-menu-content>
+          </md-menu>
+        </div>
+        <span flex></span>
+        <md-button class="md-raised" ng-click="adc.deploy()" ng-show="adc.app.status=='ready'"
+                   ng-disabled="adc.app.status=='deployed'">Deploy
+        </md-button>
+      </div>
 
-    <md-tabs md-dynamic-height class="md-accent md-hue-1 tabs-section" md-selected="adc.selectedIndex">
-      <md-tab label="General">
-        <md-content layout="column">
-          <md-list>
-            <md-list-item class="md-2-line">
-              <div class="md-list-item-text" layout="column">
-                <h4>Status</h4>
-                <p>{{adc.app.status}}</p>
-              </div>
-            </md-list-item>
-            <md-list-item class="md-2-line">
-              <div class="md-list-item-text" layout="column">
-                <h4>Git URL</h4>
-                <p>{{adc.app.gitUrl}}</p>
-              </div>
-            </md-list-item>
-            <md-list-item class="md-2-line">
-              <div class="md-list-item-text" layout="column">
-                <h4>Created at</h4>
-                <p>{{adc.app.createdAt}}</p>
-              </div>
-            </md-list-item>
-          </md-list>
-        </md-content>
-      </md-tab>
-      <md-tab ng-repeat="component in adc.app.components" label="{{component.originalName}}">
-        <md-content layout="row">
-          <div flex="80" layout="column">
+      <md-tabs md-dynamic-height class="md-accent md-hue-1 tabs-section" md-selected="adc.selectedIndex">
+        <md-tab label="General">
+          <md-content layout="column">
             <md-list>
               <md-list-item class="md-2-line">
                 <div class="md-list-item-text" layout="column">
-                  <h4>Image</h4>
-                  <p>{{component.image}}</p>
-                </div>
-              </md-list-item>
-              <md-list-item class="md-2-line" ng-show="component.node">
-                <div class="md-list-item-text" layout="column">
-                  <h4>Host</h4>
-                  <p>{{component.node.name}}</p>
-                  <p ng-hide="component.published_port">{{component.node.ip}}</p>
-                  <a ng-show="component.published_port" target="_blank"
-                     href="{{'http://' + component.node.ip + ':' + component.published_port}}">{{component.node.ip + ':'
-                    + component.published_port}}</a>
+                  <h4>Status</h4>
+                  <p>{{adc.app.status}}</p>
                 </div>
               </md-list-item>
               <md-list-item class="md-2-line">
                 <div class="md-list-item-text" layout="column">
-                  <h4>Environment</h4>
-                  <p ng-repeat="item in component.environment">{{item}}</p>
+                  <h4>Git URL</h4>
+                  <p>{{adc.app.gitUrl}}</p>
                 </div>
               </md-list-item>
               <md-list-item class="md-2-line">
                 <div class="md-list-item-text" layout="column">
-                  <h4>Exposed ports</h4>
-                  <p ng-repeat="item in component.expose">{{item}}</p>
+                  <h4>Created at</h4>
+                  <p>{{adc.app.createdAt}}</p>
                 </div>
               </md-list-item>
             </md-list>
-          </div>
-          <div flex="20" layout="column">
-            <md-menu md-position-mode="target-right target" ng-show="adc.app.status=='deployed'">
-              <md-button class="md-raised" aria-label="Move" ng-click="$mdOpenMenu($event)">
-                Move
-              </md-button>
-              <md-menu-content width="5">
-                <md-menu-item ng-repeat="node in adc.nodes" ng-hide="node.name==component.node.name">
-                  <md-button ng-click="adc.move(component, node)">
-                    {{node.name}}
-                  </md-button>
-                </md-menu-item>
-              </md-menu-content>
-            </md-menu>
-          </div>
-        </md-content>
-      </md-tab>
-    </md-tabs>
+          </md-content>
+        </md-tab>
+        <md-tab ng-repeat="component in adc.app.components" label="{{component.originalName}}">
+          <md-content layout="row">
+            <div flex="80" layout="column">
+              <md-list>
+                <md-list-item class="md-2-line">
+                  <div class="md-list-item-text" layout="column">
+                    <h4>Image</h4>
+                    <p>{{component.image}}</p>
+                  </div>
+                </md-list-item>
+                <md-list-item class="md-2-line" ng-show="component.node">
+                  <div class="md-list-item-text" layout="column">
+                    <h4>Host</h4>
+                    <p>{{component.node.name}}</p>
+                    <p ng-hide="component.published_port">{{component.node.ip}}</p>
+                    <a ng-show="component.published_port" target="_blank"
+                       href="{{'http://' + component.node.ip + ':' + component.published_port}}">{{component.node.ip +
+                      ':'
+                      + component.published_port}}</a>
+                  </div>
+                </md-list-item>
+                <md-list-item class="md-2-line">
+                  <div class="md-list-item-text" layout="column">
+                    <h4>Environment</h4>
+                    <p ng-repeat="item in component.environment">{{item}}</p>
+                  </div>
+                </md-list-item>
+                <md-list-item class="md-2-line">
+                  <div class="md-list-item-text" layout="column">
+                    <h4>Exposed ports</h4>
+                    <p ng-repeat="item in component.expose">{{item}}</p>
+                  </div>
+                </md-list-item>
+              </md-list>
+            </div>
+            <div flex="20" layout="column">
+              <md-menu md-position-mode="target-right target" ng-show="adc.app.status=='deployed'">
+                <md-button class="md-raised" aria-label="Move" ng-click="$mdOpenMenu($event)">
+                  Move
+                </md-button>
+                <md-menu-content width="5">
+                  <md-menu-item ng-repeat="node in adc.nodes" ng-hide="node.name==component.node.name">
+                    <md-button ng-click="adc.move(component, node)">
+                      {{node.name}}
+                    </md-button>
+                  </md-menu-item>
+                </md-menu-content>
+              </md-menu>
+            </div>
+          </md-content>
+        </md-tab>
+      </md-tabs>
+    </div>
+    <div flex="30" class="md-whiteframe-1dp" layout="column" layout-align="center center">
+      <span class="md-title md-padding">Charts</span>
+    </div>
   </div>
-  <div flex="30" class="md-whiteframe-1dp" layout="column" layout-align="center center">
-    <span class="md-title md-padding">Charts</span>
-  </div>
-</div>
+</ui-view>
