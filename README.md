@@ -7,7 +7,7 @@
 * `npm install`
 * `npm install -g gulp` 
 * `npm install -g bower`
-* add `sudo` before the above install commands in Linux
+* add `sudo` before the above install commands in Linux/MacOS
 
 ## Run
 * `bower install`
