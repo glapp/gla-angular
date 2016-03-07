@@ -60,12 +60,10 @@
         function onSuccess(response) {
           $log.info(response);
           vm.app = response;
-          if (vm.navItems.length == 0) {
-            vm.navItems.push({
-              name: vm.app.name,
-              state: "apps.details({ app_id: '" + vm.app.id + "'})"
-            });
-          }
+          vm.navItems = [{
+            name: vm.app.name,
+            state: "apps.details({ app_id: '" + vm.app.id + "'})"
+          }];
         }, function onError(err) {
           toastr.error(err.data, 'Error');
         });
