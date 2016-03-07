@@ -54,13 +54,13 @@
                     + component.published_port}}</a>
                 </div>
               </md-list-item>
-              <md-list-item class="md-2-line" ng-show="component.node">
+              <md-list-item class="md-2-line">
                 <div class="md-list-item-text" layout="column">
                   <h4>Environment</h4>
                   <p ng-repeat="item in component.environment">{{item}}</p>
                 </div>
               </md-list-item>
-              <md-list-item class="md-2-line" ng-show="component.node">
+              <md-list-item class="md-2-line">
                 <div class="md-list-item-text" layout="column">
                   <h4>Exposed ports</h4>
                   <p ng-repeat="item in component.expose">{{item}}</p>
