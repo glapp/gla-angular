@@ -11,7 +11,7 @@
       </md-button>
     </div>
 
-    <md-tabs md-dynamic-height class="md-accent md-hue-1 tabs-section">
+    <md-tabs layout-fill class="md-accent md-hue-1 tabs-section">
       <md-tab label="General">
         <md-content layout="column">
           <md-list>
@@ -40,20 +40,25 @@
         <md-content layout="row">
           <div flex="80" layout="column">
             <md-list>
+              <md-list-item class="md-2-line" ng-show="component.node">
+                <div class="md-list-item-text" layout="column">
+                  <h4>Host</h4>
+                  <p>Provider: {{adc.selections.provider[component.node.labels.provider] || 'undefined'}}</p>
+                  <p>Region: {{adc.selections.region[component.node.labels.region] || 'undefined'}}</p>
+                  <p>Tier: {{adc.selections.tier[component.node.labels.tier] || 'undefined'}}</p>
+                  <p ng-hide="component.published_port">IP: {{component.node.ip}}</p>
+                  <p ng-show="component.published_port">IP:
+                    <a target="_blank"
+                       href="{{'http://' + component.node.ip + ':' + component.published_port}}">{{component.node.ip +
+                      ':'
+                      + component.published_port}}</a>
+                  </p>
+                </div>
+              </md-list-item>
               <md-list-item class="md-2-line">
                 <div class="md-list-item-text" layout="column">
                   <h4>Image</h4>
                   <p>{{component.image}}</p>
-                </div>
-              </md-list-item>
-              <md-list-item class="md-2-line" ng-show="component.node">
-                <div class="md-list-item-text" layout="column">
-                  <h4>Host</h4>
-                  <p>{{component.node.name}}</p>
-                  <p ng-hide="component.published_port">{{component.node.ip}}</p>
-                  <a ng-show="component.published_port" target="_blank"
-                     href="{{'http://' + component.node.ip + ':' + component.published_port}}">{{component.node.ip + ':'
-                    + component.published_port}}</a>
                 </div>
               </md-list-item>
               <md-list-item class="md-2-line">
@@ -75,38 +80,26 @@
               <md-button class="md-raised" aria-label="Move" ng-click="$mdOpenMenu($event)">
                 Move
               </md-button>
-              <md-menu-content>
-                <form>
-                  <md-radio-group ng-model="data.provider" ng-init="data.provider = component.node.labels.provider">
-                    <md-radio-button value="">(No preference)</md-radio-button>
-                    <md-radio-button ng-repeat="provider in adc.selections.provider"
-                                     ng-class="{'md-primary': provider[0]==component.node.labels.provider}"
-                                     value="{{provider[0]}}">
-                      {{provider[1]}}
-                    </md-radio-button>
-                  </md-radio-group>
-                  <hr/>
-                  <md-radio-group ng-model="data.region" ng-init="data.region = component.node.labels.region">
-                    <md-radio-button value="">(No preference)</md-radio-button>
-                    <md-radio-button ng-repeat="region in adc.selections.region"
-                                     ng-class="{'md-primary': region[0]==component.node.labels.region}"
-                                     value="{{region[0]}}">
-                      {{region[1]}}
-                    </md-radio-button>
-                  </md-radio-group>
-                  <hr/>
-                  <md-radio-group ng-model="data.tier" ng-init="data.tier = component.node.labels.tier">
-                    <md-radio-button value="">(No preference)</md-radio-button>
-                    <md-radio-button ng-repeat="tier in adc.selections.tier"
-                                     ng-class="{'md-primary': tier[0]==component.node.labels.tier}" value="{{tier[0]}}">
-                      {{tier[1]}}
-                    </md-radio-button>
-                  </md-radio-group>
-                  <hr/>
-                  <md-button class="md-raised" ng-click="adc.move(component, data)">
-                    Apply
-                  </md-button>
-                </form>
+              <md-menu-content class="md-body-1" width="4">
+                <section>
+                  <form ng-init="data={}">
+                    <div ng-repeat="option in adc.getKeys(adc.selections)">
+                      <span layout-padding class="md-body-1">{{option.substring(0,1).toUpperCase() + option.substring(1) + ':'}}</span>
+                      <md-radio-group ng-model="data[option]" ng-init="data[option] = component.node.labels[option]">
+                        <md-radio-button value="">(No preference)</md-radio-button>
+                        <md-radio-button ng-repeat="short in adc.getKeys(adc.selections[option])"
+                                         ng-class="{'md-primary': short==component.node.labels[option]}"
+                                         value="{{short}}">
+                          {{adc.selections[option][short]}}
+                        </md-radio-button>
+                      </md-radio-group>
+                      <hr/>
+                    </div>
+                    <md-button ng-disabled="adc.disableButton(data, component.node.labels)" class="md-raised" ng-click="adc.move(component, data)">
+                      Apply
+                    </md-button>
+                  </form>
+                </section>
               </md-menu-content>
             </md-menu>
           </div>

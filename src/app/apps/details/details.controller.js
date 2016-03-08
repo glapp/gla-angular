@@ -15,12 +15,12 @@
     vm.nodes = [];
     vm.selectedIndex = 0;
     vm.deploy = deploy;
-    vm.disableDeploy = disableDeploy;
     vm.isEmpty = isEmpty;
     vm.disableMove = disableMove;
     vm.move = move;
+    vm.getKeys = getKeys;
+    vm.disableButton = disableButton;
 
-    // TODO: Change them dynamically
     vm.selections = {};
 
     getDetails();
@@ -34,8 +34,25 @@
         })
     }
 
-    function disableDeploy() {
-      return vm.app.status != 'ready'
+    function disableButton(data, labels) {
+
+      // Check whether all the "no preference" buttons are pressed, which doesn't make sense
+      var disable = true;
+      angular.forEach(data, function(value) {
+        if (value != '') {
+          disable = false;
+        }
+      });
+      if (disable) return disable;
+
+      // Check whether it's the same configuration as before
+      disable = true;
+      angular.forEach(data, function(value, key) {
+        if (value != labels[key]) {
+          disable = false
+        }
+      });
+      return disable
     }
 
     function getDetails() {
@@ -59,18 +76,12 @@
           angular.forEach(response, function (node) {
             angular.forEach(Object.keys(node.labels), function (key) {
               if (mapping[key]) {
-                if (!vm.selections[key]) vm.selections[key] = [];
+                if (!vm.selections[key]) vm.selections[key] = {};
                 var length = vm.selections[key];
                 angular.forEach(mapping[key], function (map) {
                   if (node.labels[key] == map[0]) {
-                    var alreadyThere = false;
-                    angular.forEach(vm.selections[key], function (entry) {
-                      if (entry[0] == map[0]) {
-                        alreadyThere = true;
-                      }
-                    });
-                    if (!alreadyThere) {
-                      vm.selections[key].push(map)
+                    if (!vm.selections[key][map[0]]) {
+                      vm.selections[key][map[0]] = map[1];
                     }
                   }
                 });
@@ -118,7 +129,16 @@
       return false;
     }
 
+    function getKeys(obj) {
+      return Object.keys(obj).sort();
+    }
+
     var mapping = {
+      provider: [
+        ['amazonec2', 'Amazon EC2'],
+        ['digitalocean', 'Digital Ocean'],
+        ['virtualbox', 'Virtualbox']
+      ],
       region: [
         ['us', 'USA'],
         ['eu', 'Europe']
@@ -126,11 +146,6 @@
       tier: [
         ['1', 'Tier 1'],
         ['2', 'Tier 2']
-      ],
-      provider: [
-        ['aws', 'AWS'],
-        ['digitalocean', 'Digital Ocean'],
-        ['virtualbox', 'Virtualbox']
       ]
     }
   }
