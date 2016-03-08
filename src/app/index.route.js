@@ -40,7 +40,7 @@
         controllerAs: 'adc'
       })
       .state('apps.details.policy', {
-        url: '/{app_id}/policy', // TODO: Should include only database IDs
+        url: '/policy', // TODO: Should include only database IDs
         templateUrl: 'app/apps/details/policy/policy.html',
         controller: 'AppPolicyController',
         controllerAs: 'apc'
