@@ -6,10 +6,12 @@
     <div layout="start center">
       <span class="md-title md-padding">Details of {{adc.app.name}}</span>
       <span flex></span>
-      <md-button class="md-raised" ng-click="adc.deploy()" ng-show="adc.app.status=='ready'" ng-disabled="adc.app.status=='deployed'">Deploy</md-button>
+      <md-button class="md-raised" ng-click="adc.deploy()" ng-show="adc.app.status=='ready'"
+                 ng-disabled="adc.app.status=='deployed'">Deploy
+      </md-button>
     </div>
 
-    <md-tabs md-dynamic-height class="md-accent md-hue-1 tabs-section" md-selected="adc.selectedIndex">
+    <md-tabs md-dynamic-height class="md-accent md-hue-1 tabs-section">
       <md-tab label="General">
         <md-content layout="column">
           <md-list>
@@ -69,16 +71,42 @@
             </md-list>
           </div>
           <div flex="20" layout="column">
-            <md-menu md-position-mode="target-right target" ng-show="adc.app.status=='deployed'">
+            <md-menu md-position-mode="target target" ng-show="adc.app.status=='deployed'">
               <md-button class="md-raised" aria-label="Move" ng-click="$mdOpenMenu($event)">
                 Move
               </md-button>
-              <md-menu-content width="5">
-                <md-menu-item ng-repeat="node in adc.nodes" ng-hide="node.name==component.node.name">
-                  <md-button ng-click="adc.move(component, node)">
-                    {{node.name}}
+              <md-menu-content>
+                <form>
+                  <md-radio-group ng-model="data.provider" ng-init="data.provider = component.node.labels.provider">
+                    <md-radio-button value="">(No preference)</md-radio-button>
+                    <md-radio-button ng-repeat="provider in adc.selections.provider"
+                                     ng-class="{'md-primary': provider[0]==component.node.labels.provider}"
+                                     value="{{provider[0]}}">
+                      {{provider[1]}}
+                    </md-radio-button>
+                  </md-radio-group>
+                  <hr/>
+                  <md-radio-group ng-model="data.region" ng-init="data.region = component.node.labels.region">
+                    <md-radio-button value="">(No preference)</md-radio-button>
+                    <md-radio-button ng-repeat="region in adc.selections.region"
+                                     ng-class="{'md-primary': region[0]==component.node.labels.region}"
+                                     value="{{region[0]}}">
+                      {{region[1]}}
+                    </md-radio-button>
+                  </md-radio-group>
+                  <hr/>
+                  <md-radio-group ng-model="data.tier" ng-init="data.tier = component.node.labels.tier">
+                    <md-radio-button value="">(No preference)</md-radio-button>
+                    <md-radio-button ng-repeat="tier in adc.selections.tier"
+                                     ng-class="{'md-primary': tier[0]==component.node.labels.tier}" value="{{tier[0]}}">
+                      {{tier[1]}}
+                    </md-radio-button>
+                  </md-radio-group>
+                  <hr/>
+                  <md-button class="md-raised" ng-click="adc.move(component, data)">
+                    Apply
                   </md-button>
-                </md-menu-item>
+                </form>
               </md-menu-content>
             </md-menu>
           </div>

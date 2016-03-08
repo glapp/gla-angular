@@ -20,6 +20,9 @@
     vm.disableMove = disableMove;
     vm.move = move;
 
+    // TODO: Change them dynamically
+    vm.selections = {};
+
     getDetails();
 
     function deploy() {
@@ -52,6 +55,32 @@
       Node.getInfo(
         function onSuccess(response) {
           vm.nodes = response;
+          vm.selections = {};
+          angular.forEach(response, function (node) {
+            angular.forEach(Object.keys(node.labels), function (key) {
+              if (mapping[key]) {
+                if (!vm.selections[key]) vm.selections[key] = [];
+                var length = vm.selections[key];
+                angular.forEach(mapping[key], function (map) {
+                  if (node.labels[key] == map[0]) {
+                    var alreadyThere = false;
+                    angular.forEach(vm.selections[key], function (entry) {
+                      if (entry[0] == map[0]) {
+                        alreadyThere = true;
+                      }
+                    });
+                    if (!alreadyThere) {
+                      vm.selections[key].push(map)
+                    }
+                  }
+                });
+                if (vm.selections[key].length == length) {
+                  $log.warn('Unknown value for the label ' + key + ': ' + node.labels[key] + '. Please add a mapping for this value.')
+                }
+              }
+            })
+          })
+          $log.info(vm.selections)
         }, function onError(err) {
           toastr.error(err.data, 'Error');
         })
@@ -68,10 +97,14 @@
       return empty;
     }
 
-    function move(component, goal_node) {
+    function move(component, opt) {
+
+      // TODO: set opt values to undefined
+
+
       Application.move({
         component_id: component.id,
-        goal_node: goal_node.name
+        options: opt
       }, function onSuccess(response) {
         $log.info(response);
         getDetails();
@@ -82,7 +115,23 @@
     }
 
     function disableMove() {
-      return false
+      return false;
+    }
+
+    var mapping = {
+      region: [
+        ['us', 'USA'],
+        ['eu', 'Europe']
+      ],
+      tier: [
+        ['1', 'Tier 1'],
+        ['2', 'Tier 2']
+      ],
+      provider: [
+        ['aws', 'AWS'],
+        ['digitalocean', 'Digital Ocean'],
+        ['virtualbox', 'Virtualbox']
+      ]
     }
   }
 })();
