@@ -28,17 +28,21 @@
     function deploy() {
       Application.deploy({app_id: vm.app.id},
         function onSuccess(response) {
-          vm.app = response;
+          $log.info(response);
+          // TODO deactivate nice circling icon
+          toastr.success('Successfully deployed ' + vm.app.name + '!', 'Info');
+          getDetails();
         }, function onError(err) {
           $log.error(err);
         })
     }
 
     function disableButton(data, labels) {
+      if (!labels) return true;
 
       // Check whether all the "no preference" buttons are pressed, which doesn't make sense
       var disable = true;
-      angular.forEach(data, function(value) {
+      angular.forEach(data, function (value) {
         if (value != '') {
           disable = false;
         }
@@ -47,7 +51,7 @@
 
       // Check whether it's the same configuration as before
       disable = true;
-      angular.forEach(data, function(value, key) {
+      angular.forEach(data, function (value, key) {
         if (value != labels[key]) {
           disable = false
         }
@@ -107,15 +111,21 @@
     }
 
     function move(component, opt) {
+      var oldNode;
 
-      // TODO: set opt values to undefined
-
+      if (component.node) {
+        oldNode = component.node.name;
+      } else {
+        toastr.error('Couldn\'t move!', 'Error');
+        return;
+      }
 
       Application.move({
         component_id: component.id,
         options: opt
       }, function onSuccess(response) {
         $log.info(response);
+        toastr.success('Successfully moved ' + component.originalName + ' from ' + oldNode + ' to ' + response.node + '!', 'Info');
         getDetails();
       }, function onError(err) {
         $log.error(err);
