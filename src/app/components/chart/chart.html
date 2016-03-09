@@ -1,0 +1,13 @@
+<div ng-init="show = 'cpu'">
+  <md-button ng-show="show != 'cpu'" class="md-raised" ng-click="show = 'cpu'">Show CPU</md-button>
+  <md-button ng-show="show != 'responsetime'" class="md-raised" ng-click="show = 'responsetime'">Show response time</md-button>
+  <div class="cpu-usage" ng-show="show == 'cpu'">
+    <nvd3 options="DataCtrl.options" data="DataCtrl.data"></nvd3>
+    <nvd3 options="DataCtrl.options1" data="DataCtrl.data"></nvd3>
+  </div>
+  <div class="response-time" ng-show="show == 'responsetime'">
+    <nvd3 options="DataCtrl.options3" data="DataCtrl.data3"></nvd3>
+    <nvd3 options="DataCtrl.options4" data="DataCtrl.data3"></nvd3>
+  </div>
+  last 30 seconds
+</div>
