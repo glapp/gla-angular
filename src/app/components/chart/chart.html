@@ -1,8 +1,13 @@
 <!--<div ng-controller="ChartController" layout-fill>-->
-<div>
+<div class="cpu-usage">
+  <md-button class="md-raised">{{DataCtrl.toggle}}</md-button>
   <nvd3 options="DataCtrl.options" data="DataCtrl.data"></nvd3>
   <nvd3 options="DataCtrl.options1" data="DataCtrl.data"></nvd3>
-  {{DataCtrl.test}}
+  last 30 seconds
+</div>
+<div class="response-time">
+  <nvd3 options="DataCtrl.options3" data="DataCtrl.data3"></nvd3>
+  <nvd3 options="DataCtrl.options4" data="DataCtrl.data3"></nvd3>
 </div>
 <!--</div>-->
 
