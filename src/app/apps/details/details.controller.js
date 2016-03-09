@@ -22,6 +22,7 @@
     vm.disableButton = disableButton;
     vm.selections = {};
     vm.getStatusMessage = getStatusMessage;
+    vm.openScenarioDialog = openScenarioDialog;
 
     getDetails();
 
@@ -37,6 +38,17 @@
           $log.error(err);
           vm.app.deploying = false;
         })
+    }
+
+    function openScenarioDialog(ev, scenario) {
+      $mdDialog.show(
+        $mdDialog.alert()
+          .title('Scenario ' + scenario)
+          .content(scenarios[scenario])
+          .clickOutsideToClose(true)
+          .targetEvent(ev)
+          .ok('Let\s do this!')
+      )
     }
 
     function disableButton(data, labels) {
@@ -156,8 +168,7 @@
       preparing: 'The application is being prepared on every host.',
       failed: 'Something went wrong during the preparation / deployment phase.',
       deployed: 'The application is deployed. Check the other tabs to check on the states of the individual components.'
-
-    }
+    };
 
     var mapping = {
       provider: [
@@ -173,6 +184,12 @@
         ['1', 'Tier 1'],
         ['2', 'Tier 2']
       ]
+    };
+
+    var scenarios = {
+      1: 'Scenario 1 description',
+      2: 'Scenario 2 description',
+      3: 'Scenario 3 description'
     }
   }
 })();
