@@ -6,102 +6,20 @@
     <div layout="start center">
       <span class="md-title md-padding">Details of {{adc.app.name}}</span>
       <span flex></span>
-      <md-button class="md-raised" ng-click="adc.deploy()" ng-show="adc.app.status=='ready'"
-                 ng-disabled="adc.app.status=='deployed'">Deploy
-      </md-button>
+      <md-button class="md-raised" ng-click="adc.deploy()" ng-disabled="adc.disableDeploy()">Deploy</md-button>
     </div>
 
-    <md-tabs layout-fill class="md-accent md-hue-1 tabs-section">
-      <md-tab label="General">
-        <md-content layout="column" class="md-body-1 md-padding">
+    <md-tabs md-dynamic-height class="md-accent md-hue-1 tabs-section" md-selected="adc.selectedIndex">
+      <md-tab ng-repeat="tab in adc.tabItems" ng-disabled="tab.disabled" label="{{tab.title}}">
+        <md-content>
           <md-list>
-            <md-list-item class="md-2-line">
+            <md-list-item ng-repeat="item in tab.list" ng-hide="adc.isEmpty(item.content)" class="md-2-line">
               <div class="md-list-item-text" layout="column">
-                <h4>Status</h4>
-                <p>{{adc.app.status}}</p>
-                <p ng-hide="!adc.getStatusMessage(adc.app.status)">{{adc.getStatusMessage(adc.app.status)}}</p>
-                <br><!-- TODO: remove this layout-hack -->
-              </div>
-            </md-list-item>
-            <md-list-item class="md-2-line">
-              <div class="md-list-item-text" layout="column">
-                <h4>Logs</h4>
-                <p ng-repeat="log in adc.app.log">
-                  <span>{{log.createdAt | amDateFormat:'MM.DD.YYYY HH:MM:ss'}}</span><span>{{': ' + log.content}}</span>
-                </p>
+                <h4>{{item.description}}</h4>
+                <p ng-repeat="listitem in item.content track by $index">{{listitem}}</p>
               </div>
             </md-list-item>
           </md-list>
-        </md-content>
-      </md-tab>
-      <md-tab ng-repeat="component in adc.app.components" label="{{component.originalName}}">
-        <md-content layout="row" class="md-body-1 md-padding">
-          <div flex="80" layout="column">
-            <md-list>
-              <md-list-item class="md-2-line" ng-show="component.node">
-                <div class="md-list-item-text" layout="column">
-                  <h4>Host</h4>
-                  <p>Provider: {{adc.selections.provider[component.node.labels.provider] || 'undefined'}}</p>
-                  <p>Region: {{adc.selections.region[component.node.labels.region] || 'undefined'}}</p>
-                  <p>Tier: {{adc.selections.tier[component.node.labels.tier] || 'undefined'}}</p>
-                  <p ng-hide="component.published_port">IP: {{component.node.ip}}</p>
-                  <p ng-show="component.published_port">IP:
-                    <a target="_blank"
-                       href="{{'http://' + component.node.ip + ':' + component.published_port}}">{{component.node.ip +
-                      ':'
-                      + component.published_port}}</a>
-                  </p>
-                </div>
-              </md-list-item>
-              <md-list-item class="md-2-line">
-                <div class="md-list-item-text" layout="column">
-                  <h4>Image</h4>
-                  <p>{{component.image}}</p>
-                </div>
-              </md-list-item>
-              <md-list-item class="md-2-line">
-                <div class="md-list-item-text" layout="column">
-                  <h4>Environment</h4>
-                  <p ng-repeat="item in component.environment">{{item}}</p>
-                </div>
-              </md-list-item>
-              <md-list-item class="md-2-line">
-                <div class="md-list-item-text" layout="column">
-                  <h4>Exposed ports</h4>
-                  <p ng-repeat="item in component.expose">{{item}}</p>
-                </div>
-              </md-list-item>
-            </md-list>
-          </div>
-          <div flex="20" layout="column">
-            <md-menu md-position-mode="target target" ng-show="adc.app.status=='deployed'">
-              <md-button class="md-raised" aria-label="Move" ng-click="$mdOpenMenu($event)">
-                Move
-              </md-button>
-              <md-menu-content class="md-body-1" width="4">
-                <section>
-                  <form ng-init="data={}">
-                    <div ng-repeat="option in adc.getKeys(adc.selections)">
-                      <span layout-padding class="md-body-1">{{option.substring(0,1).toUpperCase() + option.substring(1) + ':'}}</span>
-                      <md-radio-group ng-model="data[option]" ng-init="data[option] = component.node.labels[option]">
-                        <md-radio-button value="">(No preference)</md-radio-button>
-                        <md-radio-button ng-repeat="short in adc.getKeys(adc.selections[option])"
-                                         ng-class="{'md-primary': short==component.node.labels[option]}"
-                                         value="{{short}}">
-                          {{adc.selections[option][short]}}
-                        </md-radio-button>
-                      </md-radio-group>
-                      <hr/>
-                    </div>
-                    <md-button ng-disabled="adc.disableButton(data, component.node.labels)" class="md-raised"
-                               ng-click="adc.move(component, data)">
-                      Apply
-                    </md-button>
-                  </form>
-                </section>
-              </md-menu-content>
-            </md-menu>
-          </div>
         </md-content>
       </md-tab>
     </md-tabs>
