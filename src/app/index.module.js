@@ -14,6 +14,7 @@
       'ngMaterial',
       'toastr',
       'nvd3',
+      'nvd3ChartDirectives',
       'angularMoment'
     ]);
 

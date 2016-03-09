@@ -40,7 +40,7 @@
               <div class="md-list-item-text" layout="column">
                 <h4>Logs</h4>
                 <p ng-repeat="log in adc.app.log">
-                  <span>{{log.createdAt | amDateFormat:'MM.DD.YYYY HH:MM:ss'}}</span><span>{{': ' + log.content}}</span>
+                  <span>{{log.createdAt | amDateFormat:'DD.MM.YYYY HH:MM:ss'}}</span><span>{{': ' + log.content}}</span>
                 </p>
               </div>
             </md-list-item>
@@ -120,7 +120,7 @@
       </md-tab>
     </md-tabs>
   </div>
-  <div flex="30" class="md-whiteframe-1dp" layout="column" layout-align="center center">
-    <span class="md-title md-padding">Charts</span>
+  <div flex="30" ng-show="adc.app.status == 'deployed'" class="md-whiteframe-0dp" layout="column" layout-fill layout-align="start center">
+    <chart></chart>
   </div>
 </div>
