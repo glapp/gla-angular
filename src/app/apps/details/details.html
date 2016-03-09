@@ -120,8 +120,7 @@
       </md-tab>
     </md-tabs>
   </div>
-  <div flex="30" class="md-whiteframe-0dp" layout="column" layout-fill layout-align="start center">
-    <span class="md-title md-padding">Charts</span>
+  <div flex="30" ng-show="adc.app.status == 'deployed'" class="md-whiteframe-0dp" layout="column" layout-fill layout-align="start center">
     <chart></chart>
   </div>
 </div>
