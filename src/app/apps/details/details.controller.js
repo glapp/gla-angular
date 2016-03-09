@@ -6,7 +6,7 @@
     .controller('AppDetailsController', AppDetailsController);
 
   /** @ngInject */
-  function AppDetailsController($stateParams, $log, Application, Node, toastr) {
+  function AppDetailsController($stateParams, $log, $mdDialog, Application, Node, toastr) {
     var vm = this;
 
     vm.navItems = [];
