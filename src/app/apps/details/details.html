@@ -1,4 +1,15 @@
-<sub-navbar items="adc.navItems"></sub-navbar>
+<sub-navbar items="adc.navItems">
+  <span class="md-body-2">Scenarios:</span>
+  <md-button class="md-fab md-primary md-hue-1 md-mini" aria-label="Scenario 1" ng-click="adc.openScenarioDialog($event, 1)">
+    <span class="md-body-2">1</span>
+  </md-button>
+  <md-button class="md-fab md-primary md-hue-1 md-mini" aria-label="Scenario 2" ng-click="adc.openScenarioDialog($event, 2)">
+    <span class="md-body-2">2</span>
+  </md-button>
+  <md-button class="md-fab md-primary md-hue-1 md-mini" aria-label="Scenario 3" ng-click="adc.openScenarioDialog($event, 3)">
+    <span class="md-body-2">3</span>
+  </md-button>
+</sub-navbar>
 
 <div layout="column" layout-gt-md="row" layout-fill>
   <div flex="70" class="md-whiteframe-1dp" layout="column" layout-fill>
