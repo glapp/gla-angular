@@ -26,14 +26,16 @@
     getDetails();
 
     function deploy() {
+      vm.app.deploying = true;
       Application.deploy({app_id: vm.app.id},
         function onSuccess(response) {
           $log.info(response);
-          // TODO deactivate nice circling icon
-          toastr.success('Successfully deployed ' + vm.app.name + '!', 'Info');
           getDetails();
+          vm.app.deploying = false;
+          toastr.success('Successfully deployed ' + vm.app.name + '!', 'Info');
         }, function onError(err) {
           $log.error(err);
+          vm.app.deploying = false;
         })
     }
 
@@ -124,15 +126,19 @@
         return;
       }
 
+      component.moving = true;
+
       Application.move({
         component_id: component.id,
         options: opt
       }, function onSuccess(response) {
         $log.info(response);
+        component.moving = false;
         toastr.success('Successfully moved ' + component.originalName + ' from ' + oldNode + ' to ' + response.node + '!', 'Info');
         getDetails();
       }, function onError(err) {
         $log.error(err);
+        component.moving = false;
         toastr.error(err.data, 'Error');
       });
     }

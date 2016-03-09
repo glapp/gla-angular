@@ -7,7 +7,9 @@
       <span class="md-title md-padding">Details of {{adc.app.name}}</span>
       <span flex></span>
       <md-button class="md-raised" ng-click="adc.deploy()" ng-show="adc.app.status=='ready'"
-                 ng-disabled="adc.app.status=='deployed'">Deploy
+                 ng-disabled="adc.app.status=='deployed' || adc.app.deploying">
+        <span ng-hide="adc.app.deploying">Deploy</span>
+        <span ng-show="adc.app.deploying">Deploying...</span>
       </md-button>
     </div>
 
@@ -65,7 +67,7 @@
                   <p ng-repeat="item in component.environment">{{item}}</p>
                 </div>
               </md-list-item>
-              <md-list-item class="md-2-line">
+              <md-list-item class="md-2-line" ng-hide="!component.expose || component.expose.length == 0">
                 <div class="md-list-item-text" layout="column">
                   <h4>Exposed ports</h4>
                   <p ng-repeat="item in component.expose">{{item}}</p>
@@ -75,8 +77,9 @@
           </div>
           <div flex="20" layout="column">
             <md-menu md-position-mode="target target" ng-show="adc.app.status=='deployed'">
-              <md-button class="md-raised" aria-label="Move" ng-click="$mdOpenMenu($event)">
-                Move
+              <md-button class="md-raised" aria-label="Move" ng-disabled="component.moving" ng-click="$mdOpenMenu($event)">
+                <span ng-hide="component.moving">Move</span>
+                <span ng-show="component.moving">Moving...</span>
               </md-button>
               <md-menu-content class="md-body-1" width="4">
                 <section>
