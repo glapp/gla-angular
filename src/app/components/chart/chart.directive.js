@@ -22,7 +22,7 @@
     return directive;
 
     /** @ngInject */
-    function DataController($interval) {
+    function DataController($interval, d3) {
       var vm = this;
       vm.toggle = "toggle";
       vm.cpu = true;
