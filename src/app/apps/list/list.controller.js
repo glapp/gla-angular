@@ -6,7 +6,7 @@
     .controller('AppListController', AppListController);
 
   /** @ngInject */
-  function AppListController($mdDialog, $document, $interval, $log, Application) {
+  function AppListController($mdDialog, $document, $interval, $log, Application, toastr) {
     var vm = this;
 
     vm.apps = [];
@@ -75,9 +75,13 @@
         parent: angular.element($document.body),
         targetEvent: ev
       }).then(function (app) {
-        vm.apps.push(app);
-        updateReadyCount();
-        startRepeat();
+        if (app) {
+          vm.apps.push(app);
+          updateReadyCount();
+          startRepeat();
+        }
+      }).catch(function (err) {
+        toastr.error(err.data, 'Error');
       });
     }
   }

@@ -20,8 +20,8 @@
     vm.move = move;
     vm.getKeys = getKeys;
     vm.disableButton = disableButton;
-
     vm.selections = {};
+    vm.getStatusMessage = getStatusMessage;
 
     getDetails();
 
@@ -101,6 +101,10 @@
         })
     }
 
+    function getStatusMessage(reqStatus) {
+      if (status[reqStatus]) return status[reqStatus];
+      return undefined;
+    }
 
     function isEmpty(content) {
       var empty = true;
@@ -141,6 +145,14 @@
 
     function getKeys(obj) {
       return Object.keys(obj).sort();
+    }
+
+    var status = {
+      ready: 'The application is prepared on every host and ready to deploy.',
+      preparing: 'The application is being prepared on every host.',
+      failed: 'Something went wrong during the preparation / deployment phase.',
+      deployed: 'The application is deployed. Check the other tabs to check on the states of the individual components.'
+
     }
 
     var mapping = {
