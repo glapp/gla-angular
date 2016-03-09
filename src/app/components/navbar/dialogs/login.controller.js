@@ -6,7 +6,7 @@
     .controller('LoginController', LoginController);
 
   /** @ngInject */
-  function LoginController($rootScope, $state, $mdDialog, User, toastr) {
+  function LoginController($rootScope, $state, $mdDialog, $log, User, toastr) {
     var vm = this;
 
     vm.loginData = {};
@@ -22,7 +22,8 @@
         vm.loginData = {};
         $state.go('apps.list');
       }, function onError(err) {
-        toastr.error('Error when signing in: ', err);
+        $log.error(err);
+        toastr.error(err.statusText, 'Error while signing in');
         vm.loginData = {};
         $mdDialog.hide();
       });

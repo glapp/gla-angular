@@ -14,7 +14,7 @@
           getAppDetails: {method: 'GET', url: 'http://localhost:1337/application/getAppDetails', isArray: false},
           addApp: {method: 'POST', url: 'http://localhost:1337/application/add', isArray: false},
           deploy: {method: 'POST', url: 'http://localhost:1337/application/deploy', isArray: false},
-          move: {method: 'POST', url: 'http://localhost:1337/move', isArray: true}
+          move: {method: 'POST', url: 'http://localhost:1337/move', isArray: false}
         }
       );
     }
