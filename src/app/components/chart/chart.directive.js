@@ -81,7 +81,7 @@
           if (vm.data[0].values.length > 30) vm.data[0].values.shift();
           x++;
 
-          vm.$apply(); // update both chart
+          //vm.$apply(); // update both chart
         }, 2500);
         $interval(function(){
           if(max <100){
@@ -142,7 +142,7 @@
           if (vm.data3[0].values.length > 30) vm.data3[0].values.shift();
           x++;
 
-          vm.$apply(); // update both chart
+          //vm.$apply(); // update both chart
         }, 2000);
         $interval(function(){
           if(max <480){
