@@ -56,21 +56,12 @@
 
       // Check whether all the "no preference" buttons are pressed, which doesn't make sense
       var disable = true;
-      angular.forEach(data, function (value) {
-        if (value != '') {
+      angular.forEach(data, function (value, key) {
+        if (value != '' && value != labels[key]) {
           disable = false;
         }
       });
-      if (disable) return disable;
-
-      // Check whether it's the same configuration as before
-      disable = true;
-      angular.forEach(data, function (value, key) {
-        if (value != labels[key]) {
-          disable = false
-        }
-      });
-      return disable
+      return disable;
     }
 
     function getDetails() {
