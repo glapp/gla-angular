@@ -15,8 +15,6 @@
       'toastr',
       'nvd3',
       'nvd3ChartDirectives',
-      'angularMoment',
-      'd3'
+      'angularMoment'
     ]);
-
 })();
