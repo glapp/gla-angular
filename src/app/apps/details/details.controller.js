@@ -178,9 +178,9 @@
     };
 
     var scenarios = {
-      1: 'Scenario 1 description',
-      2: 'Scenario 2 description',
-      3: 'Scenario 3 description'
+      1: '<ul><li>The voting application goes live. As it is announced and spread through various social media, more and more people are going to the website to vote.</li><li>The platform detects an increase in CPU utilization of the voting cell.</li><li>The platform moves the instance of voting cell (component) to a higher tier cloud server.</li>',
+      2: '<ul><li>Due to the difference in timezone, number of voters from different geographical regions varies throughout the day.</li><li>An increase of users from a different geographical region (for instance, users coming from the United States) results in an increase of response time.</li><li>From the application metric data of response time and IP address, the platform detects this increase in response time.</li><li>The platform then moves the cell to cloud servers in the United States to reduce the response time.</li></ul>',
+      3: '<ul><li>There is a price change for cloud server from AWS and the cost is lower than that of Digital Ocean.</li><li>The platform received the change in price metric data and computes the new cost.</li><li>The platform then moves the cells to AWS which has a lower cost.</li></ul>'
     }
   }
 
