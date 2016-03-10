@@ -97,8 +97,8 @@
                   <form ng-init="data={}">
                     <div ng-repeat="option in adc.getKeys(adc.selections)">
                       <span layout-padding class="md-body-1">{{option.substring(0,1).toUpperCase() + option.substring(1) + ':'}}</span>
-                      <md-radio-group ng-model="data[option]" ng-init="data[option] = component.node.labels[option]">
-                        <md-radio-button value="">(No preference)</md-radio-button>
+                      <md-radio-group ng-model="data[option]" ng-init="data[option] = ''">
+                        <md-radio-button value="" class="md-primary">(No preference)</md-radio-button>
                         <md-radio-button ng-repeat="short in adc.getKeys(adc.selections[option])"
                                          ng-class="{'md-primary': short==component.node.labels[option]}"
                                          value="{{short}}">
