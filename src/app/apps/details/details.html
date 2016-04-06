@@ -47,50 +47,50 @@
           </md-list>
         </md-content>
       </md-tab>
-      <md-tab ng-repeat="component in adc.app.components" label="{{component.originalName}}">
+      <md-tab ng-repeat="organ in adc.app.organs" label="{{organ.originalName}}">
         <md-content layout="row" class="md-body-1 md-padding">
           <div flex="80" layout="column">
             <md-list>
-              <md-list-item class="md-2-line" ng-show="component.node">
+              <md-list-item class="md-2-line" ng-show="organ.host">
                 <div class="md-list-item-text" layout="column">
                   <h4>Host</h4>
-                  <p>Provider: {{adc.selections.provider[component.node.labels.provider] || 'undefined'}}</p>
-                  <p>Region: {{adc.selections.region[component.node.labels.region] || 'undefined'}}</p>
-                  <p>Tier: {{adc.selections.tier[component.node.labels.tier] || 'undefined'}}</p>
-                  <p ng-hide="component.published_port">IP: {{component.node.ip}}</p>
-                  <p ng-show="component.published_port">IP:
+                  <p>Provider: {{adc.selections.provider[organ.host.labels.provider] || 'undefined'}}</p>
+                  <p>Region: {{adc.selections.region[organ.host.labels.region] || 'undefined'}}</p>
+                  <p>Tier: {{adc.selections.tier[organ.host.labels.tier] || 'undefined'}}</p>
+                  <p ng-hide="organ.published_port">IP: {{organ.host.ip}}</p>
+                  <p ng-show="organ.published_port">IP:
                     <a target="_blank"
-                       href="{{'http://' + component.node.ip + ':' + component.published_port}}">{{component.node.ip +
+                       href="{{'http://' + organ.host.ip + ':' + organ.published_port}}">{{organ.host.ip +
                       ':'
-                      + component.published_port}}</a>
+                      + organ.published_port}}</a>
                   </p>
                 </div>
               </md-list-item>
               <md-list-item class="md-2-line">
                 <div class="md-list-item-text" layout="column">
                   <h4>Image</h4>
-                  <p>{{component.image}}</p>
+                  <p>{{organ.image}}</p>
                 </div>
               </md-list-item>
               <md-list-item class="md-2-line">
                 <div class="md-list-item-text" layout="column">
                   <h4>Environment</h4>
-                  <p ng-repeat="item in component.environment">{{item}}</p>
+                  <p ng-repeat="item in organ.environment">{{item}}</p>
                 </div>
               </md-list-item>
-              <md-list-item class="md-2-line" ng-hide="!component.expose || component.expose.length == 0">
+              <md-list-item class="md-2-line" ng-hide="!organ.expose || organ.expose.length == 0">
                 <div class="md-list-item-text" layout="column">
                   <h4>Exposed ports</h4>
-                  <p ng-repeat="item in component.expose">{{item}}</p>
+                  <p ng-repeat="item in organ.expose">{{item}}</p>
                 </div>
               </md-list-item>
             </md-list>
           </div>
           <div flex="20" layout="column">
             <md-menu md-position-mode="target target" ng-show="adc.app.status=='deployed'">
-              <md-button class="md-raised" aria-label="Move" ng-disabled="component.moving" ng-click="$mdOpenMenu($event)">
-                <span ng-hide="component.moving">Move</span>
-                <span ng-show="component.moving">Moving...</span>
+              <md-button class="md-raised" aria-label="Move" ng-disabled="organ.moving" ng-click="$mdOpenMenu($event)">
+                <span ng-hide="organ.moving">Move</span>
+                <span ng-show="organ.moving">Moving...</span>
               </md-button>
               <md-menu-content class="md-body-1" width="4">
                 <section>
@@ -100,15 +100,15 @@
                       <md-radio-group ng-model="data[option]" ng-init="data[option] = ''">
                         <md-radio-button value="" class="md-primary">(No preference)</md-radio-button>
                         <md-radio-button ng-repeat="short in adc.getKeys(adc.selections[option])"
-                                         ng-class="{'md-primary': short==component.node.labels[option]}"
+                                         ng-class="{'md-primary': short==organ.host.labels[option]}"
                                          value="{{short}}">
                           {{adc.selections[option][short]}}
                         </md-radio-button>
                       </md-radio-group>
                       <hr/>
                     </div>
-                    <md-button ng-disabled="adc.disableButton(data, component.node.labels)" class="md-raised"
-                               ng-click="adc.move(component, data)">
+                    <md-button ng-disabled="adc.disableButton(data, organ.host.labels)" class="md-raised"
+                               ng-click="adc.move(organ, data)">
                       Apply
                     </md-button>
                   </form>

@@ -6,19 +6,19 @@
     .controller('InfrastructureController', InfrastructureController);
 
   /** @ngInject */
-  function InfrastructureController($log, Node, toastr) {
+  function InfrastructureController($log, Host, toastr) {
     var vm = this;
 
-    vm.nodes = [];
+    vm.hosts = [];
     vm.tabItems = [];
 
     getNodeInfo();
 
     function getNodeInfo() {
-      Node.getInfo({},
+      Host.getInfo({},
         function onSuccess(response) {
           $log.info(response);
-          vm.nodes = response;
+          vm.hosts = response;
           fillList();
         },
         function onError(err) {
@@ -29,18 +29,18 @@
     function fillList() {
       vm.tabItems = [];
 
-      angular.forEach(vm.nodes, function (node) {
+      angular.forEach(vm.hosts, function (host) {
         var labels = [];
-        for (var key in node.labels) {
-          labels.push(key + ': ' + node.labels[key]);
+        for (var key in host.labels) {
+          labels.push(key + ': ' + host.labels[key]);
         }
-        var title = node.name;
-        var length = node.name.length;
+        var title = host.name;
+        var length = host.name.length;
         if (length > 8) {
-          title = node.name.substring(0, 2) + '...' + node.name.substring(length - 5);
+          title = host.name.substring(0, 2) + '...' + host.name.substring(length - 5);
         }
-        var components = node.components.map(function (component) {
-          return component.name;
+        var cells = host.cells.map(function (cell) {
+          return cell.name;
         });
 
         vm.tabItems.push({
@@ -48,15 +48,15 @@
           list: [
             {
               description: 'Name',
-              content: [node.name]
+              content: [host.name]
             },
             {
               description: 'IP',
-              content: [node.ip]
+              content: [host.ip]
             },
             {
               description: 'Status',
-              content: [node.status]
+              content: [host.status]
             },
             {
               description: 'Labels',
@@ -64,15 +64,15 @@
             },
             {
               description: 'Reserved CPUs',
-              content: [node.reservedCPUs]
+              content: [host.reservedCPUs]
             },
             {
               description: 'Reserved Memory',
-              content: [node.reservedMemory]
+              content: [host.reservedMemory]
             },
             {
-              description: 'Components',
-              content: components
+              description: 'Cells',
+              content: cells
             }
           ]
         });

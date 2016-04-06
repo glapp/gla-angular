@@ -57,8 +57,8 @@
     function updateReadyCount() {
       angular.forEach(vm.apps, function (app) {
         var count = 0;
-        angular.forEach(app.components, function (component) {
-          if (component.ready) {
+        angular.forEach(app.organs, function (organ) {
+          if (organ.ready) {
             count++;
           }
         });

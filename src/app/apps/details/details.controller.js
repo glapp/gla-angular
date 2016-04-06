@@ -6,13 +6,13 @@
     .controller('AppDetailsController', AppDetailsController);
 
   /** @ngInject */
-  function AppDetailsController($stateParams, $log, $mdDialog, Application, Node, toastr) {
+  function AppDetailsController($stateParams, $log, $mdDialog, Application, Host, toastr) {
     var vm = this;
 
     vm.navItems = [];
     vm.tabItems = [];
     vm.app = {};
-    vm.nodes = [];
+    vm.hosts = [];
     vm.selectedIndex = 0;
     vm.deploy = deploy;
     vm.isEmpty = isEmpty;
@@ -76,9 +76,9 @@
         }, function onError(err) {
           toastr.error(err.data, 'Error');
         });
-      Node.getInfo(
+      Host.getInfo(
         function onSuccess(response) {
-          vm.nodes = response;
+          vm.hosts = response;
           vm.selections = {};
           angular.forEach(response, function (node) {
             angular.forEach(Object.keys(node.labels), function (key) {
