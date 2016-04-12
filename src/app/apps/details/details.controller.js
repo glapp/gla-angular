@@ -6,7 +6,7 @@
     .controller('AppDetailsController', AppDetailsController);
 
   /** @ngInject */
-  function AppDetailsController($stateParams, $log, $mdDialog, Application, Host, toastr) {
+  function AppDetailsController($stateParams, $log, $mdDialog, Application, Host, Cell, toastr) {
     var vm = this;
 
     vm.navItems = [];
@@ -80,20 +80,20 @@
         function onSuccess(response) {
           vm.hosts = response;
           vm.selections = {};
-          angular.forEach(response, function (node) {
-            angular.forEach(Object.keys(node.labels), function (key) {
+          angular.forEach(response, function (host) {
+            angular.forEach(Object.keys(host.labels), function (key) {
               if (mapping[key]) {
                 if (!vm.selections[key]) vm.selections[key] = {};
                 var length = vm.selections[key];
                 angular.forEach(mapping[key], function (map) {
-                  if (node.labels[key] == map[0]) {
+                  if (host.labels[key] == map[0]) {
                     if (!vm.selections[key][map[0]]) {
                       vm.selections[key][map[0]] = map[1];
                     }
                   }
                 });
                 if (vm.selections[key].length == length) {
-                  $log.warn('Unknown value for the label ' + key + ': ' + node.labels[key] + '. Please add a mapping for this value.')
+                  $log.warn('Unknown value for the label ' + key + ': ' + host.labels[key] + '. Please add a mapping for this value.')
                 }
               }
             })
@@ -119,29 +119,29 @@
       return empty;
     }
 
-    function move(component, opt) {
+    function move(cell, opt) {
       var oldNode;
 
-      if (component.node) {
-        oldNode = component.node.name;
+      if (cell.host) {
+        oldNode = cell.host.name;
       } else {
         toastr.error('Couldn\'t move!', 'Error');
         return;
       }
 
-      component.moving = true;
+      cell.moving = true;
 
-      Application.move({
-        component_id: component.id,
+      Cell.move({
+        cell_id: cell.id,
         options: opt
       }, function onSuccess(response) {
         $log.info(response);
-        component.moving = false;
-        toastr.success('Successfully moved ' + component.originalName + ' from ' + oldNode + ' to ' + response.node + '!', 'Info');
+        cell.moving = false;
+        toastr.success('Successfully moved ' + cell.originalName + ' from ' + oldNode + ' to ' + response.node + '!', 'Info');
         getDetails();
       }, function onError(err) {
         $log.error(err);
-        component.moving = false;
+        cell.moving = false;
         toastr.error(err.data, 'Error');
       });
     }
