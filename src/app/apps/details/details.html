@@ -68,7 +68,7 @@
                         ':'
                         + cell.published_port}}</a>
                     </p>
-                    <md-menu md-position-mode="target target" ng-show="adc.app.status=='deployed'">
+                    <md-menu md-position-mode="target target" ng-show="adc.app.status=='deployed' && !cell.isProxy">
                       <md-button class="md-raised" aria-label="Move" ng-disabled="cell.moving"
                                  ng-click="$mdOpenMenu($event)">
                         <span ng-hide="cell.moving">Move</span>

@@ -16,7 +16,6 @@
     vm.selectedIndex = 0;
     vm.deploy = deploy;
     vm.isEmpty = isEmpty;
-    vm.disableMove = disableMove;
     vm.move = move;
     vm.getKeys = getKeys;
     vm.disableButton = disableButton;
@@ -97,7 +96,7 @@
                 }
               }
             })
-          })
+          });
           $log.info(vm.selections)
         }, function onError(err) {
           toastr.error(err.data, 'Error');
@@ -120,11 +119,8 @@
     }
 
     function move(cell, opt) {
-      var oldNode;
 
-      if (cell.host) {
-        oldNode = cell.host.name;
-      } else {
+      if (!cell.host) {
         toastr.error('Couldn\'t move!', 'Error');
         return;
       }
@@ -137,17 +133,13 @@
       }, function onSuccess(response) {
         $log.info(response);
         cell.moving = false;
-        toastr.success('Successfully moved ' + cell.originalName + ' from ' + oldNode + ' to ' + response.node + '!', 'Info');
+        toastr.success('Moved!', 'Info');
         getDetails();
       }, function onError(err) {
         $log.error(err);
         cell.moving = false;
         toastr.error(err.data, 'Error');
       });
-    }
-
-    function disableMove() {
-      return false;
     }
 
     function getKeys(obj) {
