@@ -45,6 +45,12 @@
         controller: 'AppPolicyController',
         controllerAs: 'apc'
       })
+      .state('dashboard', {
+        url: '/dashboard', // TODO: change routes to application later
+        templateUrl: 'app/dashboard/dashboard.html',
+        controller: 'DashboardController',
+        controllerAs: 'dc'
+      })
       .state('infrastructure', {
         url: '/infrastructure',
         templateUrl: 'app/infrastructure/infrastructure.html',

@@ -2,6 +2,9 @@
   <md-button class="md-icon-button" aria-label="Add application" ng-click="alc.openAddDialog($event)">
     <md-icon>add</md-icon>
   </md-button>
+  <md-button class="md-icon-button" aria-label="Show app dashboard" ui-sref-active="md-raised" ng-show="vm.isAuth()">
+    <md-icon>menu</md-icon>
+  </md-button>
 </sub-navbar>
 
 <md-content>
@@ -20,6 +23,8 @@
         </p>
       </md-whiteframe-content>
     </md-whiteframe>
+
+
 
 
   </div>
