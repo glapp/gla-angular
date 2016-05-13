@@ -6,7 +6,7 @@
     .controller('AppDetailsController', AppDetailsController);
 
   /** @ngInject */
-  function AppDetailsController($stateParams, $log, $mdDialog, Application, Host, Cell, toastr) {
+  function AppDetailsController($stateParams, $log, $mdDialog, Application, Host, Cell, Organ, toastr) {
     var vm = this;
 
     vm.navItems = [];
@@ -17,6 +17,7 @@
     vm.deploy = deploy;
     vm.isEmpty = isEmpty;
     vm.move = move;
+    vm.scaleUp = scaleUp;
     vm.getKeys = getKeys;
     vm.disableButton = disableButton;
     vm.selections = {};
@@ -116,6 +117,17 @@
         }
       });
       return empty;
+    }
+
+    function scaleUp(organ) {
+      Organ.scaleUp({organ_id: organ.id}, function onSuccess(response) {
+        $log.info(response);
+        toastr.success('Scaled Up!', 'Info');
+        getDetails();
+      }, function onError(err) {
+        $log.error(err);
+        toastr.error(err.data, 'Error');
+      })
     }
 
     function move(cell, opt) {
