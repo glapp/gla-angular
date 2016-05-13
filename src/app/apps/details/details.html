@@ -53,6 +53,9 @@
       <md-tab ng-repeat="organ in adc.app.organs" label="{{organ.originalName}}">
         <md-content layout="row" class="md-body-1 md-padding">
           <div flex layout="column">
+            <md-button ng-show="adc.app.status=='deployed'" class="md-raised" aria-label="Scale Up" ng-click="adc.scaleUp(organ)">
+              <span>Scale Up</span>
+            </md-button>
             <md-list>
               <md-list-item class="md-2-line md-padding" ng-show="organ.cells && organ.cells.length > 0">
                 <div ng-repeat="cell in organ.cells" layout="row" flex>
