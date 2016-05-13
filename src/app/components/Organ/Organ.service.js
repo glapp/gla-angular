@@ -10,7 +10,8 @@
           id: '@_id'
         },
         {
-          scaleUp: {method: 'POST', url: 'http://localhost:1337/organ/scaleUp', isArray: false}
+          scaleUp: {method: 'POST', url: 'http://localhost:1337/organ/scaleUp', isArray: false},
+          scaleDown: {method: 'POST', url: 'http://localhost:1337/organ/scaleDown', isArray: false}
         }
       );
     }
