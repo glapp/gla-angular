@@ -53,7 +53,8 @@
       <md-tab ng-repeat="organ in adc.app.organs" label="{{organ.originalName}}">
         <md-content layout="row" class="md-body-1 md-padding">
           <div flex layout="column">
-            <md-button ng-show="adc.app.status=='deployed'" class="md-raised" aria-label="Scale Up" ng-click="adc.scaleUp(organ)">
+            <md-button ng-show="adc.app.status=='deployed'" class="md-raised" aria-label="Scale Up"
+                       ng-click="adc.scaleUp(organ)">
               <span>Scale Up</span>
             </md-button>
             <md-list>
@@ -71,6 +72,10 @@
                         ':'
                         + cell.published_port}}</a>
                     </p>
+                    <md-button class="md-raised" aria-label="Kill" ng-click="adc.scaleDown(organ, cell)"
+                               ng-show="adc.app.status=='deployed' && !cell.isProxy">
+                      <span>Kill</span>
+                    </md-button>
                     <md-menu md-position-mode="target target" ng-show="adc.app.status=='deployed' && !cell.isProxy">
                       <md-button class="md-raised" aria-label="Move" ng-disabled="cell.moving"
                                  ng-click="$mdOpenMenu($event)">

@@ -18,6 +18,7 @@
     vm.isEmpty = isEmpty;
     vm.move = move;
     vm.scaleUp = scaleUp;
+    vm.scaleDown = scaleDown;
     vm.getKeys = getKeys;
     vm.disableButton = disableButton;
     vm.selections = {};
@@ -123,6 +124,17 @@
       Organ.scaleUp({organ_id: organ.id}, function onSuccess(response) {
         $log.info(response);
         toastr.success('Scaled Up!', 'Info');
+        getDetails();
+      }, function onError(err) {
+        $log.error(err);
+        toastr.error(err.data, 'Error');
+      })
+    }
+
+    function scaleDown(organ, cell) {
+      Organ.scaleDown({organ_id: organ.id, cell_id: cell.id}, function onSuccess(response) {
+        $log.info(response);
+        toastr.success('Killed!', 'Info');
         getDetails();
       }, function onError(err) {
         $log.error(err);
