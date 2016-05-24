@@ -32,5 +32,41 @@
   <div flex="85" class="md-whiteframe-1dp" layout="column" layout-fill
        layout-align="start center">
 
+    {{dc.json.name}}
+    <br>
+    <!--{{dc.json.organs[0].originalName}} is dependent on {{dc.json.organs[0].dependent_on[0].image}}-->
+
+<!--
+    <div ng-repeat="organ in dc.json.organs">
+      <span>Name : {{ organ.originalName }}</span>
+      <span> : {{ organ.dependent_on[0].image }}</span>
+    </div>
+-->
+
+<!--    <div ng-repeat="cell in dc.graph_nodes">
+      {{cell}}
+    </div>
+    <div ng-repeat="cell in dc.graph_edges">
+      {{cell}}
+    </div>
+    {{dc.graph}}-->
+<!--    {{dc.temp}}
+    <br><br>
+    {{dc.gnodes}}
+    <br><br>
+    {{dc.node_temp}}
+    <br><br>
+    {{dc.edge_temp}}
+    <br><br>data<br>
+    {{dc.data}}-->
+    <br>live_graph<br>
+    {{dc.live_data}}
+    <br>node_test<br>
+    {{dc.node_test}}
+
+    <vis-network data="dc.node_test" options="dc.options" height="100%"></vis-network>
+
+    <vis-network data="dc.data" options="dc.options" height="100%"></vis-network>
+
   </div>
 </div>
