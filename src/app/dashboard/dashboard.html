@@ -3,70 +3,30 @@
   <div flex="15" class="dashboard-menu" layout="column" layout-fill>
 
     <md-subheader class="md-no-sticky">App Menu</md-subheader>
-    <md-list-item ng-click="dc.showAlert($event)">
-      <md-icon>home</md-icon>
-      <p>Overview</p>
-    </md-list-item><md-divider></md-divider>
-    <md-list-item ng-click="navigateTo('whatever', $event)">
-      <md-icon>settings_input_component</md-icon>
-      <p>Policy</p>
-    </md-list-item><md-divider></md-divider>
-    <md-list-item ng-click="navigateTo('whatever', $event)">
-        <md-icon>trending_up</md-icon>
-      <p>Analytics</p>
-    </md-list-item><md-divider></md-divider>
-    <md-list-item ng-click="navigateTo('whatever', $event)">
-      <md-icon>replay</md-icon>
-      <p>History</p>
-    </md-list-item><md-divider></md-divider>
-    <md-list-item ng-click="navigateTo('whatever', $event)">
-      <md-icon>notifications</md-icon>
-      <p>Alerts</p>
-    </md-list-item><md-divider></md-divider>
-    <md-list-item ng-click="navigateTo('whatever', $event)">
-      <md-icon>settings</md-icon>
-      <p>Settings</p>
-    </md-list-item><md-divider></md-divider>
+
+    <div ng-repeat="item in dc.menu">
+      <md-list-item ui-sref={{item.path}}>
+        <md-icon>{{item.icon}}</md-icon>
+        <p>{{item.name}}</p>
+      </md-list-item><md-divider></md-divider>
+    </div>
+
   </div>
 
   <div flex="85" class="md-whiteframe-1dp" layout="column" layout-fill
        layout-align="start center">
 
-    {{dc.json.name}}
-    <br>
-    <!--{{dc.json.organs[0].originalName}} is dependent on {{dc.json.organs[0].dependent_on[0].image}}-->
+<!--    <md-button class="md-fab md-primary" align="right" aria-label="Network View" ui-sref=".overview">
+      <md-icon>explore</md-icon>
+    </md-button>
+    <md-button class="md-fab md-primary" aria-label="List View" ui-sref="apps.details({ app_id: app.id })">
+      <md-icon>menu</md-icon>
+    </md-button>-->
 
-<!--
-    <div ng-repeat="organ in dc.json.organs">
-      <span>Name : {{ organ.originalName }}</span>
-      <span> : {{ organ.dependent_on[0].image }}</span>
+
+    <div class="container">
+      <div ui-view></div>
     </div>
--->
-
-<!--    <div ng-repeat="cell in dc.graph_nodes">
-      {{cell}}
-    </div>
-    <div ng-repeat="cell in dc.graph_edges">
-      {{cell}}
-    </div>
-    {{dc.graph}}-->
-<!--    {{dc.temp}}
-    <br><br>
-    {{dc.gnodes}}
-    <br><br>
-    {{dc.node_temp}}
-    <br><br>
-    {{dc.edge_temp}}
-    <br><br>data<br>
-    {{dc.data}}-->
-    <br>live_graph<br>
-    {{dc.live_data}}
-    <br>node_test<br>
-    {{dc.node_test}}
-
-    <vis-network data="dc.node_test" options="dc.options" height="100%"></vis-network>
-
-    <vis-network data="dc.data" options="dc.options" height="100%"></vis-network>
 
   </div>
 </div>
