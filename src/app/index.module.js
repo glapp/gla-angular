@@ -15,6 +15,7 @@
       'toastr',
       'nvd3',
       'nvd3ChartDirectives',
-      'angularMoment'
+      'angularMoment',
+      'ngVis'
     ]);
 })();

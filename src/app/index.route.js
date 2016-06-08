@@ -40,10 +40,52 @@
         controllerAs: 'adc'
       })
       .state('apps.details.policy', {
-        url: '/policy', // TODO: Should include only database IDs
+        url: '/policy', //
         templateUrl: 'app/apps/details/policy/policy.html',
         controller: 'AppPolicyController',
         controllerAs: 'apc'
+      })
+      .state('dashboard', {
+        url: '/{app_id}',
+        templateUrl: 'app/dashboard/dashboard.html',
+        controller: 'DashboardController',
+        controllerAs: 'dashboard'
+      })
+      .state('dashboard.overview', {
+        url: '/overview',
+        templateUrl: 'app/dashboard/overview/overview.html',
+        controller: 'OverviewController',
+        controllerAs: 'overview'
+      })
+      .state('dashboard.policy', {
+        url: '/policy',
+        templateUrl: 'app/dashboard/policy/policy.html',
+        controller: 'PolicyController',
+        controllerAs: 'policy'
+      })
+      .state('dashboard.analytics', {
+        url: '/analytics',
+        templateUrl: 'app/dashboard/analytics/analytics.html',
+        controller: 'AnalyticsController',
+        controllerAs: 'analytics'
+      })
+      .state('dashboard.history', {
+        url: '/history',
+        templateUrl: 'app/dashboard/history/history.html',
+        controller: 'HistoryController',
+        controllerAs: 'history'
+      })
+      .state('dashboard.notifications', {
+        url: '/notifications',
+        templateUrl: 'app/dashboard/notifications/notifications.html',
+        controller: 'NotificationsController',
+        controllerAs: 'notifications'
+      })
+      .state('dashboard.settings', {
+        url: '/settings',
+        templateUrl: 'app/dashboard/settings/settings.html',
+        controller: 'SettingsController',
+        controllerAs: 'settings'
       })
       .state('infrastructure', {
         url: '/infrastructure',
