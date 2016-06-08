@@ -40,16 +40,16 @@
         controllerAs: 'adc'
       })
       .state('apps.details.policy', {
-        url: '/policy', // TODO: Should include only database IDs
+        url: '/policy', //
         templateUrl: 'app/apps/details/policy/policy.html',
         controller: 'AppPolicyController',
         controllerAs: 'apc'
       })
       .state('dashboard', {
-        url: '/dashboard', // TODO: change routes to application later
+        url: '/{app_id}',
         templateUrl: 'app/dashboard/dashboard.html',
         controller: 'DashboardController',
-        controllerAs: 'dc'
+        controllerAs: 'dashboard'
       })
       .state('dashboard.overview', {
         url: '/overview',

@@ -2,16 +2,12 @@
   <md-button class="md-icon-button" aria-label="Add application" ng-click="alc.openAddDialog($event)">
     <md-icon>add</md-icon>
   </md-button>
-  <md-button class="md-icon-button" aria-label="Show app dashboard" ui-sref-active="md-raised" ng-show="vm.isAuth()">
-    <md-icon>menu</md-icon>
-  </md-button>
 </sub-navbar>
 
 <md-content>
 
-
   <div layout="row" layout-padding layout-wrap layout-fill ng-cloak>
-    <md-whiteframe ui-sref="apps.details({ app_id: app.id })" ng-repeat="app in alc.apps"
+    <md-whiteframe ui-sref="dashboard.overview({ app_id: app.id })" ng-repeat="app in alc.apps"
                    class="{{app.status}}-status md-whiteframe-2dp app-box" flex-sm="50"
                    flex-gt-sm="25" layout
                    layout-align="center center">

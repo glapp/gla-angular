@@ -1,11 +1,11 @@
+
 <div>
-
-<!--  <br>live_graph<br>
-  {{overview.live_data}}
-  <br>node_test<br>
-  {{overview.node_test}}
-
-  <vis-network data="overview.node_test" options="overview.options" height="100%"></vis-network>-->
+  <span layout="row" class="md-toolbar-tools" layout-align="start center">
+    <md-button md-no-ink class="md-primary" ng-click="overview.cells(true)">show cells</md-button>
+    <md-button md-no-ink class="md-primary" ng-click="overview.proxy(true)">proxy</md-button>
+    <md-button md-no-ink class="md-primary" ui-sref="apps.details({ app_id: overview.id })">details</md-button>
+  </span>
 
   <vis-network data="overview.live_data" options="overview.options" height="100%"></vis-network>
 </div>
+

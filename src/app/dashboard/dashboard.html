@@ -4,7 +4,7 @@
 
     <md-subheader class="md-no-sticky">App Menu</md-subheader>
 
-    <div ng-repeat="item in dc.menu">
+    <div ng-repeat="item in dashboard.menu">
       <md-list-item ui-sref={{item.path}}>
         <md-icon>{{item.icon}}</md-icon>
         <p>{{item.name}}</p>
@@ -15,14 +15,6 @@
 
   <div flex="85" class="md-whiteframe-1dp" layout="column" layout-fill
        layout-align="start center">
-
-<!--    <md-button class="md-fab md-primary" align="right" aria-label="Network View" ui-sref=".overview">
-      <md-icon>explore</md-icon>
-    </md-button>
-    <md-button class="md-fab md-primary" aria-label="List View" ui-sref="apps.details({ app_id: app.id })">
-      <md-icon>menu</md-icon>
-    </md-button>-->
-
 
     <div class="container">
       <div ui-view></div>
