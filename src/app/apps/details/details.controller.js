@@ -181,7 +181,8 @@
       provider: [
         ['amazonec2', 'Amazon EC2'],
         ['digitalocean', 'Digital Ocean'],
-        ['virtualbox', 'Virtualbox']
+        ['virtualbox', 'Virtualbox'],
+        ['google', 'Google Cloud Platform']
       ],
       region: [
         ['us', 'USA'],
