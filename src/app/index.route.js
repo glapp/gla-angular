@@ -20,6 +20,12 @@
         controller: 'HomeController',
         controllerAs: 'hc'
       })
+      .state('infrastructure', {
+        url: '/infrastructure',
+        templateUrl: 'app/infrastructure/infrastructure.html',
+        controller: 'InfrastructureController',
+        controllerAs: 'ic'
+      })
       .state('apps', {
         url: '/apps',
         templateUrl: 'app/apps/apps.html',
@@ -86,13 +92,8 @@
         templateUrl: 'app/dashboard/settings/settings.html',
         controller: 'SettingsController',
         controllerAs: 'settings'
-      })
-      .state('infrastructure', {
-        url: '/infrastructure',
-        templateUrl: 'app/infrastructure/infrastructure.html',
-        controller: 'InfrastructureController',
-        controllerAs: 'ic'
       });
+
 
     $urlRouterProvider.otherwise('/');
   }
