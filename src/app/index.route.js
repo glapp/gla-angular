@@ -45,12 +45,6 @@
         controller: 'AppDetailsController',
         controllerAs: 'adc'
       })
-      .state('apps.details.policy', {
-        url: '/policy', //
-        templateUrl: 'app/apps/details/policy/policy.html',
-        controller: 'AppPolicyController',
-        controllerAs: 'apc'
-      })
       .state('dashboard', {
         url: '/{app_id}',
         templateUrl: 'app/dashboard/dashboard.html',
