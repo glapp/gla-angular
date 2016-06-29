@@ -6,7 +6,7 @@
     .controller('AppDetailsController', AppDetailsController);
 
   /** @ngInject */
-  function AppDetailsController($stateParams, $log, $mdDialog, Application, Host, Cell, Organ, toastr) {
+  function AppDetailsController($stateParams, $log, $mdDialog, $state, Application, Host, Cell, Organ, toastr) {
     var vm = this;
 
     vm.navItems = [];
@@ -24,6 +24,10 @@
     vm.selections = {};
     vm.getStatusMessage = getStatusMessage;
     vm.openScenarioDialog = openScenarioDialog;
+    vm.remove = remove;
+    vm.undeploy = undeploy;
+    vm.rename = rename;
+    vm.newName = "";
 
     getDetails();
 
@@ -48,7 +52,7 @@
           .content(scenarios[scenario])
           .clickOutsideToClose(true)
           .targetEvent(ev)
-          .ok('Let\s do this!')
+          .ok('Let\'s do this!')
       )
     }
 
@@ -164,6 +168,48 @@
         cell.moving = false;
         toastr.error(err.data, 'Error');
       });
+    }
+
+    function undeploy() {
+      vm.app.undeploying = true;
+      Application.undeploy({app_id: vm.app.id},
+        function onSuccess(response) {
+          $log.info(response);
+          getDetails();
+          vm.app.undeploying = false;
+          toastr.success('Successfully undeployed ' + vm.app.name + '!', 'Info');
+        }, function onError(err) {
+          $log.error(err);
+          vm.app.undeploying = false;
+        })
+    }
+
+    function rename() {
+      vm.app.renaming = true;
+      Application.rename({app_id: vm.app.id, name: vm.newName},
+        function onSuccess(response) {
+          $log.info(response);
+          vm.app.name = vm.newName;
+          vm.app.renaming = false;
+          toastr.success('Successfully renamed to ' + vm.app.name + '!', 'Info');
+        }, function onError(err) {
+          $log.error(err);
+          vm.app.renaming = false;
+        })
+    }
+
+    function remove() {
+      vm.app.removing = true;
+      Application.remove({app_id: vm.app.id},
+        function onSuccess(response) {
+          $log.info(response);
+          vm.app.removing = false;
+          $state.go('apps.list');
+          toastr.success('Successfully removed application!', 'Info');
+        }, function onError(err) {
+          $log.error(err);
+          vm.app.removing = false;
+        })
     }
 
     function getKeys(obj) {

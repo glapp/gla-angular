@@ -20,6 +20,23 @@
     <div layout="start center">
       <span class="md-title md-padding">Details of {{adc.app.name}}</span>
       <span flex></span>
+      <md-button class="md-raised" ng-click="adc.undeploy()" ng-show="adc.app.status=='deployed'"
+                 ng-disabled="adc.app.undeploying">
+        <span ng-hide="adc.app.deploying">Undeploy</span>
+        <span ng-show="adc.app.deploying">Undeploying...</span>
+      </md-button>
+      <md-input-container>
+        <label>Rename to...</label>
+        <input ng-model="adc.newName">
+      </md-input-container>
+      <md-button class="md-raised" ng-click="adc.rename()" ng-disabled="adc.app.renaming">
+        <span ng-hide="adc.app.renaming">Rename</span>
+        <span ng-show="adc.app.renaming">Renaming...</span>
+      </md-button>
+      <md-button class="md-raised" ng-click="adc.remove()" ng-disabled="adc.app.removing">
+        <span ng-hide="adc.app.removing">Remove</span>
+        <span ng-show="adc.app.removing">Removing...</span>
+      </md-button>
       <md-button class="md-raised" ng-click="adc.deploy()" ng-show="adc.app.status=='ready'"
                  ng-disabled="adc.app.status=='deployed' || adc.app.deploying">
         <span ng-hide="adc.app.deploying">Deploy</span>
@@ -132,8 +149,8 @@
       </md-tab>
     </md-tabs>
   </div>
-<!--  <div flex="30" ng-show="adc.app.status == 'deployed'" class="md-whiteframe-0dp" layout="column" layout-fill
-       layout-align="start center">
-    <chart></chart>
-  </div>-->
+  <!--  <div flex="30" ng-show="adc.app.status == 'deployed'" class="md-whiteframe-0dp" layout="column" layout-fill
+         layout-align="start center">
+      <chart></chart>
+    </div>-->
 </div>
