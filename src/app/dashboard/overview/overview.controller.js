@@ -38,7 +38,7 @@
       graph_nodes = [];
       graph_edges = [];
       vm.live_data = {};
-      var details = Application.getAppDetails({app_id: $stateParams.app_id},
+      Application.getAppDetails({app_id: $stateParams.app_id},
         function onSuccess(response) {
           $log.info(response);
           response.organs.forEach(function(organ){

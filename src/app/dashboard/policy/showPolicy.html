@@ -1,0 +1,90 @@
+
+
+
+  <div layout-margin>
+      <div ng-cloak layout="column" >
+
+        <md-toolbar class="md-theme-light">
+          <div layout="row" flex-gt-sm="95">
+            <h2 class="md-toolbar-tools" >
+              <span>Select policies to be removed</span>
+            </h2>
+            <md-button class="md-icon-button" ng-click="policy.deletePolicy(policy.rules)">
+              <md-icon >delete</md-icon>
+            </md-button>
+          </div>
+        </md-toolbar>
+
+        <md-content>
+          <md-list>
+            <md-list-item class="md-3-line" ng-repeat="rule in policy.rules track by $index">
+              <div class="md-list-item-text">
+                <h3>{{rule.metric}}</h3>
+                <h4>{{rule.operator}}</h4>
+                <p>{{rule.value}}</p>
+              </div>
+              <!--<md-button class="md-secondary">Respond</md-button>-->
+              <md-checkbox ng-model="rule.selected" ng-init="rule.selected = false"></md-checkbox>
+              <md-divider ng-if="!$last"></md-divider>
+            </md-list-item>
+          </md-list>
+
+        </md-content>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!--
+<div layout="column">
+
+This is for Tab layout
+
+  <md-content class="md-padding">
+    <md-tabs md-selected="selectedIndex" md-border-bottom md-autoselect>
+      <md-tab ng-repeat="rule in policy.rules"
+              ng-disabled="rule.disabled"
+              label="{{rule.metric}}">
+
+        <div style="padding: 25px; text-align: center;">{{rule}}</div>
+
+        <div class="rule-tab" style="padding: 25px; text-align: center;">
+          <div ng-bind="{{rule}}"></div>
+        </div>
+
+      </md-tab>
+    </md-tabs>
+
+  </md-content>
+-->
+
+  <!--This is for simple json layout-->
+
+
+  <!--  <div layout="row" ng-repeat="rule in policy.rules">
+      &lt;!&ndash;row in policy.test_rule.rules track by $index&ndash;&gt;
+      <span>
+        {{rule}}
+      </span>
+      <md-divider></md-divider>
+    </div>
+
+  </div>-->

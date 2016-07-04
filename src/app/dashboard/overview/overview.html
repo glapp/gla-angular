@@ -5,7 +5,10 @@
     <md-button md-no-ink class="md-primary" ng-click="overview.proxy(true)">proxy</md-button>
     <md-button md-no-ink class="md-primary" ui-sref="apps.details({ app_id: overview.id })">details</md-button>
   </span>
-
+  <span>
+    <md-switch ng-model="showHints"> {{showHints ? "List" : "Graph"}} View</md-switch>
+  </span>
+</div>
+<div>
   <vis-network data="overview.live_data" options="overview.options" height="100%"></vis-network>
 </div>
-

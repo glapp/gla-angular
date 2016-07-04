@@ -1,10 +1,69 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
 
-</body>
-</html>
+<div layout="column">
+  <md-content class="md-padding">
+
+    <md-tabs md-selected="selectedIndex" md-border-bottom layout-fill > <!--class="md-accent md-hue-1 tabs-section"-->
+      <md-tab ng-repeat="tab in policy.menu"
+              label="{{tab.name}}"
+              ui-sref="{{tab.path}}">
+
+        <!--<div class="rule-tab" style="padding: 25px; text-align: center;">
+          &lt;!&ndash;<div ng-bind="{{policy.metrics}}"></div>&ndash;&gt;
+        </div>-->
+
+
+     <!--   <md-content layout="column" class="md-body-1 md-padding">
+          <md-list>
+            <md-list-item class="md-2-line">
+              <div class="md-list-item-text" layout="column">
+                <h4>Status</h4>
+              </div>
+            </md-list-item>
+            <md-list-item class="md-2-line">
+              <div class="md-list-item-text" layout="column">
+                <h4>Logs</h4>
+                </p>
+              </div>
+            </md-list-item>
+          </md-list>
+        </md-content>-->
+
+
+      </md-tab>
+    </md-tabs>
+  </md-content>
+
+</div>
+
+<!--<div>-->
+<!--<input ng-model=collapse type=checkbox>Title-->
+  <!--<input ng-model=collapse1 type=checkbox>Title-->
+<!--<div ng-show=collapse md-dynamic-height>-->
+  <!--<md-content class="md-padding">-->
+    <!--Only shown when checkbox is clicked-->
+  <!--</md-content>-->
+
+<!--</div>-->
+  <!--<div ng-show=collapse1 md-dynamic-height>-->
+    <!--Only shown when checkbox is clicked. Only shown when checkbox is clickedOnly shown when checkbox is clickedOnly shown when checkbox is clickedOnly shown when checkbox is clickedOnly shown when checkbox is clickedOnly shown when checkbox is clickedOnly shown when checkbox is clickedOnly shown when checkbox is clickedOnly shown when checkbox is clickedOnly shown when checkbox is clickedOnly shown when checkbox is clickedOnly shown when checkbox is clickedOnly shown when checkbox is clickedOnly shown when checkbox is clickedOnly shown when checkbox is clickedOnly shown when checkbox is clickedOnly shown when checkbox is clickedOnly shown when checkbox is clickedOnly shown when checkbox is clickedOnly shown when checkbox is clickedOnly shown when checkbox is clickedOnly shown when checkbox is clickedOnly shown when checkbox is clickedOnly shown when checkbox is clickedOnly shown when checkbox is clickedOnly shown when checkbox is clickedOnly shown when checkbox is clickedOnly shown when checkbox is clickedOnly shown when checkbox is clickedOnly shown when checkbox is clickedOnly shown when checkbox is clickedOnly shown when checkbox is clickedOnly shown when checkbox is clickedOnly shown when checkbox is clickedOnly shown when checkbox is clickedOnly shown when checkbox is clickedOnly shown when checkbox is clickedOnly shown when checkbox is clickedOnly shown when checkbox is clickedOnly shown when checkbox is clickedOnly shown when checkbox is clickedOnly shown when checkbox is clickedOnly shown when checkbox is clickedOnly shown when checkbox is clickedOnly shown when checkbox is clickedOnly shown when checkbox is clicked-->
+  <!--</div>-->
+<!--</div>-->
+
+
+
+
+
+
+
+
+<div class="container">
+  <div ui-view></div>
+</div>
+
+
+
+
+
+
+
+

@@ -63,6 +63,18 @@
         controller: 'PolicyController',
         controllerAs: 'policy'
       })
+      .state('dashboard.policy.create', {
+        url: '/create',
+        templateUrl: 'app/dashboard/policy/createPolicy.html',
+        controller: 'PolicyController',
+        controllerAs: 'policy'
+      })
+      .state('dashboard.policy.show', {
+        url: '/show',
+        templateUrl: 'app/dashboard/policy/showPolicy.html',
+        controller: 'PolicyController',
+        controllerAs: 'policy'
+      })
       .state('dashboard.analytics', {
         url: '/analytics',
         templateUrl: 'app/dashboard/analytics/analytics.html',

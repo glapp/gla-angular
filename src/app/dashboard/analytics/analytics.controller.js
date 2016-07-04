@@ -1,3 +1,10 @@
-/**
- * Created by maverick on 24/5/2016.
- */
+(function() {
+  'use strict';
+
+  angular
+    .module('glaAngular')
+    .controller('AnalyticsController', AnalyticsController);
+
+  /** @ngInject */
+  function AnalyticsController($stateParams, Policy, Application, toastr, $log) {}
+})();
