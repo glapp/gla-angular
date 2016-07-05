@@ -1,10 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<div layout-margin>
+  <div ng-cloak layout="column" >
 
-</body>
-</html>
+    <md-toolbar class="md-hue-1">
+      <div layout="row" flex-gt-sm="95">
+        <h2 class="md-toolbar-tools" >
+          <span>Activity Log</span>
+        </h2>
+      </div>
+    </md-toolbar>
+
+    <md-content>
+      <md-list>
+        <md-list-item class="md-2-line" ng-cloak ng-repeat="log in history.logs">
+
+          <div class="md-list-item-text">
+            <div layout-gt-sm="row">
+               <div flex-xs="25">
+                 {{log.createdAt | amDateFormat:'DD.MM.YYYY HH:mm:ss'}}
+               </div>
+              <div flex="25" hide-xs="" hide-sm=""><!-- Spacer //--></div>
+                <div flex-xs="50">
+                  {{log.content}}
+                </div>
+            </div>
+          </div>
+          <md-divider ng-if="!$last"></md-divider>
+        </md-list-item>
+      </md-list>
+
+
+
+    </md-content>
+  </div>
+</div>
+
+
+
+<!--TODO: On demand loading of logs/Infinite scroll to handle many data points.-->
+
+<!--
+<div ng-cloak>
+<md-content layout="column">
+  <md-virtual-repeat-container id="vertical-container">
+    <div md-virtual-repeat="log in history.logs"
+         class="repeated-item" flex>
+      {{log}}
+    </div>
+  </md-virtual-repeat-container>
+</md-content>
+</div>
+-->
