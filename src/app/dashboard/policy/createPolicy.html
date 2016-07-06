@@ -35,8 +35,8 @@
         <md-input-container class="md-block" flex-gt-sm="">
           <label>Operator</label>
           <md-select ng-model="row.operator">
-            <md-option ng-repeat="option in policy.operator" > <!--value="{{metric}}"-->
-              {{option}}
+            <md-option value="{{option.id}}" ng-repeat="option in policy.operator" > <!--value="{{metric}}"-->
+              {{option.name}}
             </md-option>
           </md-select>
         </md-input-container>

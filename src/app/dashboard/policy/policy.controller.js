@@ -16,8 +16,14 @@
         {"organs": [{}]}
       ]
     };
-    vm.operator = ["is", "is not", "exists", "less than", "greater than", "equals", "regexp", "contains"];
-    vm.metrics = ["cpu_system_seconds", "money_spent", "budget_balance", "memory_failures_total", "network_transmit_errors_total", "networks_receive_bytes_total"];
+/*    vm.operator = ["is", "is not", "exists", "less than", "greater than", "equals", "regexp", "contains"];*/
+    vm.metrics = ["container_cpu_usage_seconds_total", "money_spent", "budget_balance", "container_network_receive_bytes_total","memory_failures_total", "network_transmit_errors_total", "networks_receive_bytes_total"];
+
+    vm.operator = [
+      {name: "greater than", id: "1" },
+      {name: "less than", id: "2" },
+      {name: "equals", id: "3" }
+    ];
 
     vm.menu = [
       {"name": "Create Policy", "icon": "home", "path": "dashboard.policy.create"},
@@ -143,6 +149,7 @@
         toastr.error('Choose atleast 1 policy to perform the operation.', 'Error');
       }
 
+      vm.rules = getPolicyListCurated();
       return result;
     };
 

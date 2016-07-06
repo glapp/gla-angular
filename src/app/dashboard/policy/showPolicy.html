@@ -17,7 +17,7 @@
 
         <md-content>
           <md-list>
-            <md-list-item class="md-3-line" ng-repeat="rule in policy.rules track by $index">
+            <md-list-item class="md-3-line" ng-cloak ng-repeat="rule in policy.rules track by $index">
               <div class="md-list-item-text">
                 <h3>{{rule.metric}}</h3>
                 <h4>{{rule.operator}}</h4>
