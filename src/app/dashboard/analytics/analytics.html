@@ -1,37 +1,88 @@
 <!--
-  <div flex="30" ng-show="adc.app.status == 'deployed'" class="md-whiteframe-0dp" layout="column" layout-fill
-       layout-align="start center">
-    <chart></chart>
-  </div>
--->
+
 <div>
   <chart></chart>
 </div>
-
-<div layout="row" layout-margin>
-
-  <div flex="25">
-    <md-list>
-      <md-list-item>
-        <md-button class="md-fab md-mini">
-          <div align="center">A</div>
-        </md-button>
-      </md-list-item>
-    </md-list>
-  </div>
-
-  <div flex>
-    <md-content></md-content>
-  </div>
+-->
 
 
-  <div flex="25">
-    <md-list>
-      <md-list-item>
-        <md-button class="md-fab md-mini">
-          <div align="center">N</div>
-        </md-button>
-      </md-list-item>
-    </md-list>
-  </div>
+<!--<div layout-align="start center" layout="column" flex-auto=""><h2>Real-Time Monitoring</h2></div>-->
+
+<md-toolbar class="md-hue-1" layout-align="start center" layout="column" flex-auto=""> <h4>Real-Time Monitoring</h4></md-toolbar>
+{{adc.app}}
+<div>
+  <md-content class="md-padding" >
+    <div layout="row"  layout-xs="column" layout-align layout-margin layout-padding>
+
+      <md-card flex flex-gt-xs="50">
+
+        <div layout-gt-sm="row" layout-margin>
+          <div flex-xs="25"><h3>CPU Usage</h3></div>
+          <div flex="33" hide-xs="" hide-sm=""><!-- Spacer //--></div>
+          <md-input-container layout-align="end  center" flex-auto="">
+            <label>Select</label>
+            <md-select ng-model="analytics.option"> <!--md-selected-text="getSelectedOption()"-->
+              <!--<md-optgroup label="Organs">-->
+                <md-option ng-repeat="organ in analytics.organs">{{organ.label}}</md-option>
+              <!--</md-optgroup>-->
+            </md-select>
+          </md-input-container>
+        </div>
+
+        <md-card-content>
+
+          <chart></chart>
+          {{analytics.option}}
+
+        </md-card-content>
+
+        <div layout-gt-sm="row">
+          <!--<md-toolbar class="md-warn md-hue-3" layout-align="start center" layout="row" flex-auto="">-->
+            <md-button class="md-fab md-mini" ng-repeat="button in analytics.buttons">
+              <div align="center">{{button}}</div>
+            </md-button>
+          <!--</md-toolbar>-->
+        </div>
+
+
+      </md-card>
+
+
+
+      <md-card flex flex-gt-xs="50">
+        <h3>Memory</h3>
+        <md-card-content>
+          <p>Some content</p>
+          <!--<chart></chart>-->
+        </md-card-content>
+      </md-card>
+    </div>
+  </md-content>
+</div>
+
+
+
+
+<!--Second Row-->
+<div>
+  <md-content class="md-padding" >
+    <div layout="row"  layout-xs="column" layout-align layout-margin layout-padding="">
+      <md-card flex flex-gt-xs="50">
+        <h3>Response Time</h3>
+        <md-card-content>
+          <p>Some content</p>
+          <!--<chart></chart>-->
+        </md-card-content>
+      </md-card>
+
+
+      <md-card flex flex-gt-xs="50">
+        <h3>Events</h3>
+        <md-card-content>
+          <p>Some content</p>
+          <!--<chart></chart>-->
+        </md-card-content>
+      </md-card>
+    </div>
+  </md-content>
 </div>
