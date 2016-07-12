@@ -1,81 +1,111 @@
 
-<div layout="column" > <!--layout-align="start center"-->
+<div  layout-margin> <!--layout-align="start center" layout="column"-->
 
-  <md-content layout-padding="">
-    <form name="createPolicy">
-<!--      <div layout="row" layout-xs="column" layout-sm="column" layout-align="space-between center"></div>-->
+  <div ng-cloak layout="column" >
 
-
-      <!-- 3rd block, Repeat rows of rules  row in policy.test_rule.rules track by $index , row in policy.rows -->
-      <div layout-gt-sm="row" ng-repeat="row in policy.new_policy.rules track by $index" ng-model="policy.newPolicy.rule" layout-margin>
-
-        <md-input-container class="md-block" flex-gt-sm="">
-          <label>Select Organ</label>
-          <md-select ng-model="row.organs[0].organ_id">
-            <md-option ng-repeat="organ in policy.organs" >
-              {{organ.label}}
-            </md-option>
-          </md-select>
-        </md-input-container>
-
-        <div flex="5" hide-xs="" hide-sm=""><!-- Spacer //--></div>
-
-        <md-input-container class="md-block" flex-gt-sm="">
-          <label>Metric</label>
-          <md-select ng-model="row.metric">
-            <md-option ng-repeat="metric in policy.metrics" > <!--value="{{metric}}"-->
-              <!--<md-option ng-repeat="metric in policy.goals[0].metrics" value="{{metric.value}}">-->
-              {{metric}}
-            </md-option>
-          </md-select>
-        </md-input-container>
-
-        <div flex="5" hide-xs="" hide-sm=""><!-- Spacer //--></div>
-
-        <md-input-container class="md-block" flex-gt-sm="">
-          <label>Operator</label>
-          <md-select ng-model="row.operator">
-            <md-option value="{{option.id}}" ng-repeat="option in policy.operator" > <!--value="{{metric}}"-->
-              {{option.name}}
-            </md-option>
-          </md-select>
-        </md-input-container>
-
-
-        <div flex="5" hide-xs="" hide-sm=""><!-- Spacer //--></div>
-
-        <md-input-container class="md-block" flex-gt-sm="">
-          <label>Value</label>
-          <input required="" title="value" name="value" ng-model="row.value">
-        </md-input-container>
-
-        <md-input-container class="md-block" flex-gt-sm="">
-          <md-button class="md-icon-button" ng-click="policy.addRow()">
-            <md-icon>add</md-icon>
-          </md-button>
-          <md-button class="md-icon-button" ng-click="policy.removeRow()">
-            <md-icon>delete</md-icon>
-          </md-button>
-        </md-input-container>
-        <!--{{row}}-->
-      </div>
-
-      <div layout-gt-sm="row" layout-align="center">
-        <md-button class="md-raised md-primary" ng-click="policy.savePolicy()"> <!--ng-disabled="policy.saveEnabled"-->
-          Save
-        </md-button>
-        <md-button class="md-raised md-warn" ng-click="">
-          Cancel
+    <md-toolbar class="md-hue-1"> <!--md-theme-light-->
+      <div layout="row" flex-gt-sm="95">
+        <h2 class="md-toolbar-tools" >
+          <span>Add new policy</span>
+        </h2>
+        <md-button class="md-mini md-fab md-primary" ng-click="policy.savePolicy()"><!--md-icon-button-->
+          <md-icon >save</md-icon>
+          <md-tooltip md-direction="bottom">
+            Save
+          </md-tooltip>
         </md-button>
       </div>
+    </md-toolbar>
+
+    <md-content layout-padding="">
+      <form name="createPolicy">
+        <!--      <div layout="row" layout-xs="column" layout-sm="column" layout-align="space-between center"></div>-->
 
 
-    </form>
-  </md-content>
-<!--  {{policy.new_policy}}-->
+        <!-- 3rd block, Repeat rows of rules  row in policy.test_rule.rules track by $index , row in policy.rows -->
+        <div layout-gt-sm="row" ng-repeat="row in policy.new_policy.rules track by $index" ng-model="policy.newPolicy.rule" layout-margin>
+
+          <md-input-container class="md-block" flex-gt-sm="">
+            <label>Priority</label>
+            <md-select ng-model="row.weight">
+              <md-option ng-repeat="weight in policy.weights">
+                {{weight}}
+              </md-option>
+            </md-select>
+          </md-input-container>
+
+          <div flex="5" hide-xs="" hide-sm=""><!-- Spacer //--></div>
+
+          <md-input-container class="md-block" flex-gt-sm="">
+            <label>Select Organ</label>
+            <md-select ng-model="row.organs[0].organ_id" multiple>
+              <md-option ng-repeat="organ in policy.organs" value = {{organ.id}}>
+                {{organ.label}}
+              </md-option>
+            </md-select>
+          </md-input-container>
+
+          <div flex="5" hide-xs="" hide-sm=""><!-- Spacer //--></div>
+
+          <md-input-container class="md-block" flex-gt-sm="">
+            <label>Metric</label>
+            <md-select ng-model="row.metric">
+              <md-option ng-repeat="metric in policy.metrics" > <!--value="{{metric}}"-->
+                <!--<md-option ng-repeat="metric in policy.goals[0].metrics" value="{{metric.value}}">-->
+                {{metric}}
+              </md-option>
+            </md-select>
+          </md-input-container>
+
+          <div flex="5" hide-xs="" hide-sm=""><!-- Spacer //--></div>
+
+          <md-input-container class="md-block" flex-gt-sm="">
+            <label>Operator</label>
+            <md-select ng-model="row.operator">
+              <md-option value="{{option.id}}" ng-repeat="option in policy.operator" > <!--value="{{metric}}"-->
+                {{option.name}}
+              </md-option>
+            </md-select>
+          </md-input-container>
+
+
+          <div flex="5" hide-xs="" hide-sm=""><!-- Spacer //--></div>
+
+          <md-input-container class="md-block" flex-gt-sm="">
+            <label>Value</label>
+            <input required="" title="value" name="value" ng-model="row.value">
+          </md-input-container>
+
+          <md-input-container class="md-block" flex-gt-sm="">
+            <md-button class="md-icon-button" ng-click="policy.addRow()">
+              <md-icon>add</md-icon>
+              <md-tooltip md-direction="bottom">
+                Add a new row
+              </md-tooltip>
+            </md-button>
+            <!--            <md-button class="md-icon-button" ng-click="policy.removeRow()">
+                          <md-icon>delete</md-icon>
+                        </md-button>-->
+          </md-input-container>
+          <!--{{row}}-->
+        </div>
+
+        <!--        <div layout-gt-sm="row" layout-align="center">
+                  <md-button class="md-raised md-primary" ng-click="policy.savePolicy()"> &lt;!&ndash;ng-disabled="policy.saveEnabled"&ndash;&gt;
+                    Save
+                  </md-button>
+                  <md-button class="md-raised md-warn" ng-click="">
+                    Cancel
+                  </md-button>
+                </div>-->
+
+
+      </form>
+    </md-content>
+
+  </div>
+  <!--  {{policy.new_policy}}-->
 </div>
-
-
 
 
 

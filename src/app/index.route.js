@@ -59,6 +59,18 @@
       })
       .state('dashboard.policy', {
         url: '/policy',
+        /*views: {
+          '': {
+            templateUrl: 'app/dashboard/policy/policy.html',
+            controller: 'PolicyController',
+            controllerAs: 'policy'
+          },
+          'detail@policy': {
+            templateUrl: 'app/dashboard/policy/createPolicy.html',
+            controller: 'PolicyController',
+            controllerAs: 'policy'
+          }
+        }*/
         templateUrl: 'app/dashboard/policy/policy.html',
         controller: 'PolicyController',
         controllerAs: 'policy'

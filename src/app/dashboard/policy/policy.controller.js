@@ -25,6 +25,8 @@
       {name: "equals", id: "3" }
     ];
 
+    vm.weights = [1,2,3,4,5];
+
     vm.menu = [
       {"name": "Create Policy", "icon": "home", "path": "dashboard.policy.create"},
       {"name": "Show All", "icon": "settings_input_component", "path": "dashboard.policy.show"}
@@ -84,7 +86,7 @@
       Application.getAppDetails({app_id: $stateParams.app_id},
         function onSuccess(response) {
           response.organs.forEach(function(organ){
-            items.push({id: organ.originalName, label: organ.originalName});
+            items.push({id: organ.id, label: organ.originalName});
           });
 
         }, function onError(err) {
@@ -102,7 +104,15 @@
       Policy.getPolicy({app_id: $stateParams.app_id},
         function onSuccess(response) {
           response.rules.forEach(function(rule){
-            items.push({metric: rule.metric, operator: rule.operator, value: rule.value, id: rule.id, selected: false });
+            items.push({
+              metric: rule.metric,
+              operator: rule.operator,
+              value: rule.value,
+              weight: rule.weight,
+              id: rule.id,
+              organs: rule.organs,
+              selected: false
+            });
           });
 
         }, function onError(err) {

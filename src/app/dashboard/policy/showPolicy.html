@@ -1,37 +1,39 @@
 
 
 
-  <div layout-margin>
-      <div ng-cloak layout="column" >
+<div layout-margin>
+  <div ng-cloak layout="column" >
 
-        <md-toolbar class="md-theme-light">
-          <div layout="row" flex-gt-sm="95">
-            <h2 class="md-toolbar-tools" >
-              <span>Select policies to be removed</span>
-            </h2>
-            <md-button class="md-icon-button" ng-click="policy.deletePolicy(policy.rules)">
-              <md-icon >delete</md-icon>
-            </md-button>
-          </div>
-        </md-toolbar>
+    <md-toolbar class="md-hue-1"> <!--md-theme-light-->
+      <div layout="row" flex-gt-sm="95">
+        <h2 class="md-toolbar-tools" >
+          <span>Select policies to be removed</span>
+        </h2>
+        <md-button class=" md-fab md-mini" ng-click="policy.deletePolicy(policy.rules)"><!--md-icon-button-->
+          <md-icon >delete</md-icon>
+          <md-tooltip md-direction="bottom">
+            Delete
+          </md-tooltip>
+        </md-button>
+      </div>
+    </md-toolbar>
 
-        <md-content>
-          <md-list>
-            <md-list-item class="md-3-line" ng-cloak ng-repeat="rule in policy.rules track by $index">
-              <div class="md-list-item-text">
-                <h3>{{rule.metric}}</h3>
-                <h4>{{rule.operator}}</h4>
-                <p>{{rule.value}}</p>
-              </div>
-              <!--<md-button class="md-secondary">Respond</md-button>-->
-              <md-checkbox ng-model="rule.selected" ng-init="rule.selected = false"></md-checkbox>
-              <md-divider ng-if="!$last"></md-divider>
-            </md-list-item>
-          </md-list>
-
-        </md-content>
-    </div>
+    <md-content>
+      <md-list>
+        <md-list-item class="md-3-line" ng-cloak ng-repeat="rule in policy.rules track by $index">
+          <div class="md-list-item-text">
+            <h3>Metric: {{rule.metric}}</h3>
+            <p>Operator: {{rule.operator}}, Value: {{rule.value}} , Priority: {{rule.weight}}</p>
+            Organs: <p><div style="float:left" ng-repeat="item in rule.organs"><p>{{item.originalName}} , </p></div></p>
   </div>
+  <!--<md-button class="md-secondary">Respond</md-button>-->
+  <md-checkbox ng-model="rule.selected" ng-init="rule.selected = false"></md-checkbox>
+  <md-divider ng-if="!$last"></md-divider>
+  </md-list-item>
+  </md-list>
+
+  </md-content>
+</div>
 
 
 
