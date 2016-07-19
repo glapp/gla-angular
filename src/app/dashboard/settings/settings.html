@@ -1,10 +1,100 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
 
-</body>
-</html>
+
+
+<div>
+
+    <div layout-margin>
+      <div ng-cloak layout="column" >
+
+        <md-toolbar class="md-hue-1">
+          <div layout="row" flex-gt-sm="95">
+            <h2 class="md-toolbar-tools" >
+              <span>Application settings</span>
+            </h2>
+          </div>
+        </md-toolbar>
+
+        <md-content layout-padding="">
+          <div layout-gt-sm="row" layout-margin>
+            <div flex-xs="25">
+              <h3>Name</h3>
+              <p>change title of the application</p>
+            </div>
+            <div flex="25" hide-xs="" hide-sm=""><!-- Spacer //--></div>
+
+            <div flex-xs="25">
+              <md-input-container class="md-block" flex-gt-sm="">
+                <label>{{settings.name}}</label>
+                <input required="" title="value" name="value" ng-model="settings.newName">
+              </md-input-container>
+            </div>
+
+            <div flex-xs="25">
+
+              <md-button class="md-mini md-fab md-primary" ng-click="settings.rename()"><!--md-icon-button-->
+                <md-icon >save</md-icon>
+                <md-tooltip md-direction="bottom">
+                  Save
+                </md-tooltip>
+              </md-button>
+            </div>
+          </div>
+
+          <md-divider></md-divider>
+
+          <div layout-gt-sm="row" layout-margin>
+
+            <div flex-xs="33">
+              <h3>Deployment settings</h3>
+  <!--            <span Stop the application ng-show="settings.app.status=='deployed'"></span>
+              <span Start the application ng-show="settings.app.status=='ready'"></span>-->
+              <p>Status: {{settings.app.status}}</p>
+            </div>
+            <div flex="25" hide-xs="" hide-sm=""><!-- Spacer //--></div>
+            <div flex="5" hide-xs="" hide-sm=""><!-- Spacer //--></div>
+
+
+            <div flex-xs="25">
+
+              <md-button class="md-raised" ng-click="settings.undeploy()" ng-show="settings.app.status=='deployed'"
+                         ng-disabled="settings.app.undeploying">
+                <span ng-hide="settings.app.deploying">Undeploy</span>
+                <span ng-show="settings.app.deploying">Undeploying...</span>
+                <md-tooltip md-direction="bottom">
+                  Stop the application
+                </md-tooltip>
+              </md-button>
+              <md-button class="md-raised" ng-click="settings.deploy()" ng-show="settings.app.status=='ready'"
+                         ng-disabled="settings.app.status=='deployed' || settings.app.deploying">
+                <span ng-hide="settings.app.deploying">Deploy</span>
+                <span ng-show="settings.app.deploying">Deploying...</span>
+                <md-tooltip md-direction="bottom">
+                  Start the application
+                </md-tooltip>
+              </md-button>
+            </div>
+
+          </div>
+
+          <md-divider></md-divider>
+
+          <div layout-gt-sm="row" layout-margin>
+
+            <div flex-xs="33">
+              <h3>Remove App</h3>
+              <p>Deleting your app is irreversible.</p>
+            </div>
+
+            <div flex="25" hide-xs="" hide-sm=""><!-- Spacer //--></div>
+
+            <div flex-xs="25">
+              <md-button class="md-raised md-warn" ng-click="settings.remove()">Delete</md-button>
+            </div>
+          </div>
+
+          <md-divider></md-divider>
+        </md-content>
+      </div>
+    </div>
+
+</div>
