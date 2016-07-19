@@ -5,18 +5,19 @@
     .module('glaAngular')
     .service('Application', Application);
 
-    function Application($resource) {
-      return $resource('http://localhost:1337/application/:id', {
+    function Application($resource, SAILS_HOST) {
+      var url = 'http://' + SAILS_HOST + '/application/';
+      return $resource(url + ':id', {
           id: '@_id'
         },
         {
-          getUserApps: {method: 'GET', url: 'http://localhost:1337/application/getUserApps'},
-          getAppDetails: {method: 'GET', url: 'http://localhost:1337/application/details', isArray: false},
-          addApp: {method: 'POST', url: 'http://localhost:1337/application/add', isArray: false},
-          deploy: {method: 'POST', url: 'http://localhost:1337/application/deploy', isArray: false},
-          undeploy: {method: 'POST', url: 'http://localhost:1337/application/undeploy', isArray: false},
-          rename: {method: 'POST', url: 'http://localhost:1337/application/rename', isArray: false},
-          remove: {method: 'POST', url: 'http://localhost:1337/application/remove', isArray: false}
+          getUserApps: {method: 'GET', url: url + 'getUserApps'},
+          getAppDetails: {method: 'GET', url: url + 'details', isArray: false},
+          addApp: {method: 'POST', url: url + 'add', isArray: false},
+          deploy: {method: 'POST', url: url + 'deploy', isArray: false},
+          undeploy: {method: 'POST', url: url + 'undeploy', isArray: false},
+          rename: {method: 'POST', url: url + 'rename', isArray: false},
+          remove: {method: 'POST', url: url + 'remove', isArray: false}
         }
       );
     }
