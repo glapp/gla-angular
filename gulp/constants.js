@@ -6,10 +6,10 @@ var path = require('path');
 var conf = require('./conf');
 
 gulp.task('constants', function () {
-  return gulp.src('gulp/config.json')
+  return gulp.src('gulp/sails-host.json')
     .pipe(ngConstant({
       name: 'glaAngular',
-      constants: {SAILS_HOST: process.env.SAILS_HOST || 'localhost:1337'}
+      constants: {SAILS_HOST: process.env.SAILS_HOST}
     }))
     .pipe(gulp.dest(path.join(conf.paths.tmp, '/serve/app')));
 });

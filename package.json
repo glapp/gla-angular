@@ -2,6 +2,7 @@
   "name": "glaAngular",
   "version": "0.0.0",
   "dependencies": {
+    "gulp-connect": "^4.2.0",
     "gulp-ng-constant": "^1.1.0"
   },
   "scripts": {
