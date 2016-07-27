@@ -5,14 +5,14 @@
     .module('glaAngular')
     .service('Application', Application);
 
-    function Application(sailsResource) {
+    function Application(sailsResource, SAILS_HOST) {
       return sailsResource('application',
         {
           getUserApps: {method: 'GET', url: '/application/getUserApps'},
           addApplication: {method: 'POST', url: '/application/add'}
         },
         {
-          origin: 'http://localhost:1337',
+          origin: 'http://' + SAILS_HOST,
           verbose: true
         }
       );

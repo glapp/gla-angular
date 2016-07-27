@@ -5,12 +5,13 @@
     .module('glaAngular')
     .service('Host', Host);
 
-    function Host($resource) {
-      return $resource('http://localhost:1337/host/:id', {
+    function Host($resource, SAILS_HOST) {
+      var url = 'http://' + SAILS_HOST + '/host/';
+      return $resource(url + ':id', {
           id: '@_id'
         },
         {
-          getInfo: {method: 'GET', url: 'http://localhost:1337/host/info', isArray: true}
+          getInfo: {method: 'GET', url: url + 'info', isArray: true}
         }
       );
     }

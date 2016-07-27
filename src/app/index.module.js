@@ -16,6 +16,7 @@
       'nvd3',
       'nvd3ChartDirectives',
       'angularMoment',
-      'ngVis'
+      'ngVis',
+      'glaAngular.config'
     ]);
 })();

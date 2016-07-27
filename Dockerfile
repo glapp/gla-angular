@@ -1,9 +1,9 @@
 FROM node:slim
 
 ADD . /gla-angular
-RUN cd /gla-sails; npm install -g bower gulp; npm install
+RUN cd /gla-angular; npm install -g bower; npm install -g gulp; npm install
 
-WORKDIR /gla-sails
+WORKDIR /gla-angular
 
 EXPOSE 3000
 
