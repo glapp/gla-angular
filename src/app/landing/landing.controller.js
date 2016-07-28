@@ -6,11 +6,9 @@
     .controller('LandingController', LandingController);
 
   /** @ngInject */
-  function LandingController(SAILS_HOST) {
+  function LandingController() {
     var vm = this;
 
-    console.log(SAILS_HOST);
-    vm.sails = SAILS_HOST;
     vm.test = 'landingTest'
 
   }

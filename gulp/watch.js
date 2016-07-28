@@ -3,7 +3,6 @@
 var path = require('path');
 var gulp = require('gulp');
 var conf = require('./conf');
-var connect = require('gulp-connect');
 
 var browserSync = require('browser-sync');
 
@@ -34,8 +33,7 @@ gulp.task('watch', ['inject'], function () {
     }
   });
 
-  gulp.watch(path.join(conf.paths.src, '/app/**/*.html'), function() {
-    gulp.src('./app/*.html')
-      .pipe(connect.reload());
+  gulp.watch(path.join(conf.paths.src, '/app/**/*.html'), function(event) {
+    browserSync.reload(event.path);
   });
 });
