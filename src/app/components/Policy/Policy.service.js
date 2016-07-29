@@ -1,12 +1,12 @@
-(function() {
+(function () {
   'use strict';
 
   angular
     .module('glaAngular')
     .service('Policy', Policy);
 
-  function Policy($resource, SAILS_HOST) {
-    var url = 'http://' + SAILS_HOST + '/rule/';
+  function Policy($resource, $location, SAILS_HOST, SAILS_PORT) {
+    var url = 'http://' + (SAILS_HOST ? SAILS_HOST : $location.host()) + ':' + SAILS_PORT + '/rule/';
     return $resource(url + ':id', {
         id: '@_id'
       },

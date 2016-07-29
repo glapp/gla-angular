@@ -1,4 +1,4 @@
-# GLA frontend
+# GLA Frontend
 
 ## Pre-requisites
 * [Node.js](https://nodejs.org/)
@@ -11,5 +11,4 @@
 
 ## Run
 * `bower install`
-* `gulp build`
 * `gulp serve`
