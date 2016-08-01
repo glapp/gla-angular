@@ -11,7 +11,7 @@
         id: '@_id'
       },
       {
-        move: {method: 'POST', url: url + '/move', isArray: false}
+        move: {method: 'POST', url: url + 'move', isArray: false}
       }
     );
   }
