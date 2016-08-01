@@ -1,19 +1,11 @@
-<!--
-
-<div>
-  <chart></chart>
-</div>
--->
-
-
-<!--<div layout-align="start center" layout="column" flex-auto=""><h2>Real-Time Monitoring</h2></div>-->
 
 <md-toolbar class="md-hue-1" layout-align="start center" layout="column" flex-auto=""> <h4>Real-Time Monitoring</h4></md-toolbar>
-{{adc.app}}
+
 <div>
   <md-content class="md-padding" >
     <div layout="row"  layout-xs="column" layout-align layout-margin layout-padding>
 
+      <!--CPU Chart-->
       <md-card flex flex-gt-xs="50">
 
         <div layout-gt-sm="row" layout-margin>
@@ -21,41 +13,53 @@
           <div flex="33" hide-xs="" hide-sm=""><!-- Spacer //--></div>
           <md-input-container layout-align="end  center" flex-auto="">
             <label>Select</label>
-            <md-select ng-model="analytics.option"> <!--md-selected-text="getSelectedOption()"-->
-              <!--<md-optgroup label="Organs">-->
-                <md-option ng-repeat="organ in analytics.organs">{{organ.label}}</md-option>
-              <!--</md-optgroup>-->
+            <md-select ng-model="analytics.selected_organ_cpu" ng-change="analytics.reRun(cpu=true, memory=false)"> <!--md-selected-text="getSelectedOption()"-->
+                <md-option ng-repeat="organ in analytics.organs" value={{organ.id}}>{{organ.label}}</md-option>
             </md-select>
           </md-input-container>
         </div>
 
         <md-card-content>
-
-          <chart></chart>
-          {{analytics.option}}
-
+          <div>
+            <nvd3 options="analytics.cpu_options" data="analytics.cpu_data"></nvd3>
+          </div>
         </md-card-content>
 
         <div layout-gt-sm="row">
-          <!--<md-toolbar class="md-warn md-hue-3" layout-align="start center" layout="row" flex-auto="">-->
-            <md-button class="md-fab md-mini" ng-repeat="button in analytics.buttons">
+            <md-button class="md-fab md-mini" ng-repeat="button in analytics.buttons" ng-click="analytics.button_cpu(button); analytics.reRun(cpu=true, memory=false)">
               <div align="center">{{button}}</div>
             </md-button>
-          <!--</md-toolbar>-->
+        </div>
+      </md-card>
+
+
+      <!--Memory Chart-->
+      <md-card flex flex-gt-xs="50">
+
+        <div layout-gt-sm="row" layout-margin>
+          <div flex-xs="25"><h3>Memory</h3></div>
+          <div flex="33" hide-xs="" hide-sm=""><!-- Spacer //--></div>
+          <md-input-container layout-align="end  center" flex-auto="">
+            <label>Select</label>
+            <md-select ng-model="analytics.selected_organ_memory" ng-model="analytics.selected_organ_memory" ng-change="analytics.reRun(cpu=false, memory=true)"> <!--md-selected-text="getSelectedOption()"-->
+              <md-option ng-repeat="organ in analytics.organs" value={{organ.id}}>{{organ.label}}</md-option>
+            </md-select>
+          </md-input-container>
         </div>
 
-
-      </md-card>
-
-
-
-      <md-card flex flex-gt-xs="50">
-        <h3>Memory</h3>
         <md-card-content>
-          <p>Some content</p>
-          <!--<chart></chart>-->
+          <div>
+            <nvd3 options="analytics.memory_options" data="analytics.memory_data"></nvd3>
+          </div>
         </md-card-content>
+
+        <div layout-gt-sm="row">
+          <md-button class="md-fab md-mini" ng-repeat="button in analytics.buttons" ng-click="analytics.button_memory(button); analytics.reRun(cpu=false, memory=true)">
+            <div align="center">{{button}}</div>
+          </md-button>
+        </div>
       </md-card>
+
     </div>
   </md-content>
 </div>
@@ -67,22 +71,27 @@
 <div>
   <md-content class="md-padding" >
     <div layout="row"  layout-xs="column" layout-align layout-margin layout-padding="">
-      <md-card flex flex-gt-xs="50">
-        <h3>Response Time</h3>
+
+      <!--Event Chart-->
+      <md-card flex flex-gt-xs="100">
+
+        <div layout-gt-sm="row" layout-margin>
+          <h3>Events</h3>
+        </div>
+
         <md-card-content>
-          <p>Some content</p>
-          <!--<chart></chart>-->
+          <div>
+            <nvd3 options="analytics.event_options" data="analytics.event_data"></nvd3>
+          </div>
         </md-card-content>
+
       </md-card>
 
-
-      <md-card flex flex-gt-xs="50">
-        <h3>Events</h3>
-        <md-card-content>
-          <p>Some content</p>
-          <!--<chart></chart>-->
-        </md-card-content>
-      </md-card>
     </div>
   </md-content>
 </div>
+
+<!--{{analytics.test}}
+option ={{analytics.selected_button_cpu}}
+selected_organ ={{analytics.selected_organ_cpu}}
+{{analytics.organs}}-->
