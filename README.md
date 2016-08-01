@@ -15,13 +15,16 @@
 
 
 ## Help
-To clean up the current installation
+To clean up the current installation  
 
-*for bower*
+For bower  
+
 * `bower cache list`
 * `bower cache clean`
 * `bower install`
-*for npm*
+
+For npm  
+
 * `npm cache clean`
-* `rm -rf node_modules/`
+* `rm -rf node_modules/` or `rmdir node_modules` in windows
 * `npm install`
