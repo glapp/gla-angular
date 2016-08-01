@@ -12,3 +12,16 @@
 ## Run
 * `bower install`
 * `gulp serve`
+
+
+## Help
+To clean up the current installation
+
+*for bower*
+* `bower cache list`
+* `bower cache clean`
+* `bower install`
+*for npm*
+* `npm cache clean`
+* `rm -rf node_modules/`
+* `npm install`
