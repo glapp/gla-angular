@@ -5,14 +5,15 @@
     .module('glaAngular')
     .service('Analytics', Analytics);
 
-  function Analytics($resource) {
-    return $resource('http://localhost:1337/analytics/:id', {
+  function Analytics($resource, $location, SAILS_HOST, SAILS_PORT) {
+    var url = 'http://' + (SAILS_HOST ? SAILS_HOST : $location.host()) + ':' + SAILS_PORT + '/analytics/';
+    return $resource(url + ':id', {
         id: '@_id'
       },
       {
-        getOrganCpu: {method: 'GET', url: 'http://localhost:1337/analytics/organCpu', isArray: true},
-        getOrganMemory: {method: 'GET', url: 'http://localhost:1337/analytics/organMemory', isArray: true},
-        getEvents: {method: 'GET', url: 'http://localhost:1337/analytics/events', isArray: true}
+        getOrganCpu: {method: 'GET', url: url + 'organCpu', isArray: true},
+        getOrganMemory: {method: 'GET', url: url + 'organMemory', isArray: true},
+        getEvents: {method: 'GET', url: url + 'events', isArray: true}
       }
     );
   }
