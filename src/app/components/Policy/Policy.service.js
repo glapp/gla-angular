@@ -6,7 +6,7 @@
     .service('Policy', Policy);
 
   function Policy($resource, $location, SAILS_HOST, SAILS_PORT) {
-    var url = 'http://' + (SAILS_HOST ? SAILS_HOST : $location.host()) + ':' + SAILS_PORT + '/rule/';
+    var url = 'http://' + (SAILS_HOST ? SAILS_HOST : $location.host()) + ':' + SAILS_PORT + '/policy/';
     return $resource(url + ':id', {
         id: '@_id'
       },
