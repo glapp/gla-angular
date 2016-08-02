@@ -11,7 +11,7 @@
         id: '@_id'
       },
       {
-        getPolicy: {method: 'GET', url: url + 'policy', isArray: false},
+        getPolicy: {method: 'GET', url: url, isArray: false},
         createPolicy: {method: 'POST', url: url + 'set', isArray: false},
         removePolicy: {method: 'POST', url: url + 'remove', isArray: false}
       }
