@@ -79,7 +79,7 @@
             state: "apps.details({ app_id: '" + vm.app.id + "'})"
           }];
         }, function onError(err) {
-          toastr.error(err.data, 'Error');
+          toastr.error(err.data.json, 'Error');
         });
       Host.getInfo(
         function onSuccess(response) {
@@ -105,7 +105,7 @@
           });
           $log.info(vm.selections)
         }, function onError(err) {
-          toastr.error(err.data, 'Error');
+          toastr.error(err.data.json, 'Error');
         })
     }
 
@@ -131,7 +131,7 @@
         getDetails();
       }, function onError(err) {
         $log.error(err);
-        toastr.error(err.data, 'Error');
+        toastr.error(err.data.json, 'Error');
       })
     }
 
@@ -142,7 +142,7 @@
         getDetails();
       }, function onError(err) {
         $log.error(err);
-        toastr.error(err.data, 'Error');
+        toastr.error(err.data.json, 'Error');
       })
     }
 
@@ -166,7 +166,7 @@
       }, function onError(err) {
         $log.error(err);
         cell.moving = false;
-        toastr.error(err.data, 'Error');
+        toastr.error(err.data.json, 'Error');
       });
     }
 
