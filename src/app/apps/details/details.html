@@ -25,7 +25,7 @@
         <span ng-hide="adc.app.deploying">Undeploy</span>
         <span ng-show="adc.app.deploying">Undeploying...</span>
       </md-button>
-      <md-input-container>
+<!--      <md-input-container>
         <label>Rename to...</label>
         <input ng-model="adc.newName">
       </md-input-container>
@@ -36,7 +36,7 @@
       <md-button class="md-raised" ng-click="adc.remove()" ng-disabled="adc.app.removing">
         <span ng-hide="adc.app.removing">Remove</span>
         <span ng-show="adc.app.removing">Removing...</span>
-      </md-button>
+      </md-button>-->
       <md-button class="md-raised" ng-click="adc.deploy()" ng-show="adc.app.status=='ready'"
                  ng-disabled="adc.app.status=='deployed' || adc.app.deploying">
         <span ng-hide="adc.app.deploying">Deploy</span>

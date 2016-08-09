@@ -6,7 +6,7 @@
     .controller('OverviewController', OverviewController);
 
   /** @ngInject */
-  function OverviewController($stateParams, Application, $log, toastr) {
+  function OverviewController($stateParams, $state, Application, $log, toastr) {
     var vm = this;
     var graph_nodes = [];
     var graph_edges = [];
@@ -16,6 +16,13 @@
     vm.id = $stateParams.app_id;
 
     getDetails();
+
+    vm.list = function () {
+      $state.go('dashboard.overview.details');
+    };
+    vm.graph = function () {
+      $state.go('dashboard.overview.graph');
+    };
 
     vm.cells = function(status){
       vm.show_cells = status;
@@ -45,12 +52,14 @@
             graph_nodes.push({id: organ.originalName, label: organ.originalName, shape: 'circle', shadow: true, color: 'orange', size: 10});
 
             organ.cells.forEach(function(cell){
-              if (cell.isProxy && vm.show_proxy){
+              if (cell.isProxy ) //&& vm.show_proxy
+              {
                 //label: cell.id
                 graph_nodes.push({id: cell.id, label: cell.host.name, shape: 'diamond', shadow: true, color: 'brown', size: 10});
                 graph_edges.push({from: cell.id, to: organ.originalName});
               }
-              else if (vm.show_cells) {
+              else // else if (vm.show_cells)
+              {
                 //label: cell.id
                 graph_nodes.push({id: cell.id, label: cell.host.name, shape: 'square', shadow: true, color: 'green', size: 10, title: cell.host.name});
                 graph_edges.push({from: cell.id, to: organ.originalName});

@@ -39,12 +39,6 @@
         controller: 'AppListController',
         controllerAs: 'alc'
       })
-      .state('apps.details', {
-        url: '/{app_id}', // TODO: Should include only database IDs
-        templateUrl: 'app/apps/details/details.html',
-        controller: 'AppDetailsController',
-        controllerAs: 'adc'
-      })
       .state('dashboard', {
         url: '/{app_id}',
         templateUrl: 'app/dashboard/dashboard.html',
@@ -56,21 +50,38 @@
         templateUrl: 'app/dashboard/overview/overview.html',
         controller: 'OverviewController',
         controllerAs: 'overview'
+        /*views: {
+          mainModule: {
+            controller: 'OverviewController',
+            controllerAs: 'overview',
+            templateUrl: 'app/dashboard/overview/overview.html'
+          },
+          'graph@dashboard.overview': {
+            templateUrl: 'app/dashboard/overview/overview.graph.html',
+            controller: 'OverviewController',
+            controllerAs: 'overview'
+            },
+            'list@dashboard.overview': {
+              templateUrl: 'app/apps/list/list.html',
+                controller: 'AppListController',
+                controllerAs: 'alc'
+            }
+        }*/
+      })
+      .state('dashboard.overview.graph', {
+        url: '/',
+        templateUrl: 'app/dashboard/overview/overview.graph.html',
+        controller: 'OverviewController',
+        controllerAs: 'overview'
+      })
+      .state('dashboard.overview.details', {
+        url: '/list', // TODO: Should include only database IDs {app_id}
+        templateUrl: 'app/apps/details/details.html',
+        controller: 'AppDetailsController',
+        controllerAs: 'adc'
       })
       .state('dashboard.policy', {
         url: '/policy',
-        /*views: {
-          '': {
-            templateUrl: 'app/dashboard/policy/policy.html',
-            controller: 'PolicyController',
-            controllerAs: 'policy'
-          },
-          'detail@policy': {
-            templateUrl: 'app/dashboard/policy/createPolicy.html',
-            controller: 'PolicyController',
-            controllerAs: 'policy'
-          }
-        }*/
         templateUrl: 'app/dashboard/policy/policy.html',
         controller: 'PolicyController',
         controllerAs: 'policy'

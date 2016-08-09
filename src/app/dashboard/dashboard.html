@@ -1,19 +1,20 @@
 
 <div layout="column" class="dashboard-page" layout-gt-md="row" layout-fill>
-  <div flex="15" class="dashboard-menu" layout="column" layout-fill>
+  <div flex="15" class="dashboard-menu md-whiteframe-0dp" layout="column" layout-fill>
 
-    <md-subheader class="md-no-sticky">App Menu</md-subheader>
+    <!--<md-subheader class="md-no-sticky">App Menu</md-subheader>-->
 
     <div ng-repeat="item in dashboard.menu">
-      <md-list-item ui-sref={{item.path}}>
+      <md-list-item ui-sref={{item.path}} class="md-whiteframe-1dp">
         <md-icon>{{item.icon}}</md-icon>
         <p>{{item.name}}</p>
-      </md-list-item><md-divider></md-divider>
+      </md-list-item>
+      <!--<md-divider></md-divider>-->
     </div>
 
   </div>
 
-  <div flex="85" class="md-whiteframe-1dp" layout="column" layout-fill> <!--layout-align="start center"-->
+  <div flex="85" class="dashboard-content" layout="column" layout-fill> <!--layout-align="start center"-->
 
     <div class="container">
       <div ui-view></div>

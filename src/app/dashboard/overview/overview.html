@@ -1,14 +1,33 @@
 
 <div>
-  <span layout="row" class="md-toolbar-tools" layout-align="start center">
-    <md-button md-no-ink class="md-primary" ng-click="overview.cells(true)">show cells</md-button>
-    <md-button md-no-ink class="md-primary" ng-click="overview.proxy(true)">proxy</md-button>
-    <md-button md-no-ink class="md-primary" ui-sref="apps.details({ app_id: overview.id })">details</md-button>
-  </span>
-  <span>
+  <div layout="row" layout-xs="column" layout-align="center center">
+  <!--<span layout="row" layout-align="start center">-->
+    <md-button md-no-ink class="md-primary" ui-sref="dashboard.overview.details">
+      <!--details-->
+      <md-icon ng-style="{'font-size': 36+'px'}">
+        view_list
+      </md-icon>
+      <md-tooltip md-direction="bottom">
+        List View
+      </md-tooltip>
+    </md-button>
+    <md-button md-no-ink class=" md-primary" ui-sref="dashboard.overview.graph">
+      <!--graph-->
+      <md-icon ng-style="{'font-size': 36+'px'}">
+        grain
+      </md-icon>
+      <md-tooltip md-direction="bottom">
+        Graph View
+      </md-tooltip>
+    </md-button>
+    <!--"apps.details({ app_id: overview.id })"-->
+  <!--</span>-->
+    </div>
+
+
+<!--  <span>
     <md-switch ng-model="showHints"> {{showHints ? "List" : "Graph"}} View</md-switch>
-  </span>
+  </span>-->
 </div>
-<div>
-  <vis-network data="overview.live_data" options="overview.options" height="100%"></vis-network>
-</div>
+
+<div ui-view></div>

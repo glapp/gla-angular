@@ -150,7 +150,7 @@
       if (result.ids.length > 0)
       {
         Policy.removePolicy(result,
-          function onSuccess(response){
+          function onSuccess(){
             toastr.success('Deleted sucessfully!', 'Info');
           }, function onError(err) {
             toastr.error(err.data, 'Error');
