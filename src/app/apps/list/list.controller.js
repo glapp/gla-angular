@@ -24,6 +24,31 @@
       }, 3000);
     }
 
+    function fillApps() {
+      $log.info(vm.apps);
+      angular.forEach(vm.apps, function(app) {
+        var organs = 0;
+        var cells = 0;
+        var actions = 0;
+        //organs & cells
+        angular.forEach(app.organs, function(organ) {
+          organs++;
+          angular.forEach(organ.cells, function(cell) {
+            cells++;
+          });
+        });
+        //actions
+        angular.forEach(app.log, function() {
+          actions++
+        });
+        app.organCount = organs;
+        app.cellCount = cells;
+        app.actionCount = actions;
+
+      })
+    }
+
+
     function cancelRepeat() {
       if (angular.isDefined(repeat)) {
         $interval.cancel(repeat);
@@ -34,6 +59,7 @@
     function getApps() {
       Application.getUserApps(function onSuccess(response) {
         vm.apps = response.apps;
+        fillApps();
         $log.info(response);
         updateReadyCount();
         if (vm.apps.length == 0) {
