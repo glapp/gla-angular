@@ -52,8 +52,8 @@
         <!-- 3rd block, Repeat rows of rules  row in policy.test_rule.rules track by $index , row in policy.rows -->
         <div layout-gt-sm="row" ng-repeat="row in policy.new_policy.rules track by $index" ng-model="policy.newPolicy.rule" layout-margin>
 
-          <md-input-container class="md-block" flex-gt-sm="">
-            <label>Priority</label>
+          <md-input-container class="md-block" flex-gt-xs="10">
+            <label>Weight</label>
             <md-select ng-model="row.weight">
               <md-option ng-repeat="weight in policy.weights">
                 {{weight}}
@@ -63,7 +63,20 @@
 
           <div flex="5" hide-xs="" hide-sm=""><!-- Spacer //--></div>
 
-          <md-input-container class="md-block" flex-gt-sm="">
+          <md-input-container class="md-block" flex-gt-xs="35" >
+            <label>Metric</label>
+            <md-select ng-model="row.metric">
+              <md-option ng-repeat="metric in policy.metrics" > <!--value="{{metric}}"-->
+                <!--<md-option ng-repeat="metric in policy.goals[0].metrics" value="{{metric.value}}">-->
+                {{metric}}
+              </md-option>
+            </md-select>
+            <!--<div class="md-caption">{{metric.description}}</div>-->
+          </md-input-container>
+
+          <div flex="5" hide-xs="" hide-sm=""><!-- Spacer //--></div>
+
+          <md-input-container class="md-block" flex-gt-xs="25">
             <label>Select Organ</label>
             <md-select ng-model="row.organs[0].organ_id" multiple>
               <md-option ng-repeat="organ in policy.organs" value = {{organ.id}}>
@@ -74,19 +87,7 @@
 
           <div flex="5" hide-xs="" hide-sm=""><!-- Spacer //--></div>
 
-          <md-input-container class="md-block" flex-gt-sm="">
-            <label>Metric</label>
-            <md-select ng-model="row.metric">
-              <md-option ng-repeat="metric in policy.metrics" > <!--value="{{metric}}"-->
-                <!--<md-option ng-repeat="metric in policy.goals[0].metrics" value="{{metric.value}}">-->
-                {{metric}}
-              </md-option>
-            </md-select>
-          </md-input-container>
-
-          <div flex="5" hide-xs="" hide-sm=""><!-- Spacer //--></div>
-
-          <md-input-container class="md-block" flex-gt-sm="">
+          <md-input-container class="md-block" flex-gt-xs="20">
             <label>Operator</label>
             <md-select ng-model="row.operator">
               <md-option value="{{option.id}}" ng-repeat="option in policy.operator" > <!--value="{{metric}}"-->
@@ -98,9 +99,9 @@
 
           <div flex="5" hide-xs="" hide-sm=""><!-- Spacer //--></div>
 
-          <md-input-container class="md-block" flex-gt-sm="">
+          <md-input-container class="md-block" flex-gt-xs="10">
             <label>Value</label>
-            <input required="" title="value" name="value" ng-model="row.value">
+            <input required="" title="value" type="number" name="value" ng-model="row.value">
           </md-input-container>
 
           <md-input-container class="md-block" flex-gt-sm="">
@@ -161,7 +162,7 @@
         <md-list-item class="md-3-line" ng-cloak ng-repeat="rule in policy.rules track by $index">
           <div class="md-list-item-text">
             <h3>Metric: {{rule.metric}}</h3>
-            <p>Operator: {{rule.operator}}, Value: {{rule.value}} , Priority: {{rule.weight}}</p>
+            <p>Operator: {{rule.operator}}, Value: {{rule.value}} , Weight: {{rule.weight}}</p>
             Organs: <p><div style="float:left" ng-repeat="item in rule.organs"><p>{{item.originalName}} , </p></div></p>
           </div>
           <!--<md-button class="md-secondary">Respond</md-button>-->

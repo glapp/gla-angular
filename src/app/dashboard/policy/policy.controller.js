@@ -93,7 +93,6 @@
           toastr.error(err.data, 'Error');
         });
 
-      $log.info(items);
       return items;
     }
 
