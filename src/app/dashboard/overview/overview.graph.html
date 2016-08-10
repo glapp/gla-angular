@@ -1,10 +1,33 @@
-<div>
-<!--  <div>
-  <span layout="row" class="md-toolbar-tools" layout-align="start center">
-    <md-button md-no-ink class="md-primary" ng-click="overview.cells(true)">show cells</md-button>
-    <md-button md-no-ink class="md-primary" ng-click="overview.proxy(true)">proxy</md-button>
-  </span>
-  </div>-->
+<div layout="row" layout-align="column">
+  <div layout="row" flex flex-gt-xs="80" layout-fill="top">
+  <!--  <div>
+    <span layout="row" class="md-toolbar-tools" layout-align="start center">
+      <md-button md-no-ink class="md-primary" ng-click="overview.cells(true)">show cells</md-button>
+      <md-button md-no-ink class="md-primary" ng-click="overview.proxy(true)">proxy</md-button>
+    </span>
+    </div>-->
 
-  <vis-network data="overview.live_data" options="overview.options" height="100%"></vis-network>
+
+    <vis-network data="overview.live_data" options="overview.options" events="overview.events" height="100%"></vis-network>
+  </div>
+
+  <div layout="column" class="md-whiteframe-0dp" flex flex-gt-xs="20" layout-margin layout-padding>
+    <md-button md-no-ink class="md-primary" ng-click="overview.refresh()">
+      <md-icon ng-style="{'font-size': 36+'px'}">
+        refresh
+        <md-tooltip>Refresh Graph</md-tooltip>
+      </md-icon>
+    </md-button>
+
+  <md-card>
+      <p class="md-subhead">Organ Endpoints</p>
+    <md-card-content>
+      <div ng-repeat="point in overview.end_points" class="md-caption">
+        <!--<md-list>-->
+          {{point.name}}: <a ng-href={{point.ip}}>{{point.ip}}</a>
+        <!--</md-list>-->
+      </div>
+    </md-card-content>
+  </md-card>
+  </div>
 </div>

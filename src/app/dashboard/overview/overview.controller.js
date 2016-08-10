@@ -14,6 +14,11 @@
     vm.show_cells = false;
     vm.show_proxy = false;
     vm.id = $stateParams.app_id;
+    vm.end_points = [];
+    vm.refresh = function(){
+      $log.info('test');
+      getDetails();
+    };
 
     getDetails();
 
@@ -45,18 +50,32 @@
       graph_nodes = [];
       graph_edges = [];
       vm.live_data = {};
+      vm.end_points = [];
       Application.getAppDetails({app_id: $stateParams.app_id},
         function onSuccess(response) {
-          $log.info(response);
           vm.appName = response.name;
           response.organs.forEach(function(organ){
-            graph_nodes.push({id: organ.originalName, label: organ.originalName, shape: 'circle', shadow: true, color: 'orange', size: 10});
+            graph_nodes.push({id: organ.originalName, label: organ.originalName, shape: 'square', shadow: true, color: 'orange', size: 20});
 
             organ.cells.forEach(function(cell){
               if (cell.isProxy ) //&& vm.show_proxy
               {
                 //label: cell.id
-                graph_nodes.push({id: cell.id, label: cell.host.name, shape: 'diamond', shadow: true, color: 'brown', size: 10});
+                var info = cell.host.ip +':'+cell.published_port;
+                var link = "<a href="
+                  +info
+                  +">"
+                  +cell.host.ip +":"+cell.published_port
+                  +"</a>";
+
+                if(angular.isUndefined(cell.published_port) || cell.published_port == null){
+                  vm.end_points.push({name: organ.originalName, ip: cell.host.ip});
+                }
+                else {
+                  vm.end_points.push({name: organ.originalName, ip: info});
+                }
+
+                graph_nodes.push({id: cell.id, label: cell.host.name, shape: 'diamond', shadow: true, color: 'brown', size: 10, title: link});
                 graph_edges.push({from: cell.id, to: organ.originalName});
               }
               else // else if (vm.show_cells)
@@ -79,11 +98,18 @@
 
           });
 
+
+          vm.events = {};
+
+          vm.events.click = function () {
+            console.warn('Event "click" triggered');
+            console.log.apply(console, arguments);
+          };
+
           vm.live_data = {
             nodes: graph_nodes,
             edges: graph_edges
           };
-          $log.info(vm.live_data);
 
         }, function onError(err) {
           toastr.error(err.data, 'Error');
@@ -93,7 +119,7 @@
 
 
 
-/*    vm.title = "<div class='panel panel-success' style='margin-bottom:0px'>"+
+    vm.title = "<div class='panel panel-success' style='margin-bottom:0px'>"+
       "<div class='panel-heading'>"+
       "<h3 class='panel-title'>Agent</h3>"+
       "</div>"+
@@ -121,7 +147,7 @@
       "</tr>"+
       "</table>"+
       "</div>"+
-      "</div>";*/
+      "</div>";
 
   }
 })();
