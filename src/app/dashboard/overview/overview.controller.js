@@ -48,6 +48,7 @@
       Application.getAppDetails({app_id: $stateParams.app_id},
         function onSuccess(response) {
           $log.info(response);
+          vm.appName = response.name;
           response.organs.forEach(function(organ){
             graph_nodes.push({id: organ.originalName, label: organ.originalName, shape: 'circle', shadow: true, color: 'orange', size: 10});
 

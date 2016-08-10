@@ -14,12 +14,6 @@
         controller: 'LandingController',
         controllerAs: 'lc'
       })
-      .state('home', {
-        url: '/home',
-        templateUrl: 'app/home/home.html',
-        controller: 'HomeController',
-        controllerAs: 'hc'
-      })
       .state('infrastructure', {
         url: '/infrastructure',
         templateUrl: 'app/infrastructure/infrastructure.html',
