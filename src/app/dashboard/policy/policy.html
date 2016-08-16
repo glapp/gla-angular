@@ -1,23 +1,3 @@
-<!--
-<div layout="column">
-  <md-content class="md-padding">
-
-    <md-tabs md-selected="selectedIndex" md-border-bottom layout-fill> &lt;!&ndash;class="md-accent md-hue-1 tabs-section"&ndash;&gt;
-      <md-tab ng-repeat="tab in policy.menu"
-              label="{{tab.name}}"
-              ui-sref="{{tab.path}}">
-      </md-tab>
-    </md-tabs>
-  </md-content>
-
-</div>
-
-
-<div class="container">
-  <div ui-view></div>
-</div>-->
-
-
 <div ui-view></div>
 
 
@@ -26,16 +6,16 @@
 
 
 
-<div  layout-margin> <!--layout-align="start center" layout="column"-->
+<div  layout-margin>
 
   <div ng-cloak layout="column" >
 
-    <md-toolbar class="md-hue-1"> <!--md-theme-light-->
+    <md-toolbar class="md-hue-1">
       <div layout="row" flex-gt-sm="95">
         <h2 class="md-toolbar-tools" >
           <span>Add new policy</span>
         </h2>
-        <md-button class="md-mini md-fab md-primary" ng-click="policy.savePolicy()"><!--md-icon-button-->
+        <md-button class="md-mini md-fab md-primary" ng-click="policy.savePolicy()">
           <md-icon >save</md-icon>
           <md-tooltip md-direction="bottom">
             Save
@@ -46,8 +26,6 @@
 
     <md-content layout-padding="">
       <form name="createPolicy">
-        <!--      <div layout="row" layout-xs="column" layout-sm="column" layout-align="space-between center"></div>-->
-
 
         <!-- 3rd block, Repeat rows of rules  row in policy.test_rule.rules track by $index , row in policy.rows -->
         <div layout-gt-sm="row" ng-repeat="row in policy.new_policy.rules track by $index" ng-model="policy.newPolicy.rule" layout-margin>
@@ -63,20 +41,19 @@
 
           <div flex="5" hide-xs="" hide-sm=""><!-- Spacer //--></div>
 
-          <md-input-container class="md-block" flex-gt-xs="35" >
+          <md-input-container class="md-block" flex-gt-xs="30" >
             <label>Metric</label>
-            <md-select ng-model="row.metric">
-              <md-option ng-repeat="metric in policy.metrics" > <!--value="{{metric}}"-->
-                <!--<md-option ng-repeat="metric in policy.goals[0].metrics" value="{{metric.value}}">-->
-                {{metric}}
+            <md-select ng-model="row.metric" ng-change="policy.selectChanged(row.metric)">
+              <md-option name="metric_box" ng-repeat="metric in policy.metrics" value="{{metric.id}}">
+                {{metric.name}}
               </md-option>
             </md-select>
-            <!--<div class="md-caption">{{metric.description}}</div>-->
+
           </md-input-container>
 
           <div flex="5" hide-xs="" hide-sm=""><!-- Spacer //--></div>
 
-          <md-input-container class="md-block" flex-gt-xs="25">
+          <md-input-container class="md-block" flex-gt-xs="20">
             <label>Select Organ</label>
             <md-select ng-model="row.organs[0].organ_id" multiple>
               <md-option ng-repeat="organ in policy.organs" value = {{organ.id}}>
@@ -99,9 +76,19 @@
 
           <div flex="5" hide-xs="" hide-sm=""><!-- Spacer //--></div>
 
-          <md-input-container class="md-block" flex-gt-xs="10">
+          <md-input-container class="md-block" flex-gt-xs="20">
             <label>Value</label>
-            <input required="" title="value" type="number" name="value" ng-model="row.value">
+            <input required="" title="value" type="number" step={{policy.metric_selected.step}} min={{policy.metric_selected.min}} max={{policy.metric_selected.max}} name="value" ng-model="row.value">
+            <div ng-messages="createPolicy.value.$error" multiple md-auto-hide="false" role="alert">
+              <div ng-message="required">
+                {{policy.metric_selected.input}}
+              </div>
+              <div ng-message="max">
+                Woah! That's a tad too big. Enter something smaller
+              </div>
+              <div ng-message="min">
+                Can't run a car without fuel. Enter something bigger!
+              </div>
           </md-input-container>
 
           <md-input-container class="md-block" flex-gt-sm="">
@@ -111,28 +98,17 @@
                 Add a new row
               </md-tooltip>
             </md-button>
-            <!--            <md-button class="md-icon-button" ng-click="policy.removeRow()">
-                          <md-icon>delete</md-icon>
-                        </md-button>-->
-          </md-input-container>
-          <!--{{row}}-->
-        </div>
 
-        <!--        <div layout-gt-sm="row" layout-align="center">
-                  <md-button class="md-raised md-primary" ng-click="policy.savePolicy()"> &lt;!&ndash;ng-disabled="policy.saveEnabled"&ndash;&gt;
-                    Save
-                  </md-button>
-                  <md-button class="md-raised md-warn" ng-click="">
-                    Cancel
-                  </md-button>
-                </div>-->
+          </md-input-container>
+
+        </div>
 
 
       </form>
     </md-content>
 
   </div>
-  <!--  {{policy.new_policy}}-->
+
 </div>
 
 
@@ -161,11 +137,15 @@
       <md-list>
         <md-list-item class="md-3-line" ng-cloak ng-repeat="rule in policy.rules track by $index">
           <div class="md-list-item-text">
-            <h3>Metric: {{rule.metric}}</h3>
+            <md-subhead>Metric: {{rule.metric}}</md-subhead>
             <p>Operator: {{rule.operator}}, Value: {{rule.value}} , Weight: {{rule.weight}}</p>
-            Organs: <p><div style="float:left" ng-repeat="item in rule.organs"><p>{{item.originalName}} , </p></div></p>
+            Organs:
+            <p>
+              <div style="float:left" ng-repeat="item in rule.organs">
+                <p>{{item.originalName}} , </p>
+              </div>
+            </p>
           </div>
-          <!--<md-button class="md-secondary">Respond</md-button>-->
           <md-checkbox ng-model="rule.selected" ng-init="rule.selected = false"></md-checkbox>
           <md-divider ng-if="!$last"></md-divider>
         </md-list-item>

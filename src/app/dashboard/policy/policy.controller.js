@@ -6,7 +6,7 @@
     .controller('PolicyController', PolicyController);
 
   /** @ngInject */
-  function PolicyController($stateParams, Policy, Application, toastr, $log) {
+  function PolicyController($stateParams, Policy, Application, toastr, $filter, $log) {
     var vm = this;
 
     //form related variables
@@ -17,7 +17,16 @@
       ]
     };
 /*    vm.operator = ["is", "is not", "exists", "less than", "greater than", "equals", "regexp", "contains"];*/
-    vm.metrics = ["container_cpu_usage_seconds_total", "money_spent", "budget_balance", "container_network_receive_bytes_total","memory_failures_total", "network_transmit_errors_total", "networks_receive_bytes_total"];
+    vm.metrics_old = ["container_cpu_usage_seconds_total", "money_spent", "budget_balance", "container_network_receive_bytes_total","memory_failures_total", "network_transmit_errors_total", "networks_receive_bytes_total"];
+
+    vm.metrics = [
+      {name: "CPU utilization", id: "container_cpu_usage_seconds_total", desc: "cpu", input: "Enter something b/w 0 to 1 (meaning 0 to 100%)!", step: "0.01", min: "0.00", max: "1" },
+      {name: "Receiving packets dropped", id: "container_network_receive_packets_dropped_total", desc: "packets", input: "Enter any positive integer", step: "1" },
+      {name: "Transmitting packets dropped", id: "container_network_transmit_packets_dropped_total", desc: "dropped", input: "Enter any positive integer", step: "1" },
+      {name: "Memory utilization", id: "memory_utilization", desc: "memory", input: "Enter something b/w 0 to 1 (meaning 0 to 100%)!", step: "0.01", min: "0.00", max: "1" },
+      {name: "Total cost", id: "cost", desc: "cost", input: "Enter any positive integer", step: "1", min: "1" }
+    ];
+    vm.metric_selected = {};
 
     vm.operator = [
       {name: "greater than", id: "1" },
@@ -56,6 +65,10 @@
       if(vm.counter == 0){
         enableButton();
       }
+    };
+
+    vm.selectChanged = function(val){
+      vm.metric_selected = $filter('filter')(vm.metrics, function (d) {return d.id === val;})[0];
     };
 
     // To disbale and enable the buttons
@@ -103,9 +116,12 @@
       Policy.getPolicy({app_id: $stateParams.app_id},
         function onSuccess(response) {
           response.rules.forEach(function(rule){
+            var opt = $filter('filter')(vm.operator, function (d) {return d.id === rule.operator;})[0];
+            var metric = $filter('filter')(vm.metrics, function (d) {return d.id === rule.metric;})[0];
+
             items.push({
-              metric: rule.metric,
-              operator: rule.operator,
+              metric: metric.name,
+              operator: opt.name,
               value: rule.value,
               weight: rule.weight,
               id: rule.id,

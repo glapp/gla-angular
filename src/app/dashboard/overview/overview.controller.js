@@ -99,13 +99,6 @@
           });
 
 
-          vm.events = {};
-
-          vm.events.click = function () {
-            console.warn('Event "click" triggered');
-            console.log.apply(console, arguments);
-          };
-
           vm.live_data = {
             nodes: graph_nodes,
             edges: graph_edges
@@ -117,37 +110,6 @@
 
     }
 
-
-
-    vm.title = "<div class='panel panel-success' style='margin-bottom:0px'>"+
-      "<div class='panel-heading'>"+
-      "<h3 class='panel-title'>Agent</h3>"+
-      "</div>"+
-      "<div class='panel-body' style='height: 125px; padding-top: 0px; padding-bottom: 0px'>"+
-      "<table class='table' style='border: none; margin-bottom:1px'>"+
-      "<tr>"+
-      "<td>Agent</td>"+
-      "<td>true</td>"+
-      "<td>2015-04-02 16:02</td>"+
-      "</tr>"+
-      "<tr>"+
-      "<td>CPU</td>"+
-      "<td>1%</td>"+
-      "<td>2015-04-02 16:02</td>"+
-      "</tr>"+
-      "<tr>"+
-      "<td>Memory</td>"+
-      "<td>2%</td>"+
-      "<td>2015-04-02 16:02</td>"+
-      "</tr>"+
-      "<tr>"+
-      "<td>Disk</td>"+
-      "<td>10%</td>"+
-      "<td>2015-04-02 16:02</td>"+
-      "</tr>"+
-      "</table>"+
-      "</div>"+
-      "</div>";
 
   }
 })();
