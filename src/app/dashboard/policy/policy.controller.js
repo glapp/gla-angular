@@ -24,7 +24,8 @@
       {name: "Receiving packets dropped", id: "container_network_receive_packets_dropped_total", desc: "packets", input: "Enter any positive integer", step: "1" },
       {name: "Transmitting packets dropped", id: "container_network_transmit_packets_dropped_total", desc: "dropped", input: "Enter any positive integer", step: "1" },
       {name: "Memory utilization", id: "memory_utilization", desc: "memory", input: "Enter something b/w 0 to 1 (meaning 0 to 100%)!", step: "0.01", min: "0.00", max: "1" },
-      {name: "Total cost", id: "cost", desc: "cost", input: "Enter any positive integer", step: "1", min: "1" }
+      {name: "Total cost", id: "cost", desc: "cost", input: "Enter any positive integer", step: "1", min: "1" },
+      {name: "Click count", id: "click_count", desc: "clicks", input: "Enter any positive integer", step: "1", min: "1" }
     ];
     vm.metric_selected = {};
 

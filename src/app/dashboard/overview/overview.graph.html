@@ -24,7 +24,7 @@
     <md-card-content>
       <div ng-repeat="point in overview.end_points" class="md-caption">
         <!--<md-list>-->
-          {{point.name}}: <a ng-href={{point.ip}}>{{point.ip}}</a>
+          {{point.name}}: <p><a ng-href=http://{{point.ip}} target="_blank"> {{point.ip}}</a></p>
         <!--</md-list>-->
       </div>
     </md-card-content>

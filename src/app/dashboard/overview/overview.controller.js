@@ -65,11 +65,11 @@
                 var link = "<a href="
                   +info
                   +">"
-                  +cell.host.ip +":"+cell.published_port
+                  +cell.host.ip //+":"+cell.published_port
                   +"</a>";
 
                 if(angular.isUndefined(cell.published_port) || cell.published_port == null){
-                  vm.end_points.push({name: organ.originalName, ip: cell.host.ip});
+                  //vm.end_points.push({name: organ.originalName, ip: cell.host.ip});
                 }
                 else {
                   vm.end_points.push({name: organ.originalName, ip: info});
