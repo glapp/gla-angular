@@ -24,14 +24,7 @@
         url: '/apps',
         templateUrl: 'app/apps/apps.html',
         controller: 'AppsController',
-        controllerAs: 'ac',
-        abstract: true
-      })
-      .state('apps.list', {
-        url: '',
-        templateUrl: 'app/apps/list/list.html',
-        controller: 'AppListController',
-        controllerAs: 'alc'
+        controllerAs: 'ac'
       })
       .state('dashboard', {
         url: '/{app_id}',
@@ -44,35 +37,18 @@
         templateUrl: 'app/dashboard/overview/overview.html',
         controller: 'OverviewController',
         controllerAs: 'overview'
-        /*views: {
-          mainModule: {
-            controller: 'OverviewController',
-            controllerAs: 'overview',
-            templateUrl: 'app/dashboard/overview/overview.html'
-          },
-          'graph@dashboard.overview': {
-            templateUrl: 'app/dashboard/overview/overview.graph.html',
-            controller: 'OverviewController',
-            controllerAs: 'overview'
-            },
-            'list@dashboard.overview': {
-              templateUrl: 'app/apps/list/list.html',
-                controller: 'AppListController',
-                controllerAs: 'alc'
-            }
-        }*/
       })
       .state('dashboard.overview.graph', {
         url: '/',
-        templateUrl: 'app/dashboard/overview/overview.graph.html',
-        controller: 'OverviewController',
-        controllerAs: 'overview'
+        templateUrl: 'app/dashboard/overview/graph/overview.graph.html',
+        controller: 'OverviewGraphController',
+        controllerAs: 'ogc'
       })
       .state('dashboard.overview.details', {
         url: '/list', // TODO: Should include only database IDs {app_id}
-        templateUrl: 'app/apps/details/details.html',
-        controller: 'AppDetailsController',
-        controllerAs: 'adc'
+        templateUrl: 'app/dashboard/overview/details/overview.details.html',
+        controller: 'OverviewDetailsController',
+        controllerAs: 'odc'
       })
       .state('dashboard.policy', {
         url: '/policy',

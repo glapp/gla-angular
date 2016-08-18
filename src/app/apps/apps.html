@@ -1,1 +1,67 @@
-<div layout-fill ui-view></div>
+<sub-navbar>
+  <md-button class="md-icon-button" aria-label="Add application" ng-click="ac.openAddDialog($event)">
+    <md-icon>add</md-icon>
+    <md-tooltip md-direction="bottom">
+      New App
+    </md-tooltip>
+  </md-button>
+</sub-navbar>
+
+<md-content>
+
+  <!--{{app.status}}-status md-whiteframe-2dp app-box-->
+  <div class='md-padding' layout="row" layout-wrap>
+    <md-card style="width: 350px;" class="app-box" ui-sref="dashboard.overview.graph({ app_id: app.id })"
+             ng-repeat="app in ac.apps">
+      <div class="inner-content">
+
+        <div class="{{app.status}}-status">
+          <br><br>
+        </div>
+
+        <md-card-content>
+
+          <div layout="row" layout-xs="column" >
+            <div flex flex-gt-xs="30" >
+              <md-icon ng-style="{'font-size': 48+'px'}">
+                dashboard
+              </md-icon>
+              <!--dashboard, adjust, blur_on, view_quilt, radio_button_checked, track_changes, -->
+            </div>
+            <div flex flex-gt-xs="70">
+              <h2>{{app.name}}</h2>
+              <md-divider></md-divider>
+              <h5>
+                <!--<p>Id: {{app.id}}</p>-->
+                <p>updated: {{app.updatedAt | date}}</p>
+              </h5>
+            </div>
+
+          </div>
+
+          <div class="{{app.status}}-status">
+            <p class="md-body-1" ng-show="app.status=='preparing'">
+              {{app.readyCount + '/' + app.organs.length}} organs ready
+            </p>
+          </div>
+          <!--<md-divider></md-divider>-->
+          <div layout="row" layout-xs="column">
+            <div flex flex-gt-xs="50">
+              Status <h5>{{app.status}}</h5>
+            </div>
+            <div flex flex-gt-xs="50">
+              Organs <h5>{{app.organCount}}</h5>
+            </div>
+            <!--<div flex flex-gt-xs="50">
+              Cells <h5>{{app.cellCount}}</h5>
+            </div>-->
+          </div>
+
+        </md-card-content>
+
+      </div>
+
+    </md-card>
+  </div>
+
+</md-content>

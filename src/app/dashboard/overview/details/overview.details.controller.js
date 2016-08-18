@@ -3,10 +3,10 @@
 
   angular
     .module('glaAngular')
-    .controller('AppDetailsController', AppDetailsController);
+    .controller('OverviewDetailsController', OverviewDetailsController);
 
   /** @ngInject */
-  function AppDetailsController($stateParams, $log, $mdDialog, $state, Application, Host, Cell, Organ, toastr) {
+  function OverviewDetailsController($stateParams, $log, $mdDialog, $state, Application, Host, Cell, Organ, toastr) {
     var vm = this;
 
     vm.navItems = [];
@@ -204,7 +204,7 @@
         function onSuccess(response) {
           $log.info(response);
           vm.app.removing = false;
-          $state.go('apps.list');
+          $state.go('apps');
           toastr.success('Successfully removed application!', 'Info');
         }, function onError(err) {
           $log.error(err);

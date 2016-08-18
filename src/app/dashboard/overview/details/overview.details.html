@@ -1,15 +1,15 @@
-<sub-navbar items="adc.navItems">
+<sub-navbar items="odc.navItems">
   <span class="md-body-2">Scenarios:</span>
   <md-button class="md-fab md-primary md-hue-1 md-mini" aria-label="Scenario 1"
-             ng-click="adc.openScenarioDialog($event, 1)">
+             ng-click="odc.openScenarioDialog($event, 1)">
     <span class="md-body-2">1</span>
   </md-button>
   <md-button class="md-fab md-primary md-hue-1 md-mini" aria-label="Scenario 2"
-             ng-click="adc.openScenarioDialog($event, 2)">
+             ng-click="odc.openScenarioDialog($event, 2)">
     <span class="md-body-2">2</span>
   </md-button>
   <md-button class="md-fab md-primary md-hue-1 md-mini" aria-label="Scenario 3"
-             ng-click="adc.openScenarioDialog($event, 3)">
+             ng-click="odc.openScenarioDialog($event, 3)">
     <span class="md-body-2">3</span>
   </md-button>
 </sub-navbar>
@@ -18,29 +18,29 @@
   <div flex="70" class="md-whiteframe-1dp" layout="column" layout-fill>
 
     <div layout="start center">
-      <span class="md-title md-padding">Details of {{adc.app.name}}</span>
+      <span class="md-title md-padding">Details of {{odc.app.name}}</span>
       <span flex></span>
-      <md-button class="md-raised" ng-click="adc.undeploy()" ng-show="adc.app.status=='deployed'"
-                 ng-disabled="adc.app.undeploying">
-        <span ng-hide="adc.app.deploying">Undeploy</span>
-        <span ng-show="adc.app.deploying">Undeploying...</span>
+      <md-button class="md-raised" ng-click="odc.undeploy()" ng-show="odc.app.status=='deployed'"
+                 ng-disabled="odc.app.undeploying">
+        <span ng-hide="odc.app.deploying">Undeploy</span>
+        <span ng-show="odc.app.deploying">Undeploying...</span>
       </md-button>
 <!--      <md-input-container>
         <label>Rename to...</label>
-        <input ng-model="adc.newName">
+        <input ng-model="odc.newName">
       </md-input-container>
-      <md-button class="md-raised" ng-click="adc.rename()" ng-disabled="adc.app.renaming">
-        <span ng-hide="adc.app.renaming">Rename</span>
-        <span ng-show="adc.app.renaming">Renaming...</span>
+      <md-button class="md-raised" ng-click="odc.rename()" ng-disabled="odc.app.renaming">
+        <span ng-hide="odc.app.renaming">Rename</span>
+        <span ng-show="odc.app.renaming">Renaming...</span>
       </md-button>
-      <md-button class="md-raised" ng-click="adc.remove()" ng-disabled="adc.app.removing">
-        <span ng-hide="adc.app.removing">Remove</span>
-        <span ng-show="adc.app.removing">Removing...</span>
+      <md-button class="md-raised" ng-click="odc.remove()" ng-disabled="odc.app.removing">
+        <span ng-hide="odc.app.removing">Remove</span>
+        <span ng-show="odc.app.removing">Removing...</span>
       </md-button>-->
-      <md-button class="md-raised" ng-click="adc.deploy()" ng-show="adc.app.status=='ready'"
-                 ng-disabled="adc.app.status=='deployed' || adc.app.deploying">
-        <span ng-hide="adc.app.deploying">Deploy</span>
-        <span ng-show="adc.app.deploying">Deploying...</span>
+      <md-button class="md-raised" ng-click="odc.deploy()" ng-show="odc.app.status=='ready'"
+                 ng-disabled="odc.app.status=='deployed' || odc.app.deploying">
+        <span ng-hide="odc.app.deploying">Deploy</span>
+        <span ng-show="odc.app.deploying">Deploying...</span>
       </md-button>
     </div>
 
@@ -51,15 +51,15 @@
             <md-list-item class="md-2-line">
               <div class="md-list-item-text" layout="column">
                 <h4>Status</h4>
-                <p>{{adc.app.status}}</p>
-                <p ng-hide="!adc.getStatusMessage(adc.app.status)">{{adc.getStatusMessage(adc.app.status)}}</p>
+                <p>{{odc.app.status}}</p>
+                <p ng-hide="!odc.getStatusMessage(odc.app.status)">{{odc.getStatusMessage(odc.app.status)}}</p>
                 <br><!-- TODO: remove this layout-hack -->
               </div>
             </md-list-item>
            <md-list-item class="md-2-line">
               <div class="md-list-item-text" layout="column">
                 <h4>Logs</h4>
-                <p ng-repeat="log in adc.app.log">
+                <p ng-repeat="log in odc.app.log">
                   <span>{{log.createdAt | amDateFormat:'DD.MM.YYYY HH:mm:ss'}}</span><span>{{': ' + log.content}}</span>
                 </p>
               </div>
@@ -67,11 +67,11 @@
           </md-list>
         </md-content>
       </md-tab>
-      <md-tab ng-repeat="organ in adc.app.organs" label="{{organ.originalName}}">
+      <md-tab ng-repeat="organ in odc.app.organs" label="{{organ.originalName}}">
         <md-content layout="row" class="md-body-1 md-padding">
           <div flex layout="column">
-            <md-button ng-show="adc.app.status=='deployed'" class="md-raised" aria-label="Scale Up"
-                       ng-click="adc.scaleUp(organ)">
+            <md-button ng-show="odc.app.status=='deployed'" class="md-raised" aria-label="Scale Up"
+                       ng-click="odc.scaleUp(organ)">
               <span>Scale Up</span>
             </md-button>
             <md-list>
@@ -79,9 +79,9 @@
                 <div ng-repeat="cell in organ.cells" layout="row" flex>
                   <div class="md-list-item-text" layout="column">
                     <h4>Cell {{$index + 1}}</h4>
-                    <p>Provider: {{adc.selections.provider[cell.host.labels.provider] || 'undefined'}}</p>
-                    <p>Region: {{adc.selections.region[cell.host.labels.region] || 'undefined'}}</p>
-                    <p>Tier: {{adc.selections.tier[cell.host.labels.tier] || 'undefined'}}</p>
+                    <p>Provider: {{odc.selections.provider[cell.host.labels.provider] || 'undefined'}}</p>
+                    <p>Region: {{odc.selections.region[cell.host.labels.region] || 'undefined'}}</p>
+                    <p>Tier: {{odc.selections.tier[cell.host.labels.tier] || 'undefined'}}</p>
                     <p ng-hide="cell.published_port">IP: {{cell.host.ip}}</p>
                     <p ng-show="cell.published_port">IP:
                       <a target="_blank"
@@ -89,11 +89,11 @@
                         ':'
                         + cell.published_port}}</a>
                     </p>
-                    <md-button class="md-raised" aria-label="Kill" ng-click="adc.scaleDown(organ, cell)"
-                               ng-show="adc.app.status=='deployed' && !cell.isProxy">
+                    <md-button class="md-raised" aria-label="Kill" ng-click="odc.scaleDown(organ, cell)"
+                               ng-show="odc.app.status=='deployed' && !cell.isProxy">
                       <span>Kill</span>
                     </md-button>
-                    <md-menu md-position-mode="target target" ng-show="adc.app.status=='deployed' && !cell.isProxy">
+                    <md-menu md-position-mode="target target" ng-show="odc.app.status=='deployed' && !cell.isProxy">
                       <md-button class="md-raised" aria-label="Move" ng-disabled="cell.moving"
                                  ng-click="$mdOpenMenu($event)">
                         <span ng-hide="cell.moving">Move</span>
@@ -102,20 +102,20 @@
                       <md-menu-content class="md-body-1" width="4">
                         <section>
                           <form ng-init="data={}">
-                            <div ng-repeat="option in adc.getKeys(adc.selections)">
+                            <div ng-repeat="option in odc.getKeys(odc.selections)">
                               <span layout-padding class="md-body-1">{{option.substring(0,1).toUpperCase() + option.substring(1) + ':'}}</span>
                               <md-radio-group ng-model="data[option]" ng-init="data[option] = ''">
                                 <md-radio-button value="" class="md-primary">(No preference)</md-radio-button>
-                                <md-radio-button ng-repeat="short in adc.getKeys(adc.selections[option])"
+                                <md-radio-button ng-repeat="short in odc.getKeys(odc.selections[option])"
                                                  ng-class="{'md-primary': short==cell.host.labels[option]}"
                                                  value="{{short}}">
-                                  {{adc.selections[option][short]}}
+                                  {{odc.selections[option][short]}}
                                 </md-radio-button>
                               </md-radio-group>
                               <hr/>
                             </div>
-                            <md-button ng-disabled="adc.disableButton(data, cell.host.labels)" class="md-raised"
-                                       ng-click="adc.move(cell, data)">
+                            <md-button ng-disabled="odc.disableButton(data, cell.host.labels)" class="md-raised"
+                                       ng-click="odc.move(cell, data)">
                               Apply
                             </md-button>
                           </form>
@@ -149,7 +149,7 @@
       </md-tab>
     </md-tabs>
   </div>
-  <!--  <div flex="30" ng-show="adc.app.status == 'deployed'" class="md-whiteframe-0dp" layout="column" layout-fill
+  <!--  <div flex="30" ng-show="odc.app.status == 'deployed'" class="md-whiteframe-0dp" layout="column" layout-fill
          layout-align="start center">
       <chart></chart>
     </div>-->

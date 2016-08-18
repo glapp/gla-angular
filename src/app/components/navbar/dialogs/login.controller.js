@@ -20,7 +20,7 @@
           name: response.name
         };
         vm.loginData = {};
-        $state.go('apps.list');
+        $state.go('apps');
       }, function onError(err) {
         $log.error(err);
         toastr.error(err.statusText, 'Error while signing in');

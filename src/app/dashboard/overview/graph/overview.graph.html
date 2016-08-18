@@ -2,17 +2,17 @@
   <div layout="row" flex flex-gt-xs="80" layout-fill="top">
   <!--  <div>
     <span layout="row" class="md-toolbar-tools" layout-align="start center">
-      <md-button md-no-ink class="md-primary" ng-click="overview.cells(true)">show cells</md-button>
-      <md-button md-no-ink class="md-primary" ng-click="overview.proxy(true)">proxy</md-button>
+      <md-button md-no-ink class="md-primary" ng-click="ogc.cells(true)">show cells</md-button>
+      <md-button md-no-ink class="md-primary" ng-click="ogc.proxy(true)">proxy</md-button>
     </span>
     </div>-->
 
 
-    <vis-network data="overview.live_data" options="overview.options" height="100%"></vis-network>
+    <vis-network data="ogc.live_data" options="ogc.options" height="100%"></vis-network>
   </div>
 
   <div layout="column" class="md-whiteframe-0dp" flex flex-gt-xs="20" layout-margin layout-padding>
-    <md-button md-no-ink class="md-primary" ng-click="overview.refresh()">
+    <md-button md-no-ink class="md-primary" ng-click="ogc.refresh()">
       <md-icon ng-style="{'font-size': 36+'px'}">
         refresh
         <md-tooltip>Refresh Graph</md-tooltip>
@@ -22,7 +22,7 @@
   <md-card>
       <p class="md-subhead">Organ Endpoints</p>
     <md-card-content>
-      <div ng-repeat="point in overview.end_points" class="md-caption">
+      <div ng-repeat="point in ogc.end_points" class="md-caption">
         <!--<md-list>-->
           {{point.name}}: <p><a ng-href=http://{{point.ip}} target="_blank"> {{point.ip}}</a></p>
         <!--</md-list>-->

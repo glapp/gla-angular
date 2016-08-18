@@ -76,7 +76,7 @@
         function onSuccess(response) {
           $log.info(response);
           vm.app.removing = false;
-          $state.go('apps.list');
+          $state.go('apps');
           toastr.success('Successfully removed application!', 'Info');
         }, function onError(err) {
           $log.error(err);

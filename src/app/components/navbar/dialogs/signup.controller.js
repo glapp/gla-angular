@@ -21,7 +21,7 @@
             name: response.name
           };
           vm.signupData = {};
-          $state.go('apps.list');
+          $state.go('apps');
         }, function onError(err) {
           $log.error(err);
           toastr.error(err.data.reason, 'Error while singing up');

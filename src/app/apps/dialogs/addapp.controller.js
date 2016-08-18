@@ -24,7 +24,5 @@
           $mdDialog.cancel(err);
         })
     }
-
-
   }
 })();
