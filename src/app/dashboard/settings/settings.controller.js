@@ -80,7 +80,7 @@
           toastr.success('Successfully removed application!', 'Info');
         }, function onError(err) {
           $log.error(err);
-          toastr.error(err.data, 'Error removing the app');
+          toastr.error(err.data || err.statusText, 'Error removing the app');
           vm.app.removing = false;
         })
     }

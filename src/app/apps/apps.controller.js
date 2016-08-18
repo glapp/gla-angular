@@ -107,7 +107,7 @@
           startRepeat();
         }
       }).catch(function (err) {
-        toastr.error(err.data, 'Error');
+        toastr.error(err.data || err.statusText, 'Error');
       });
     }
   }
