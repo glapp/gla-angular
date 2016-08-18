@@ -1,4 +1,4 @@
-<sub-navbar items="odc.navItems">
+<!--<sub-navbar items="odc.navItems">
   <span class="md-body-2">Scenarios:</span>
   <md-button class="md-fab md-primary md-hue-1 md-mini" aria-label="Scenario 1"
              ng-click="odc.openScenarioDialog($event, 1)">
@@ -12,19 +12,42 @@
              ng-click="odc.openScenarioDialog($event, 3)">
     <span class="md-body-2">3</span>
   </md-button>
-</sub-navbar>
+</sub-navbar>-->
+
+<md-toolbar class="md-hue-1" layout="row" >
+  <div layout="row" flex-gt-sm="75" layout-align>
+    <span class="md-title md-padding">Details of {{odc.app.name}}</span>
+  </div>
+  <div layout="row" flex-gt-sm="25" layout-align="end center">
+    <span class="md-body-2">Scenarios:</span>
+    <md-button class="md-fab md-primary md-hue-1 md-mini" aria-label="Scenario 1"
+               ng-click="odc.openScenarioDialog($event, 1)">
+      <span class="md-body-2">1</span>
+    </md-button>
+    <md-button class="md-fab md-primary md-hue-1 md-mini" aria-label="Scenario 2"
+               ng-click="odc.openScenarioDialog($event, 2)">
+      <span class="md-body-2">2</span>
+    </md-button>
+    <md-button class="md-fab md-primary md-hue-1 md-mini" aria-label="Scenario 3"
+               ng-click="odc.openScenarioDialog($event, 3)">
+      <span class="md-body-2">3</span>
+    </md-button>
+  </div>
+
+</md-toolbar>
 
 <div layout="column" layout-gt-md="row" layout-fill>
   <div flex="70" class="md-whiteframe-1dp" layout="column" layout-fill>
 
-    <div layout="start center">
-      <span class="md-title md-padding">Details of {{odc.app.name}}</span>
-      <span flex></span>
-      <md-button class="md-raised" ng-click="odc.undeploy()" ng-show="odc.app.status=='deployed'"
+   <!-- <div layout="start center">
+      &lt;!&ndash;<span class="md-title md-padding">Details of {{odc.app.name}}</span>&ndash;&gt;
+      <span flex></span>-->
+      <!--<md-button class="md-raised" ng-click="odc.undeploy()" ng-show="odc.app.status=='deployed'"
                  ng-disabled="odc.app.undeploying">
         <span ng-hide="odc.app.deploying">Undeploy</span>
         <span ng-show="odc.app.deploying">Undeploying...</span>
-      </md-button>
+      </md-button>-->
+
 <!--      <md-input-container>
         <label>Rename to...</label>
         <input ng-model="odc.newName">
@@ -44,7 +67,7 @@
       </md-button>
     </div>
 
-    <md-tabs class="md-accent md-hue-1 tabs-section" layout-fill>
+    <md-tabs class="tabs-section" layout-fill> <!--md-accent md-hue-1-->
       <md-tab label="General">
         <md-content layout="column" class="md-body-1 md-padding" layout-fill>
           <md-list >
@@ -70,80 +93,75 @@
       <md-tab ng-repeat="organ in odc.app.organs" label="{{organ.originalName}}" layout-fill>
         <md-content layout="row" class="md-body-1 md-padding">
           <div flex layout="column">
-            <md-button ng-show="odc.app.status=='deployed'" class="md-raised" aria-label="Scale Up"
-                       ng-click="odc.scaleUp(organ)">
-              <span>Scale Up</span>
-            </md-button>
-            <md-list>
-              <md-list-item class="md-2-line md-padding" ng-show="organ.cells && organ.cells.length > 0">
-                <div ng-repeat="cell in organ.cells" layout="row" flex>
-                  <div class="md-list-item-text" layout="column">
-                    <h4>Cell {{$index + 1}}</h4>
-                    <p>Provider: {{odc.selections.provider[cell.host.labels.provider] || 'undefined'}}</p>
-                    <p>Region: {{odc.selections.region[cell.host.labels.region] || 'undefined'}}</p>
-                    <p>Tier: {{odc.selections.tier[cell.host.labels.tier] || 'undefined'}}</p>
-                    <p ng-hide="cell.published_port">IP: {{cell.host.ip}}</p>
-                    <p ng-show="cell.published_port">IP:
-                      <a target="_blank"
-                         href="{{'http://' + cell.host.ip + ':' + cell.published_port}}">{{cell.host.ip +
-                        ':'
-                        + cell.published_port}}</a>
-                    </p>
-                    <md-button class="md-raised" aria-label="Kill" ng-click="odc.scaleDown(organ, cell)"
-                               ng-show="odc.app.status=='deployed' && !cell.isProxy">
-                      <span>Kill</span>
+            <div layout="row" flex flex-gt-xs="20" layout-align="end center">
+              <md-button ng-show="odc.app.status=='deployed'" class="md-raised" aria-label="Scale Up"
+                         ng-click="odc.scaleUp(organ)">
+                <span>Scale Up</span>
+              </md-button>
+            </div>
+
+            <!--// Card Layout-->
+            <div class='md-padding' layout="row" layout-wrap>
+
+              <!--Cell Info-->
+              <md-card style="width: 250px;" class="app-box" ng-repeat="cell in organ.cells">
+                <h3>Cell {{$index + 1}}</h3>
+                <md-card-content>
+                  <p>Provider: {{odc.selections.provider[cell.host.labels.provider] || 'undefined'}}</p>
+                  <p>Region: {{odc.selections.region[cell.host.labels.region] || 'undefined'}}</p>
+                  <p>Tier: {{odc.selections.tier[cell.host.labels.tier] || 'undefined'}}</p>
+                  <p ng-hide="cell.published_port">IP: {{cell.host.ip}}</p>
+                  <p ng-show="cell.published_port">IP:
+                    <a target="_blank"
+                       href="{{'http://' + cell.host.ip + ':' + cell.published_port}}">{{cell.host.ip +
+                      ':'
+                      + cell.published_port}}</a>
+                  </p>
+                </md-card-content>
+                <md-card-actions layout="row" layout-align="end center">
+                  <md-button class="md-primary" aria-label="Kill" ng-click="odc.scaleDown(organ, cell)"
+                             ng-show="odc.app.status=='deployed' && !cell.isProxy">
+                    Kill
+                  </md-button>
+                    <md-button class="md-primary" aria-label="Move" ng-disabled="cell.moving"
+                               ng-click="$mdOpenMenu($event)" ng-show="odc.app.status=='deployed' && !cell.isProxy">
+                      <span ng-hide="cell.moving">Move</span>
+                      <span ng-show="cell.moving">Moving...</span>
                     </md-button>
-                    <md-menu md-position-mode="target target" ng-show="odc.app.status=='deployed' && !cell.isProxy">
-                      <md-button class="md-raised" aria-label="Move" ng-disabled="cell.moving"
-                                 ng-click="$mdOpenMenu($event)">
-                        <span ng-hide="cell.moving">Move</span>
-                        <span ng-show="cell.moving">Moving...</span>
-                      </md-button>
-                      <md-menu-content class="md-body-1" width="4">
-                        <section>
-                          <form ng-init="data={}">
-                            <div ng-repeat="option in odc.getKeys(odc.selections)">
-                              <span layout-padding class="md-body-1">{{option.substring(0,1).toUpperCase() + option.substring(1) + ':'}}</span>
-                              <md-radio-group ng-model="data[option]" ng-init="data[option] = ''">
-                                <md-radio-button value="" class="md-primary">(No preference)</md-radio-button>
-                                <md-radio-button ng-repeat="short in odc.getKeys(odc.selections[option])"
-                                                 ng-class="{'md-primary': short==cell.host.labels[option]}"
-                                                 value="{{short}}">
-                                  {{odc.selections[option][short]}}
-                                </md-radio-button>
-                              </md-radio-group>
-                              <hr/>
-                            </div>
-                            <md-button ng-disabled="odc.disableButton(data, cell.host.labels)" class="md-raised"
-                                       ng-click="odc.move(cell, data)">
-                              Apply
-                            </md-button>
-                          </form>
-                        </section>
-                      </md-menu-content>
-                    </md-menu>
-                  </div>
-                </div>
-              </md-list-item>
-              <md-list-item class="md-2-line">
-                <div class="md-list-item-text" layout="column">
-                  <h4>Image</h4>
-                  <p>{{organ.image}}</p>
-                </div>
-              </md-list-item>
-              <md-list-item class="md-2-line">
-                <div class="md-list-item-text" layout="column">
-                  <h4>Environment</h4>
-                  <p ng-repeat="item in organ.environment">{{item}}</p>
-                </div>
-              </md-list-item>
-              <md-list-item class="md-2-line" ng-hide="!organ.expose || organ.expose.length == 0">
-                <div class="md-list-item-text" layout="column">
-                  <h4>Exposed ports</h4>
-                  <p ng-repeat="item in organ.expose">{{item}}</p>
-                </div>
-              </md-list-item>
-            </md-list>
+                </md-card-actions>
+                <br>
+                </md-card>
+
+              <!--Organ Info-->
+              <md-card class="app-box">
+                <h3>Organ meta-info</h3>
+                <md-card-content>
+
+                  <md-list-item class="md-2-line">
+                    <div class="md-list-item-text" layout="column">
+                      <span class="md-subhead">Image</span>
+                      <p>{{organ.image}}</p>
+                    </div>
+                  </md-list-item>
+                  <md-list-item class="md-2-line">
+                    <div class="md-list-item-text" layout="column">
+                      <span class="md-subhead">Environment</span>
+                      <span class="md-caption" ng-repeat="item in organ.environment">{{item}}</span>
+                    </div>
+                  </md-list-item>
+                  <md-list-item class="md-2-line" ng-hide="!organ.expose || organ.expose.length == 0">
+                    <div class="md-list-item-text" layout="column">
+                      <span class="md-subhead">Exposed ports</span>
+                      <p ng-repeat="item in organ.expose">{{item}}</p>
+                    </div>
+                  </md-list-item>
+
+                </md-card-content>
+                <br>
+              </md-card>
+
+              </div>
+
           </div>
         </md-content>
       </md-tab>
