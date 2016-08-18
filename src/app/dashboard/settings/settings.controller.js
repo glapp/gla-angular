@@ -34,7 +34,7 @@
           toastr.success('Successfully deployed ' + vm.app.name + '!', 'Info');
         }, function onError(err) {
           $log.error(err);
-          toastr.error(err, 'Error deploying the app');
+          toastr.error(err.data, 'Error deploying the app');
           vm.app.deploying = false;
         })
     }
@@ -50,7 +50,7 @@
           toastr.success('Successfully undeployed ' + vm.app.name + '!', 'Info');
         }, function onError(err) {
           $log.error(err);
-          toastr.error(err, 'Error undeploying the app');
+          toastr.error(err.data, 'Error undeploying the app');
           vm.app.undeploying = false;
         })
     }
@@ -65,6 +65,7 @@
           toastr.success('Successfully renamed to ' + vm.app.name + '!', 'Info');
         }, function onError(err) {
           $log.error(err);
+          toastr.error(err.data, 'Error renaming the app');
           vm.app.renaming = false;
         })
     }
@@ -79,7 +80,7 @@
           toastr.success('Successfully removed application!', 'Info');
         }, function onError(err) {
           $log.error(err);
-          toastr.error(err, 'Error removing the app');
+          toastr.error(err.data, 'Error removing the app');
           vm.app.removing = false;
         })
     }
