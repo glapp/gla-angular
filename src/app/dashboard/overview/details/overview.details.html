@@ -44,9 +44,9 @@
       </md-button>
     </div>
 
-    <md-tabs class="md-accent md-hue-1 tabs-section">
+    <md-tabs class="md-accent md-hue-1 tabs-section" layout-fill>
       <md-tab label="General">
-        <md-content layout="column" class="md-body-1 md-padding">
+        <md-content layout="column" class="md-body-1 md-padding" layout-fill>
           <md-list >
             <md-list-item class="md-2-line">
               <div class="md-list-item-text" layout="column">
@@ -67,7 +67,7 @@
           </md-list>
         </md-content>
       </md-tab>
-      <md-tab ng-repeat="organ in odc.app.organs" label="{{organ.originalName}}">
+      <md-tab ng-repeat="organ in odc.app.organs" label="{{organ.originalName}}" layout-fill>
         <md-content layout="row" class="md-body-1 md-padding">
           <div flex layout="column">
             <md-button ng-show="odc.app.status=='deployed'" class="md-raised" aria-label="Scale Up"
