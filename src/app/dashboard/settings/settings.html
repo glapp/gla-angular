@@ -88,7 +88,10 @@
             <div flex="25" hide-xs="" hide-sm=""><!-- Spacer //--></div>
 
             <div flex-xs="25">
-              <md-button class="md-raised md-warn" ng-click="settings.remove()">Delete</md-button>
+              <md-button class="md-raised md-warn" ng-click="settings.remove()" ng-disabled="settings.app.removing">
+                <span ng-hide="settings.app.removing">Delete</span>
+                <span ng-show="settings.app.removing">Deleting...</span>
+              </md-button>
             </div>
           </div>
 
