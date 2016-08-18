@@ -21,7 +21,7 @@
         },
         function onError(err) {
           $log.error('Error while creating an application: ', err);
-          $mdDialog.hide();
+          $mdDialog.cancel(err);
         })
     }
 
