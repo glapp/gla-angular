@@ -117,8 +117,8 @@
       Policy.getPolicy({app_id: $stateParams.app_id},
         function onSuccess(response) {
           response.rules.forEach(function(rule){
-            var opt = $filter('filter')(vm.operator, function (d) {return d.id === rule.operator;})[0];
-            var metric = $filter('filter')(vm.metrics, function (d) {return d.id === rule.metric;})[0];
+            var opt = $filter('filter')(vm.operator, function (d) {return d.id === rule.operator;})[0] || 'NaN';
+            var metric = $filter('filter')(vm.metrics, function (d) {return d.id === rule.metric;})[0] || 'NaN';
 
             items.push({
               metric: metric.name,
