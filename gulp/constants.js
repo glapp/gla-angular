@@ -4,7 +4,6 @@ var gulp = require('gulp');
 var ngConstant = require('gulp-ng-constant');
 var path = require('path');
 var conf = require('./conf');
-var dnsSync = require('dns-sync');
 
 gulp.task('constants', function () {
   // var sailsIp = dnsSync.resolve('glasails'); // Internal IP doesn't work from the browser...

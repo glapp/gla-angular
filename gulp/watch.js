@@ -3,8 +3,7 @@
 var path = require('path');
 var gulp = require('gulp');
 var conf = require('./conf');
-
-var browserSync = require('browser-sync');
+var connect = require('gulp-connect');
 
 function isOnlyChange(event) {
   return event.type === 'changed';
@@ -33,7 +32,8 @@ gulp.task('watch', ['inject'], function () {
     }
   });
 
-  gulp.watch(path.join(conf.paths.src, '/app/**/*.html'), function(event) {
-    browserSync.reload(event.path);
+  gulp.watch(path.join(conf.paths.src, '/app/**/*.html'), function() {
+    gulp.src('./app/*.html')
+      .pipe(connect.reload());
   });
 });
