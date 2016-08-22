@@ -23,7 +23,10 @@
 <div layout="column" layout-gt-md="row" layout-fill>
   <div flex="70" class="md-whiteframe-1dp" layout="column" layout-fill>
 
-  <!-- <div layout="row" layout-align="end center">
+   <!--<div layout="row" layout-align="end center">
+     <md-switch ng-model="odc.show_organ_info">
+     </md-switch>
+     {{odc.show_organ_info}}
       <md-button class="md-raised" ng-click="odc.undeploy()" ng-show="odc.app.status=='deployed'"
                  ng-disabled="odc.app.undeploying">
         <span ng-hide="odc.app.deploying">Undeploy</span>
@@ -62,12 +65,21 @@
       <md-tab ng-repeat="organ in odc.app.organs" label="{{organ.originalName}}" layout-fill>
         <md-content layout="row" class="md-body-1 md-padding">
           <div flex layout="column">
-            <div layout="row" flex flex-gt-xs="20" layout-align="end center">
-              <md-button ng-show="odc.app.status=='deployed'" class="md-raised" aria-label="Scale Up"
-                         ng-click="odc.scaleUp(organ)">
-                <span>Scale Up</span>
-              </md-button>
+
+            <div flex layout="row" layout-xs="column">
+              <div flex flex-gt-xs="90" layout-align="start center">
+                <md-switch ng-model="odc.show_organ_info">
+                </md-switch>
+                <span class="md-caption">organ info</span>
+              </div>
+              <div  flex flex-gt-xs="10" layout-align="end center">
+                <md-button ng-show="odc.app.status=='deployed'" class="md-raised" aria-label="Scale Up"
+                           ng-click="odc.scaleUp(organ)">
+                  <span>Scale Up</span>
+                </md-button>
+              </div>
             </div>
+
 
             <!--// Card Layout-->
             <div class='md-padding' layout="row" layout-wrap>
@@ -125,7 +137,7 @@
                 </md-card>
 
               <!--Organ Info-->
-              <md-card class="app-box">
+              <md-card class="app-box" ng-if="odc.show_organ_info">
                 <h3>Organ meta-info</h3>
                 <md-card-content>
 

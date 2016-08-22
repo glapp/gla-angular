@@ -28,6 +28,7 @@
     vm.undeploy = undeploy;
     vm.rename = rename;
     vm.newName = "";
+    vm.show_organ_info = false;
 
     getDetails();
 
