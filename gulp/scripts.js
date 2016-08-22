@@ -3,8 +3,14 @@
 var path = require('path');
 var gulp = require('gulp');
 var conf = require('./conf');
+var connect = require('gulp-connect');
 
 var $ = require('gulp-load-plugins')();
+
+gulp.task('scripts-reload', function() {
+  return buildScripts()
+    .pipe(connect.reload());
+});
 
 gulp.task('scripts', function() {
   return buildScripts();

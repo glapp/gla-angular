@@ -33,7 +33,7 @@ gulp.task('watch', ['inject'], function () {
   });
 
   gulp.watch(path.join(conf.paths.src, '/app/**/*.html'), function() {
-    gulp.src('./app/*.html')
+    gulp.src(path.join(conf.paths.src, '/app/**/*.html'))
       .pipe(connect.reload());
   });
 });

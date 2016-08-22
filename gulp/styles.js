@@ -3,11 +3,17 @@
 var path = require('path');
 var gulp = require('gulp');
 var conf = require('./conf');
+var connect = require('gulp-connect');
 
 var $ = require('gulp-load-plugins')();
 
 var wiredep = require('wiredep').stream;
 var _ = require('lodash');
+
+gulp.task('styles-reload', ['styles'], function() {
+  return buildStyles()
+    .pipe(connect.reload());
+});
 
 gulp.task('styles', function() {
   return buildStyles();
