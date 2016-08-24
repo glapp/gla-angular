@@ -21,7 +21,7 @@
 </md-toolbar>
 
 <div layout="column" layout-gt-md="row" layout-fill>
-  <div flex="70" class="md-whiteframe-1dp" layout="column" layout-fill>
+  <div flex="70" class="md-whiteframe-0dp" layout="column" layout-fill>
 
    <!--<div layout="row" layout-align="end center">
      <md-switch ng-model="odc.show_organ_info">
@@ -126,7 +126,7 @@
                             <hr/>
                           </div>
                           <md-button ng-disabled="odc.disableButton(data, cell.host.labels)" class="md-raised"
-                                     ng-click="odc.move(cell, data)">
+                                     ng-click="odc.move(cell, data)" md-prevent-menu-close="md-prevent-menu-close">
                             Apply
                           </md-button>
                         </form>
