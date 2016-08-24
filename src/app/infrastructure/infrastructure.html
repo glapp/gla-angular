@@ -1,9 +1,26 @@
 <div layout>
-  <span class="md-title md-padding">Infrastructure</span>
+  <md-toolbar class="md-hue-1" layout="row" layout-align="center center">Infrastructure</md-toolbar>
   <!--<span flex></span>-->
   <!--<md-button class="md-raised" ng-click="adc.deploy()" ng-disabled="adc.disableDeploy()">Deploy</md-button>-->
 </div>
-<md-tabs md-dynamic-height class="md-accent md-hue-1 tabs-section">
+
+<div class='md-padding' layout="row" layout-wrap>
+
+  <md-card style="width: 250px;" class="app-box" ng-repeat="tab in ic.tabItems">
+    <md-card-content>
+      <md-list>
+        <md-list-item ng-repeat="item in tab.list" class="md-2-line">
+          <div class="md-list-item-text" layout="column">
+            <h4>{{item.description}}</h4>
+            <p ng-repeat="listitem in item.content track by $index">{{listitem}}</p>
+          </div>
+        </md-list-item>
+      </md-list>
+    </md-card-content>
+  </md-card>
+</div>
+
+<!--<md-tabs md-dynamic-height class="tabs-section">
     <md-tab ng-repeat="tab in ic.tabItems" ng-disabled="tab.disabled" label="{{tab.title}}">
       <md-content>
         <md-list>
@@ -16,4 +33,4 @@
         </md-list>
       </md-content>
     </md-tab>
-  </md-tabs>
+  </md-tabs>-->
