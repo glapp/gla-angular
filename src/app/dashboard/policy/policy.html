@@ -33,7 +33,7 @@
           <md-input-container class="md-block" flex-gt-xs="10">
             <label>Weight</label>
             <md-select ng-model="row.weight">
-              <md-option ng-repeat="weight in policy.weights">
+              <md-option ng-repeat="weight in policy.weights" ng-value="weight">
                 {{weight}}
               </md-option>
             </md-select>
@@ -142,7 +142,7 @@
             Organs:
             <p>
               <div style="float:left" ng-repeat="item in rule.organs">
-                <p>{{item.originalName}} , </p>
+                <p>{{item.originalName}} {{{true: '', false: ', '}[$last]}} </p>
               </div>
             </p>
           </div>
