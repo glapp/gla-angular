@@ -181,6 +181,8 @@
         {values: [], key: 'Moving', color: "0FB825"},
         {values: [], key: 'Other', color: "0F36B8"}];
 
+      initializeEvents();
+
       vm.event_interval = $interval (function (){
         vm.event_data = [
           {values: [], key: 'Scaling', color: "ed5818"},
@@ -206,7 +208,31 @@
           }, function onError(err) {
             toastr.error(err.data, 'Error');
           });
-      },7500);
+      },5000);
+    }
+
+
+    //initializes for the first run before passing the baton to periodic interval - 4@demo
+    function initializeEvents(){
+      Analytics.getEvents({app_id: $stateParams.app_id},
+        function onSuccess(response){
+          response.forEach(function(action){
+            //var time = $filter('date')(action.createdAt,'MM-dd HH:mm:ss');
+            var timestamp = new Date(action.createdAt).getTime();
+            var value = 3;
+            if(action.content.match('Scaled')){
+              value = 4;
+              vm.event_data[0].values.push({x: timestamp, y: value, text: action.content});
+            } else if(action.content.match('Moved')){
+              value = 5;
+              vm.event_data[1].values.push({x: timestamp, y: value, text: action.content});
+            } else {
+              vm.event_data[2].values.push({x: timestamp, y: value, text: action.content});
+            }
+          });
+        }, function onError(err) {
+          toastr.error(err.data, 'Error');
+        });
     }
 
 
@@ -258,6 +284,7 @@
       ]);
 
       vm.cpu_data = [{values: [], key: 'CPU', color: "0FB825"}];
+      initializeCPU(organ_id,timespan);
 
       vm.cpu_interval = $interval (function (){
         Analytics.getOrganCpu({organ_id: organ_id, timespan: timespan},
@@ -277,7 +304,27 @@
         }, function onError(err) {
           toastr.error(err.data, 'Error');
         });
-      },5500);
+      },6500);
+    }
+
+    function initializeCPU(organ_id,timespan){
+      Analytics.getOrganCpu({organ_id: organ_id, timespan: timespan},
+        function onSuccess(response){
+          var items = [];
+          response.forEach(function(item){
+            items.push({timestamp: item.timestamp, value: item.value})
+          });
+
+          vm.cpu_data = [{values: [], key: 'CPU', color: "0FB825"}];
+          items.forEach(function (item){
+            //var time = $filter('date')(item.timestamp,'MM-dd HH:mm:ss');
+            //var timestamp = new Date(item.timestamp).getTime();
+            vm.cpu_data[0].values.push({x: item.timestamp*1000, y: item.value});
+          });
+
+        }, function onError(err) {
+          toastr.error(err.data, 'Error');
+        });
     }
 
 
@@ -329,6 +376,7 @@
 
       vm.memory_data = [{values: [], key: 'Memory', color: "0F36B8"}];
 
+      initializeMemory(organ_id, timespan);
       vm.memory_interval = $interval (function (){
         Analytics.getOrganMemory({organ_id: organ_id, timespan: timespan},
           function onSuccess(response){
@@ -339,15 +387,32 @@
 
             vm.memory_data = [{values: [], key: 'Memory', color: "0F36B8"}];
             items.forEach(function (item){
-              //var time = $filter('date')(item.timestamp,'MM-dd HH:mm:ss');
-              //var timestamp = new Date(item.timestamp).getTime();
               vm.memory_data[0].values.push({x: item.timestamp*1000, y: item.value});
             });
 
           }, function onError(err) {
             toastr.error(err.data, 'Error');
           });
-      },7000);
+      },8000);
+    }
+
+
+    function initializeMemory(organ_id, timespan){
+      Analytics.getOrganMemory({organ_id: organ_id, timespan: timespan},
+        function onSuccess(response){
+          var items = [];
+          response.forEach(function(item){
+            items.push({timestamp: item.timestamp, value: item.value})
+          });
+
+          vm.memory_data = [{values: [], key: 'Memory', color: "0F36B8"}];
+          items.forEach(function (item){
+            vm.memory_data[0].values.push({x: item.timestamp*1000, y: item.value});
+          });
+
+        }, function onError(err) {
+          toastr.error(err.data, 'Error');
+        });
     }
 
 
